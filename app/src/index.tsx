@@ -5,13 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { initConfig } from './config';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 initConfig();
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '',
     element: <App />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

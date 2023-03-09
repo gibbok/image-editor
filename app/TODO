@@ -1,3 +1,4 @@
-- add error boundaries
+x - add ErrorBoundary
+
 - show error with a snack bar
 - add more tests

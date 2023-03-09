@@ -12,9 +12,7 @@ const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
 
 export const ImagesPage = () => {
-  let [searchParams, setSearchParams] = useSearchParams(
-    new URLSearchParams('?foo=1&bar=2')
-  );
+  let [searchParams, setSearchParams] = useSearchParams();
 
   const imagesQuery = useGetImages({
     imageSizes: {
@@ -23,6 +21,10 @@ export const ImagesPage = () => {
     },
     onError: console.error, // TODO render error message
   });
+
+  // React.useEffect(() => {
+  //   setSearchParams(`?${new URLSearchParams({ page: 'whatever' })}`);
+  // });
 
   return (
     <Box>
