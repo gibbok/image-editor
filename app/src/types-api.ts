@@ -8,3 +8,8 @@ export type Image = Readonly<{
 }>;
 
 export type Images = ReadonlyArray<Image>;
+
+export type ResponseImages = Readonly<{
+  images: Images;
+  linkHeader: string;
+}>;
