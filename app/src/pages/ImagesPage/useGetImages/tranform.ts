@@ -1,5 +1,3 @@
-// https://picsum.photos/id/1/5000/3333
-
 import { Images } from '../../../types-api';
 import { ImagesUI, Pagination } from '../../../types-ui';
 import { ImageSizes } from './type';

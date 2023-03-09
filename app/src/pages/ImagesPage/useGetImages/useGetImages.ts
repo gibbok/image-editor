@@ -11,7 +11,6 @@ import { ImageSizes } from './type';
 
 const KEY_IMAGES = 'GET_IMAGES';
 
-// TODO handle page and limit https://picsum.photos/v2/list?page=2&limit=100
 export const fetchImages = ({
   page,
 }: Readonly<{ page: number }>): Promise<ResponseImages> =>
@@ -20,7 +19,6 @@ export const fetchImages = ({
     linkHeader: response.headers.link,
   }));
 
-// TODO add error handling cb
 export type UseGetImages = (
   params: Readonly<{
     imageSizes: ImageSizes;
@@ -30,13 +28,9 @@ export type UseGetImages = (
 ) => UseQueryResult<ResultImagesUI, unknown>;
 export const useGetImages: UseGetImages = ({ imageSizes, page, onError }) =>
   useQuery([KEY_IMAGES, { page }], () => fetchImages({ page }), {
-    select: (x) => {
-      return {
-        images: tranformResponseForUI(x.images, imageSizes),
-        pagination: getPaginationStateFromHeader(x.linkHeader),
-      };
-    },
+    select: (data) => ({
+      images: tranformResponseForUI(data.images, imageSizes),
+      pagination: getPaginationStateFromHeader(data.linkHeader),
+    }),
     onError,
   });
-
-//UseQueryResult<ImagesUI, unknown>;

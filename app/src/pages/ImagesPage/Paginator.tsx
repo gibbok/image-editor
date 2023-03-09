@@ -1,13 +1,12 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 
-import { Pagination } from '../../types-ui';
+import { Pagination, PaginationMove } from '../../types-ui';
 
-export type ClickOn = 'prev' | 'next';
 type PaginationProps = Readonly<{
   page: number;
   variant: Pagination;
-  onChange: (clickOn: ClickOn) => void;
+  onChange: (movement: PaginationMove) => void;
 }>;
 
 export type HideNextPrevButton = Readonly<{
@@ -44,7 +43,7 @@ export const disablePrevNextButtons = (
 export const Paginator = ({ page, variant, onChange }: PaginationProps) => {
   const visiblityButton = disablePrevNextButtons(variant);
 
-  const handleClickButton = (clickOn: ClickOn) => () => {
+  const handleClickButton = (clickOn: PaginationMove) => () => {
     onChange(clickOn);
   };
 

@@ -7,7 +7,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { ClickOn, Paginator } from './Paginator';
+import { Paginator } from './Paginator';
+import { PaginationMove } from '../../types-ui';
 
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
@@ -33,8 +34,8 @@ export const ImagesPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  const handleChangePage = (value: ClickOn) => {
-    setPage((prevState) => (value === 'prev' ? prevState - 1 : prevState + 1));
+  const handleChangePage = (move: PaginationMove) => {
+    setPage((prevState) => (move === 'prev' ? prevState - 1 : prevState + 1));
   };
 
   return (
