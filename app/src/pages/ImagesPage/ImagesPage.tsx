@@ -7,10 +7,18 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export const Images = () => {
-  const imagesQuery = useGetImages();
+const THUMBNAIL_WIDTH_RESIZED = 250;
+const THUMBNAIL_HEIGHT_RESIZED = 166;
 
-  // TODO render error message
+export const ImagesPage = () => {
+  const imagesQuery = useGetImages({
+    imageSizes: {
+      width: THUMBNAIL_WIDTH_RESIZED,
+      height: THUMBNAIL_HEIGHT_RESIZED,
+    },
+    onError: console.error, // TODO render error message
+  });
+
   return (
     <Box>
       {!imagesQuery.data || imagesQuery.isLoading ? (
@@ -20,8 +28,8 @@ export const Images = () => {
           {imagesQuery.data.map((item) => (
             <ImageListItem key={item.id}>
               <img
-                src={`${item.download_url}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.download_url}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO look into srcSet
+                src={`${item.urlResized}?w=248&fit=crop&auto=format`}
+                srcSet={`${item.urlResized}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO look into srcSet
                 alt={item.author}
                 loading="lazy"
               />
@@ -33,3 +41,4 @@ export const Images = () => {
     </Box>
   );
 };
+// TODO make responsive the image list

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import axios from 'axios';
+import { initConfig } from './config';
 
-axios.defaults.baseURL = 'https://picsum.photos/v2/';
+initConfig();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
