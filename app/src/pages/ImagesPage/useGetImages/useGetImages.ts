@@ -9,8 +9,10 @@ import { ImageSizes } from './type';
 const KEY_IMAGES = 'GET_IMAGES';
 
 // TODO handle page and limit https://picsum.photos/v2/list?page=2&limit=100
-export const fetchImages = (): Promise<ResponseImages> =>
-  axios.get('list').then((response) => ({
+export const fetchImages = ({
+  page,
+}: Readonly<{ page: number }>): Promise<ResponseImages> =>
+  axios.get(`list?page=${page}`).then((response) => ({
     images: response.data,
     linkHeader: response.headers.link,
   }));
@@ -19,15 +21,13 @@ export const fetchImages = (): Promise<ResponseImages> =>
 export type UseGetImages = (
   params: Readonly<{
     imageSizes: ImageSizes;
+    page: number;
     onError: (e: unknown) => void;
   }>
 ) => UseQueryResult<ImagesUI, unknown>;
-export const useGetImages: UseGetImages = ({
-  imageSizes: dimensions,
-  onError,
-}) =>
-  useQuery([KEY_IMAGES], fetchImages, {
-    select: (x) => tranformResponseForUI(x.images, dimensions),
+export const useGetImages: UseGetImages = ({ imageSizes, page, onError }) =>
+  useQuery([KEY_IMAGES], () => fetchImages({ page }), {
+    select: (x) => tranformResponseForUI(x.images, imageSizes),
     onError,
   });
 

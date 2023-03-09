@@ -19,6 +19,7 @@ export const ImagesPage = () => {
       width: THUMBNAIL_WIDTH_RESIZED,
       height: THUMBNAIL_HEIGHT_RESIZED,
     },
+    page: 0,
     onError: console.error, // TODO render error message
   });
 
