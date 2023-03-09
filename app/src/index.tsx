@@ -15,7 +15,7 @@ initConfig();
 
 const router = createBrowserRouter([
   {
-    path: '',
+    path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
   },

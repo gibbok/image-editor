@@ -12,9 +12,12 @@ import { ClickOn, Paginator } from './Paginator';
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
 
+const makeUrlParams = (page: number) =>
+  `?${new URLSearchParams({ page: page.toString() })}`;
+
 export const ImagesPage = () => {
   const [page, setPage] = React.useState(1);
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [urlParams, setUrlsParams] = useSearchParams();
 
   const imagesQuery = useGetImages({
     imageSizes: {
@@ -25,9 +28,10 @@ export const ImagesPage = () => {
     onError: console.error, // TODO render error message
   });
 
-  // React.useEffect(() => {
-  //   setSearchParams(`?${new URLSearchParams({ page: 'whatever' })}`);
-  // });
+  React.useEffect(() => {
+    setUrlsParams(makeUrlParams(page));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const handleChangePage = (value: ClickOn) => {
     setPage((prevState) => (value === 'prev' ? prevState - 1 : prevState + 1));
