@@ -8,8 +8,9 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
 export const Images = () => {
-  const imagesQuery = useGetImages(); // TODO add error handling, render an error message
+  const imagesQuery = useGetImages();
 
+  // TODO render error message
   return (
     <Box>
       {!imagesQuery.data || imagesQuery.isLoading ? (
@@ -20,15 +21,11 @@ export const Images = () => {
             <ImageListItem key={item.id}>
               <img
                 src={`${item.download_url}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.download_url}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO check srcSet
+                srcSet={`${item.download_url}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO look into srcSet
                 alt={item.author}
                 loading="lazy"
               />
-              <ImageListItemBar
-                title={item.author}
-                subtitle={<span>by: {item.author}</span>}
-                position="below"
-              />
+              <ImageListItemBar title={item.author} position="below" />
             </ImageListItem>
           ))}
         </ImageList>
