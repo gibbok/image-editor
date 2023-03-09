@@ -1,8 +1,38 @@
 import React from 'react';
 import { useGetImages } from './useGetImages/useGetImages';
 
-export const Images = () => {
-  const { data, isLoading } = useGetImages();
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
-  return <div>{isLoading ? 'loading' : JSON.stringify(data)}</div>;
+export const Images = () => {
+  const imagesQuery = useGetImages(); // TODO add error handling, render an error message
+
+  return (
+    <Box>
+      {!imagesQuery.data || imagesQuery.isLoading ? (
+        <CircularProgress />
+      ) : (
+        <ImageList sx={{ width: 800, height: 800 }}>
+          {imagesQuery.data.map((item) => (
+            <ImageListItem key={item.id}>
+              <img
+                src={`${item.download_url}?w=248&fit=crop&auto=format`}
+                srcSet={`${item.download_url}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO check srcSet
+                alt={item.author}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                title={item.author}
+                subtitle={<span>by: {item.author}</span>}
+                position="below"
+              />
+            </ImageListItem>
+          ))}
+        </ImageList>
+      )}
+    </Box>
+  );
 };
