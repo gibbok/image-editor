@@ -1,17 +1,19 @@
 import { Pagination } from '../../types-ui';
-import { HideNextPrevButton, hideNextPrevButton } from './Paginator';
+import { HideNextPrevButton, disablePrevNextButtons } from './Paginator';
 
 describe('Paginator', () => {
-  describe('hideNextPrevButton', () => {
+  describe('handleChangePage', () => {
     const cases: ReadonlyArray<[Pagination, HideNextPrevButton]> = [
-      ['prev-next', { hideNextButton: false, hidePrevButton: false }],
-      ['prev', { hideNextButton: true, hidePrevButton: false }],
-      ['next', { hideNextButton: false, hidePrevButton: true }],
-      ['none', { hideNextButton: true, hidePrevButton: true }],
+      ['prev-next', { disableNext: false, disablePrev: false }],
+      ['prev', { disableNext: true, disablePrev: false }],
+      ['next', { disableNext: false, disablePrev: true }],
+      ['none', { disableNext: true, disablePrev: true }],
     ];
 
-    test.each(cases)('link header %p, returns %p', (firstArg, expectedResult) =>
-      expect(hideNextPrevButton(firstArg)).toEqual(expectedResult)
+    test.each(cases)(
+      'variant pagination %p, returns %p',
+      (firstArg, expectedResult) =>
+        expect(disablePrevNextButtons(firstArg)).toEqual(expectedResult)
     );
   });
 });

@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Pagination as PaginationMUI,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 
 import { Pagination } from '../../types-ui';
 
-type ClickOn = 'prev' | 'next';
+export type ClickOn = 'prev' | 'next';
 type PaginationProps = Readonly<{
   page: number;
   variant: Pagination;
@@ -16,59 +11,62 @@ type PaginationProps = Readonly<{
 }>;
 
 export type HideNextPrevButton = Readonly<{
-  hideNextButton: boolean;
-  hidePrevButton: boolean;
+  disableNext: boolean;
+  disablePrev: boolean;
 }>;
-export const hideNextPrevButton = (variant: Pagination): HideNextPrevButton => {
+export const disablePrevNextButtons = (
+  variant: Pagination
+): HideNextPrevButton => {
   switch (variant) {
     case 'prev-next':
       return {
-        hideNextButton: false,
-        hidePrevButton: false,
+        disableNext: false,
+        disablePrev: false,
       };
     case 'prev':
       return {
-        hideNextButton: true,
-        hidePrevButton: false,
+        disableNext: true,
+        disablePrev: false,
       };
     case 'next':
       return {
-        hideNextButton: false,
-        hidePrevButton: true,
+        disableNext: false,
+        disablePrev: true,
       };
     default:
       return {
-        hideNextButton: true,
-        hidePrevButton: true,
+        disableNext: true,
+        disablePrev: true,
       };
   }
 };
 
 export const Paginator = ({ page, variant, onChange }: PaginationProps) => {
-  const x = hideNextPrevButton(variant);
+  const visiblityButton = disablePrevNextButtons(variant);
 
   const handleClickButton = (clickOn: ClickOn) => () => {
     onChange(clickOn);
   };
 
   return (
-    <Box display={'flex'}>
+    <Box display="flex" alignItems="center">
+      <Box mr={2}>
+        <Button
+          variant="outlined"
+          disabled={visiblityButton.disablePrev}
+          onClick={handleClickButton('prev')}
+        >
+          Prev
+        </Button>
+        <Button
+          variant="outlined"
+          disabled={visiblityButton.disableNext}
+          onClick={handleClickButton('next')}
+        >
+          Next
+        </Button>
+      </Box>
       <Typography variant="body2">Page: {page}</Typography>
-
-      <Button
-        variant="outlined"
-        disabled={x.hidePrevButton}
-        onClick={handleClickButton('prev')}
-      >
-        Prev
-      </Button>
-      <Button
-        variant="outlined"
-        disabled={x.hideNextButton}
-        onClick={handleClickButton('next')}
-      >
-        Next
-      </Button>
     </Box>
   );
 };

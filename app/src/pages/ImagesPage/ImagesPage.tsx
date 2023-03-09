@@ -7,12 +7,13 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Paginator } from './Paginator';
+import { ClickOn, Paginator } from './Paginator';
 
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
 
 export const ImagesPage = () => {
+  const [page, setPage] = React.useState(1);
   let [searchParams, setSearchParams] = useSearchParams();
 
   const imagesQuery = useGetImages({
@@ -20,7 +21,7 @@ export const ImagesPage = () => {
       width: THUMBNAIL_WIDTH_RESIZED,
       height: THUMBNAIL_HEIGHT_RESIZED,
     },
-    page: 0,
+    page,
     onError: console.error, // TODO render error message
   });
 
@@ -28,29 +29,28 @@ export const ImagesPage = () => {
   //   setSearchParams(`?${new URLSearchParams({ page: 'whatever' })}`);
   // });
 
+  const handleChangePage = (value: ClickOn) => {
+    setPage((prevState) => (value === 'prev' ? prevState - 1 : prevState + 1));
+  };
+
   return (
     <Box>
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
       ) : (
         <Box>
-          <ImageList sx={{ width: 800, height: 800 }}>
+          <ImageList sx={{ width: 800, height: 800 }} cols={3}>
             {imagesQuery.data.images.map((item) => (
               <ImageListItem key={item.id}>
-                <img
-                  src={`${item.urlResized}?w=248&fit=crop&auto=format`}
-                  srcSet={`${item.urlResized}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO look into srcSet
-                  alt={item.author}
-                  loading="lazy"
-                />
+                <img src={item.urlResized} alt={item.author} loading="lazy" />
                 <ImageListItemBar title={item.author} position="below" />
               </ImageListItem>
             ))}
           </ImageList>
           <Paginator
-            page={0}
+            page={page}
             variant={imagesQuery.data.pagination}
-            onChange={(x) => console.log('xx', x)}
+            onChange={handleChangePage}
           />
         </Box>
       )}

@@ -1,9 +1,12 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import axios from 'axios';
-import { Images, ResponseImages } from '../../../types-api';
-import { ImagesUI, ResultImagesUI } from '../../../types-ui';
-import { tranformResponseForUI } from './tranform';
+import { ResponseImages } from '../../../types-api';
+import { ResultImagesUI } from '../../../types-ui';
+import {
+  getPaginationStateFromHeader,
+  tranformResponseForUI,
+} from './tranform';
 import { ImageSizes } from './type';
 
 const KEY_IMAGES = 'GET_IMAGES';
@@ -30,7 +33,7 @@ export const useGetImages: UseGetImages = ({ imageSizes, page, onError }) =>
     select: (x) => {
       return {
         images: tranformResponseForUI(x.images, imageSizes),
-        pagination: 'next', // SPO
+        pagination: getPaginationStateFromHeader(x.linkHeader),
       };
     },
     onError,
