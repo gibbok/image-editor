@@ -7,6 +7,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Paginator } from './Paginator';
 
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
@@ -32,19 +33,26 @@ export const ImagesPage = () => {
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
       ) : (
-        <ImageList sx={{ width: 800, height: 800 }}>
-          {imagesQuery.data.images.map((item) => (
-            <ImageListItem key={item.id}>
-              <img
-                src={`${item.urlResized}?w=248&fit=crop&auto=format`}
-                srcSet={`${item.urlResized}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO look into srcSet
-                alt={item.author}
-                loading="lazy"
-              />
-              <ImageListItemBar title={item.author} position="below" />
-            </ImageListItem>
-          ))}
-        </ImageList>
+        <Box>
+          <ImageList sx={{ width: 800, height: 800 }}>
+            {imagesQuery.data.images.map((item) => (
+              <ImageListItem key={item.id}>
+                <img
+                  src={`${item.urlResized}?w=248&fit=crop&auto=format`}
+                  srcSet={`${item.urlResized}?w=248&fit=crop&auto=format&dpr=2 2x`} // TODO look into srcSet
+                  alt={item.author}
+                  loading="lazy"
+                />
+                <ImageListItemBar title={item.author} position="below" />
+              </ImageListItem>
+            ))}
+          </ImageList>
+          <Paginator
+            page={0}
+            variant={imagesQuery.data.pagination}
+            onChange={(x) => console.log('xx', x)}
+          />
+        </Box>
       )}
     </Box>
   );
