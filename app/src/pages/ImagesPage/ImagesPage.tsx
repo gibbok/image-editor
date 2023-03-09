@@ -1,5 +1,6 @@
 import React from 'react';
 import { useGetImages } from './useGetImages/useGetImages';
+import { useSearchParams } from 'react-router-dom';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -11,6 +12,10 @@ const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
 
 export const ImagesPage = () => {
+  let [searchParams, setSearchParams] = useSearchParams(
+    new URLSearchParams('?foo=1&bar=2')
+  );
+
   const imagesQuery = useGetImages({
     imageSizes: {
       width: THUMBNAIL_WIDTH_RESIZED,
