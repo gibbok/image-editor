@@ -33,7 +33,7 @@ export const ImagesPage = () => {
         <CircularProgress />
       ) : (
         <ImageList sx={{ width: 800, height: 800 }}>
-          {imagesQuery.data.map((item) => (
+          {imagesQuery.data.images.map((item) => (
             <ImageListItem key={item.id}>
               <img
                 src={`${item.urlResized}?w=248&fit=crop&auto=format`}

@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import axios from 'axios';
 import { Images, ResponseImages } from '../../../types-api';
-import { ImagesUI } from '../../../types-ui';
+import { ImagesUI, ResultImagesUI } from '../../../types-ui';
 import { tranformResponseForUI } from './tranform';
 import { ImageSizes } from './type';
 
@@ -24,10 +24,15 @@ export type UseGetImages = (
     page: number;
     onError: (e: unknown) => void;
   }>
-) => UseQueryResult<ImagesUI, unknown>;
+) => UseQueryResult<ResultImagesUI, unknown>;
 export const useGetImages: UseGetImages = ({ imageSizes, page, onError }) =>
-  useQuery([KEY_IMAGES], () => fetchImages({ page }), {
-    select: (x) => tranformResponseForUI(x.images, imageSizes),
+  useQuery([KEY_IMAGES, { page }], () => fetchImages({ page }), {
+    select: (x) => {
+      return {
+        images: tranformResponseForUI(x.images, imageSizes),
+        pagination: 'next', // SPO
+      };
+    },
     onError,
   });
 
