@@ -10,18 +10,19 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator';
 import { PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
-import { getPageFromPageParams, makeEditorUrl } from './utils';
+import {
+  getPageFromPageQueryParam,
+  makeEditorUrl,
+  makePageQueryParam,
+} from './utils';
 
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
 
-const makeUrlParams = (page: number) =>
-  `?${new URLSearchParams({ page: page.toString() })}`;
-
 export const ImagesPage = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
-  const pageParam = getPageFromPageParams(urlParams.get('page'));
+  const pageParam = getPageFromPageQueryParam(urlParams.get('page'));
   const [page, setPage] = React.useState(pageParam);
 
   const imagesQuery = useGetImages({
@@ -40,7 +41,7 @@ export const ImagesPage = () => {
 
   React.useEffect(() => {
     if (page !== pageParam) {
-      setUrlsParams(makeUrlParams(page));
+      setUrlsParams(makePageQueryParam(page));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);

@@ -6,15 +6,16 @@ export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
 
-  const imageId = urlParams.get('id');
+  const imageId = urlParams.get('id'); // TODO show id not found from server
 
-  const handleGoBackToList = () => {
+  const handleGoBackToImagesList = () => {
     navigate(-1);
   };
+
   return (
     <div>
       Editor page {imageId}
-      <Button variant="outlined" onClick={handleGoBackToList}>
+      <Button variant="outlined" onClick={handleGoBackToImagesList}>
         Go to list
       </Button>
     </div>

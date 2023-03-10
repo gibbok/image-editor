@@ -1,7 +1,9 @@
-import { Pagination } from '../../../types-ui';
+import { Images } from '../../../types-api';
+import { ImagesUI, Pagination } from '../../../types-ui';
 import {
   getPaginationStateFromHeader,
   modifySizeForImageUrl,
+  tranformResponseForUI,
 } from './tranform';
 
 describe('transform', () => {
@@ -36,5 +38,43 @@ describe('transform', () => {
       (firstArg, expectedResult) =>
         expect(getPaginationStateFromHeader(firstArg)).toBe(expectedResult)
     );
+  });
+
+  describe('tranformResponseForUI', () => {
+    it('should transform server response to data for ui', () => {
+      const reponseServer: Images = [
+        {
+          id: '102',
+          author: 'Ben Moore',
+          width: 4320,
+          height: 3240,
+          url: 'https://unsplash.com/photos/pJILiyPdrXI',
+          download_url: 'https://picsum.photos/id/102/4320/3240',
+        },
+        {
+          id: '103',
+          author: 'Ilham Rahmansyah',
+          width: 2592,
+          height: 1936,
+          url: 'https://unsplash.com/photos/DwTZwZYi9Ww',
+          download_url: 'https://picsum.photos/id/103/2592/1936',
+        },
+      ];
+
+      expect(
+        tranformResponseForUI(reponseServer, { width: 100, height: 80 })
+      ).toEqual<ImagesUI>([
+        {
+          author: 'Ben Moore',
+          id: '102',
+          urlResized: 'https://picsum.photos/id/102/100/80',
+        },
+        {
+          author: 'Ilham Rahmansyah',
+          id: '103',
+          urlResized: 'https://picsum.photos/id/103/100/80',
+        },
+      ]);
+    });
   });
 });
