@@ -3,13 +3,16 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PropertiesPanel } from './PropertiesPanel';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
+import { getImageIdFromImageIdQueryParam } from './utils';
 
 export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
 
+  const imageIdParam = getImageIdFromImageIdQueryParam(urlParams.get('id'));
+
   const imageDetailsQuery = useGetImageDetails({
-    imageId: '1',
+    imageId: imageIdParam,
     onError: console.error,
   });
 
@@ -28,6 +31,15 @@ export const EditorPage = () => {
         <Button variant="outlined" onClick={handleGoBackToImagesList}>
           Go to list
         </Button>
+        {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
+          'loading'
+        ) : (
+          <img
+            src={imageDetailsQuery.data.download_url} // TODOD check url is too big here
+            alt={imageDetailsQuery.data.author}
+            loading="lazy"
+          />
+        )}
       </Box>
       <PropertiesPanel />
     </Box>
