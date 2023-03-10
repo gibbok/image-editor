@@ -1,21 +1,29 @@
-import { Images } from '../../../types-api';
+import { Image, Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import { ImageSizes } from './type';
 
 /**
  * Conserve aspect ratio of the original region.
- * Useful when shrinking/enlarging images to fit into a certain area.
+ * Use it when shrinking/enlarging images to fit into an area.
  */
-export const calculateImageSizesAspectRatioFitImage = (
-  srcWidth: number,
-  srcHeight: number,
-  maxWidth: number,
-  maxHeight: number
-): ImageSizes => {
-  const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
 
-  return { width: srcWidth * ratio, height: srcHeight * ratio };
-};
+type SourceImageSizes = ImageSizes;
+type MaxImageSizes = ImageSizes;
+type CalculateImageSizesAspectRatioFitImage = (
+  maximumSizes: MaxImageSizes
+) => (sourceSizes: SourceImageSizes) => ImageSizes;
+export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
+  (maximumSizes) => (sourceSizes) => {
+    const ratio = Math.min(
+      maximumSizes.width / sourceSizes.width,
+      maximumSizes.height / sourceSizes.height
+    );
+
+    return {
+      width: sourceSizes.width * ratio,
+      height: sourceSizes.height * ratio,
+    };
+  };
 
 export const extractImageSizesFromUrl = (str: string): ImageSizes => {
   const tokens = str.split('/').reverse();
@@ -38,12 +46,8 @@ export const tranformResponseForUI = (
 ): ImagesUI =>
   response.map(({ id, author, download_url }) => {
     const originalSizes = extractImageSizesFromUrl(download_url);
-    const newSizes = calculateImageSizesAspectRatioFitImage(
-      originalSizes.width,
-      originalSizes.height,
-      desiredResize.width,
-      desiredResize.height
-    );
+    const newSizes =
+      calculateImageSizesAspectRatioFitImage(desiredResize)(originalSizes);
     const width = Math.round(newSizes.width);
     const height = Math.round(newSizes.height);
     return {

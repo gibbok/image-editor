@@ -84,7 +84,10 @@ describe('transform', () => {
   describe('calculateImageSizesAspectRatioFitImage', () => {
     it('should resize maintaining aspec ratio', () => {
       const originalAspectRate = 500 / 280;
-      const result = calculateImageSizesAspectRatioFitImage(500, 280, 200, 160);
+      const result = calculateImageSizesAspectRatioFitImage({
+        width: 200,
+        height: 160,
+      })({ width: 500, height: 280 });
 
       expect(result).toEqual<ImageSizes>({
         width: 200,
