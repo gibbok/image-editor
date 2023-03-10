@@ -10,6 +10,7 @@ import reportWebVitals from './reportWebVitals';
 import { initConfig } from './config';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import { EditorPage } from './pages/EditorPage/EditorPage';
 
 initConfig();
 
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: '/editor',
+    element: <EditorPage />,
   },
 ]);
 

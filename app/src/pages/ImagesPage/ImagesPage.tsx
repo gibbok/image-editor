@@ -9,6 +9,8 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator';
 import { PaginationMove } from '../../types-ui';
+import { useNavigate } from 'react-router-dom';
+import { getPageFromPageParams } from './utils';
 
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
@@ -17,9 +19,14 @@ const makeUrlParams = (page: number) =>
   `?${new URLSearchParams({ page: page.toString() })}`;
 
 export const ImagesPage = () => {
-  const [page, setPage] = React.useState(1);
   let [urlParams, setUrlsParams] = useSearchParams();
+  const pageParam = getPageFromPageParams(urlParams.get('page'));
+  console.log('xxx myPage', pageParam);
+  const [page, setPage] = React.useState(pageParam);
 
+  const navigate = useNavigate();
+
+  console.log('xxx page', page);
   const imagesQuery = useGetImages({
     imageSizes: {
       width: THUMBNAIL_WIDTH_RESIZED,
@@ -34,8 +41,17 @@ export const ImagesPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
+  React.useEffect(() => {
+    setPage(pageParam);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageParam]);
+
   const handleChangePage = (move: PaginationMove) => {
     setPage((prevState) => (move === 'prev' ? prevState - 1 : prevState + 1));
+  };
+
+  const handleNavigateToEditor = (imageId: string) => () => {
+    navigate(`/editor?id=${imageId}`);
   };
 
   return (
@@ -47,7 +63,13 @@ export const ImagesPage = () => {
           <ImageList sx={{ width: 800, height: 800 }} cols={3}>
             {imagesQuery.data.images.map((item) => (
               <ImageListItem key={item.id}>
-                <img src={item.urlResized} alt={item.author} loading="lazy" />
+                <img
+                  style={{ cursor: 'pointer' }}
+                  src={item.urlResized}
+                  alt={item.author}
+                  loading="lazy"
+                  onClick={handleNavigateToEditor(item.id)}
+                />
                 <ImageListItemBar title={item.author} position="below" />
               </ImageListItem>
             ))}
