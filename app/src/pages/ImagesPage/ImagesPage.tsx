@@ -21,12 +21,10 @@ const makeUrlParams = (page: number) =>
 export const ImagesPage = () => {
   let [urlParams, setUrlsParams] = useSearchParams();
   const pageParam = getPageFromPageParams(urlParams.get('page'));
-  console.log('xxx myPage', pageParam);
   const [page, setPage] = React.useState(pageParam);
 
   const navigate = useNavigate();
 
-  console.log('xxx page', page);
   const imagesQuery = useGetImages({
     imageSizes: {
       width: THUMBNAIL_WIDTH_RESIZED,
@@ -37,14 +35,16 @@ export const ImagesPage = () => {
   });
 
   React.useEffect(() => {
-    setUrlsParams(makeUrlParams(page));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
-
-  React.useEffect(() => {
     setPage(pageParam);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageParam]);
+
+  React.useEffect(() => {
+    if (page !== pageParam) {
+      setUrlsParams(makeUrlParams(page));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   const handleChangePage = (move: PaginationMove) => {
     setPage((prevState) => (move === 'prev' ? prevState - 1 : prevState + 1));
