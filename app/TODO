@@ -1,7 +1,8 @@
-x - add ErrorBoundary
+- add ErrorBoundary or we can still use errorElement
 
-- add cursore hand on images
+x - add cursore hand on images
+
 - show error with a snack bar
 - add more tests
 
-3+3
+3+3+3

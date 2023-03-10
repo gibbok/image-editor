@@ -1,6 +1,7 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import axios from 'axios';
+import { API_VERSION } from '../../../setup';
 import { ResponseImages } from '../../../types-api';
 import { ResultImagesUI } from '../../../types-ui';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
@@ -11,7 +12,7 @@ const KEY_IMAGES = 'GET_IMAGES';
 export const fetchImages = ({
   page,
 }: Readonly<{ page: number }>): Promise<ResponseImages> =>
-  axios.get(`list?page=${page}`).then((response) => ({
+  axios.get(`${API_VERSION}/list?page=${page}`).then((response) => ({
     images: response.data,
     linkHeader: response.headers.link,
   }));
