@@ -17,6 +17,15 @@ export const calculateImageSizesAspectRatioFitImage = (
   return { width: srcWidth * ratio, height: srcHeight * ratio };
 };
 
+export const extractImageSizesFromUrl = (str: string): ImageSizes => {
+  const tokens = str.split('/').reverse();
+  const [widthStr, heightStr] = tokens;
+  return {
+    width: Number(widthStr),
+    height: Number(heightStr), // TODO in case of error fallback to default value
+  };
+};
+
 export const modifySizeForImageUrl = (
   url: string,
   { width, height }: ImageSizes

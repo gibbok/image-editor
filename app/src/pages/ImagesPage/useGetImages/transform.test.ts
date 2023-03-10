@@ -6,6 +6,7 @@ import {
   modifySizeForImageUrl,
   tranformResponseForUI,
   calculateImageSizesAspectRatioFitImage,
+  extractImageSizesFromUrl,
 } from './tranform';
 import { ImageSizes } from './type';
 
@@ -91,6 +92,17 @@ describe('transform', () => {
         height: 112,
       });
       expect(result.width / result.height).toBe(originalAspectRate);
+    });
+  });
+
+  describe('extractImageSizesFromUrl', () => {
+    it('should extract width and heigh from url', () => {
+      expect(
+        extractImageSizesFromUrl('https://picsum.photos/id/103/2592/1936')
+      ).toEqual<ImageSizes>({
+        width: 2592,
+        height: 1936,
+      });
     });
   });
 });
