@@ -10,7 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator';
 import { PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
-import { getPageFromPageParams } from './utils';
+import { getPageFromPageParams, makeEditorUrl } from './utils';
 
 const THUMBNAIL_WIDTH_RESIZED = 250;
 const THUMBNAIL_HEIGHT_RESIZED = 166;
@@ -19,11 +19,10 @@ const makeUrlParams = (page: number) =>
   `?${new URLSearchParams({ page: page.toString() })}`;
 
 export const ImagesPage = () => {
-  let [urlParams, setUrlsParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [urlParams, setUrlsParams] = useSearchParams();
   const pageParam = getPageFromPageParams(urlParams.get('page'));
   const [page, setPage] = React.useState(pageParam);
-
-  const navigate = useNavigate();
 
   const imagesQuery = useGetImages({
     imageSizes: {
@@ -51,7 +50,7 @@ export const ImagesPage = () => {
   };
 
   const handleNavigateToEditor = (imageId: string) => () => {
-    navigate(`/editor?id=${imageId}`);
+    navigate(makeEditorUrl(imageId));
   };
 
   return (

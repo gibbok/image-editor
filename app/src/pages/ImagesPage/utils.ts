@@ -6,3 +6,5 @@ export const getPageFromPageParams = (pageStr: string | null): number => {
   const pageNumber = Number(pageStr);
   return Number.isNaN(pageNumber) ? DEFAULT_PAGE : pageNumber;
 };
+
+export const makeEditorUrl = (imageId: string) => `/editor?id=${imageId}`;
