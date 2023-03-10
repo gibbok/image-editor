@@ -7,6 +7,7 @@ import {
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,
   roundImageSizes,
+  getResizedUrl,
 } from './tranform';
 import { ImageSizes } from './type';
 
@@ -115,13 +116,18 @@ describe('transform', () => {
         width: 2592,
         height: 1936,
       });
+      // TOD add example of bad case use default value
+    });
+  });
 
-      // expect(
-      //   extractImageSizesFromUrl('https://picsum.photos/id/103/3333/5000')
-      // ).toEqual<ImageSizes>({
-      //   width: 3333,
-      //   height: 5000,
-      // });
+  describe('getResizedUrl', () => {
+    it('should return an url which fit the desired image size', () => {
+      expect(
+        getResizedUrl('https://picsum.photos/id/103/2592/1936', {
+          width: 200,
+          height: 160,
+        })
+      ).toBe('https://picsum.photos/id/103/200/149');
     });
   });
 });

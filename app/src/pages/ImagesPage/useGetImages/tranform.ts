@@ -45,25 +45,24 @@ export const modifySizeForImageUrl =
   ({ width, height }: ImageSizes) =>
     url.replace(/\d+\/\d+$/, width + '/' + height);
 
+export const getResizedUrl = (originalUrl: string, desiredResize: ImageSizes) =>
+  pipe(
+    originalUrl,
+    extractImageSizesFromUrl,
+    calculateImageSizesAspectRatioFitImage(desiredResize),
+    roundImageSizes,
+    modifySizeForImageUrl(originalUrl)
+  );
+
 export const tranformResponseForUI = (
   response: Images,
   desiredResize: ImageSizes
 ): ImagesUI =>
-  response.map(({ id, author, download_url }) => {
-    const urlResized = pipe(
-      download_url,
-      extractImageSizesFromUrl,
-      calculateImageSizesAspectRatioFitImage(desiredResize),
-      roundImageSizes,
-      modifySizeForImageUrl(download_url)
-    );
-
-    return {
-      id,
-      author,
-      urlResized,
-    };
-  });
+  response.map(({ id, author, download_url }) => ({
+    id,
+    author,
+    urlResized: getResizedUrl(download_url, desiredResize),
+  }));
 
 export const getPaginationInfoFromHeader = (
   header: string
