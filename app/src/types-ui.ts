@@ -4,6 +4,12 @@ export type ImageUI = Readonly<{
   urlResized: string;
 }>;
 
+export type ImageInfoUI = ImageUI &
+  Readonly<{
+    width: number;
+    height: number;
+  }>;
+
 export type ImagesUI = ReadonlyArray<ImageUI>;
 
 export type PaginationMove = 'prev' | 'next';

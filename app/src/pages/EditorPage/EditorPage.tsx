@@ -29,6 +29,8 @@ export const EditorPage = () => {
     navigate(-1);
   };
 
+  console.log('xxx', imageDetailsQuery?.data);
+
   return (
     <Box display="flex">
       <Box>
