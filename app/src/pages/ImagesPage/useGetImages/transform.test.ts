@@ -1,4 +1,3 @@
-import { OrganizeImportsMode } from 'typescript';
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import {
@@ -71,12 +70,12 @@ describe('transform', () => {
         {
           author: 'Ben Moore',
           id: '102',
-          urlResized: 'https://picsum.photos/id/102/100/80',
+          urlResized: 'https://picsum.photos/id/102/100/75',
         },
         {
           author: 'Ilham Rahmansyah',
           id: '103',
-          urlResized: 'https://picsum.photos/id/103/100/80',
+          urlResized: 'https://picsum.photos/id/103/100/75',
         },
       ]);
     });
@@ -96,13 +95,20 @@ describe('transform', () => {
   });
 
   describe('extractImageSizesFromUrl', () => {
-    it('should extract width and heigh from url', () => {
+    it('should extract width and height from url', () => {
       expect(
         extractImageSizesFromUrl('https://picsum.photos/id/103/2592/1936')
       ).toEqual<ImageSizes>({
         width: 2592,
         height: 1936,
       });
+
+      // expect(
+      //   extractImageSizesFromUrl('https://picsum.photos/id/103/3333/5000')
+      // ).toEqual<ImageSizes>({
+      //   width: 3333,
+      //   height: 5000,
+      // });
     });
   });
 });

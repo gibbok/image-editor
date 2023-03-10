@@ -54,13 +54,15 @@ export const ImagesPage = () => {
     navigate(makeEditorUrl(imageId));
   };
 
+  console.log('xxx', imagesQuery.data);
+
   return (
     <Box>
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
       ) : (
         <Box>
-          <ImageList sx={{ width: 800, height: 800 }} cols={3}>
+          <ImageList variant="masonry" cols={3} gap={8}>
             {imagesQuery.data.images.map((item) => (
               <ImageListItem key={item.id}>
                 <img

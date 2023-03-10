@@ -16,8 +16,6 @@ export const EditorPage = () => {
     onError: console.error,
   });
 
-  console.log('xxx', imageDetailsQuery.data);
-
   const imageId = urlParams.get('id'); // TODO show id not found from server
 
   const handleGoBackToImagesList = () => {

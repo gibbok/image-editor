@@ -19,10 +19,11 @@ export const calculateImageSizesAspectRatioFitImage = (
 
 export const extractImageSizesFromUrl = (str: string): ImageSizes => {
   const tokens = str.split('/').reverse();
-  const [widthStr, heightStr] = tokens;
+  const [heightStr, widthStr] = tokens;
+
   return {
-    width: Number(widthStr),
-    height: Number(heightStr), // TODO in case of error fallback to default value
+    width: Math.round(Number(widthStr)),
+    height: Math.round(Number(heightStr)), // TODO in case of error fallback to default value
   };
 };
 
@@ -35,11 +36,22 @@ export const tranformResponseForUI = (
   response: Images,
   desiredResize: ImageSizes
 ): ImagesUI =>
-  response.map(({ id, author, download_url }) => ({
-    id,
-    author,
-    urlResized: modifySizeForImageUrl(download_url, desiredResize),
-  }));
+  response.map(({ id, author, download_url }) => {
+    const originalSizes = extractImageSizesFromUrl(download_url);
+    const newSizes = calculateImageSizesAspectRatioFitImage(
+      originalSizes.width,
+      originalSizes.height,
+      desiredResize.width,
+      desiredResize.height
+    );
+    const width = Math.round(newSizes.width);
+    const height = Math.round(newSizes.height);
+    return {
+      id,
+      author,
+      urlResized: modifySizeForImageUrl(download_url, { width, height }),
+    };
+  });
 
 export const getPaginationInfoFromHeader = (
   header: string
