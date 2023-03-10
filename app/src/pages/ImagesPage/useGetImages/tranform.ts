@@ -40,33 +40,28 @@ export const extractImageSizesFromUrl = (str: string): ImageSizes => {
   };
 };
 
-export const modifySizeForImageUrl = (
-  url: string,
-  { width, height }: ImageSizes
-) => url.replace(/\d+\/\d+$/, width + '/' + height);
+export const modifySizeForImageUrl =
+  (url: string) =>
+  ({ width, height }: ImageSizes) =>
+    url.replace(/\d+\/\d+$/, width + '/' + height);
 
 export const tranformResponseForUI = (
   response: Images,
   desiredResize: ImageSizes
 ): ImagesUI =>
   response.map(({ id, author, download_url }) => {
-    // const originalSizes = extractImageSizesFromUrl(download_url);
-    // const newSizes =
-    //   calculateImageSizesAspectRatioFitImage(desiredResize)(originalSizes);
-
-    // const { width, height } = roundImageSizes(newSizes);
-
-    const { width, height } = pipe(
+    const urlResized = pipe(
       download_url,
       extractImageSizesFromUrl,
       calculateImageSizesAspectRatioFitImage(desiredResize),
-      roundImageSizes
+      roundImageSizes,
+      modifySizeForImageUrl(download_url)
     );
 
     return {
       id,
       author,
-      urlResized: modifySizeForImageUrl(download_url, { width, height }),
+      urlResized,
     };
   });
 

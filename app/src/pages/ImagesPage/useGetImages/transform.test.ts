@@ -15,7 +15,7 @@ describe('transform', () => {
     // TODO add more test here
     it('should modify url with given width and height', () => {
       expect(
-        modifySizeForImageUrl('https://picsum.photos/id/3/5000/3333', {
+        modifySizeForImageUrl('https://picsum.photos/id/3/5000/3333')({
           width: 200,
           height: 100,
         })
