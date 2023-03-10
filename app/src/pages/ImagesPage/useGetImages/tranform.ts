@@ -1,6 +1,7 @@
-import { Image, Images } from '../../../types-api';
+import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import { ImageSizes } from './type';
+import { pipe } from 'fp-ts/lib/function';
 
 /**
  * Conserve aspect ratio of the original region.
@@ -24,6 +25,10 @@ export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRa
       height: sourceSizes.height * ratio,
     };
   };
+export const roundImageSizes = (sizes: ImageSizes): ImageSizes => ({
+  width: Math.round(sizes.width),
+  height: Math.round(sizes.height),
+});
 
 export const extractImageSizesFromUrl = (str: string): ImageSizes => {
   const tokens = str.split('/').reverse();
@@ -45,11 +50,19 @@ export const tranformResponseForUI = (
   desiredResize: ImageSizes
 ): ImagesUI =>
   response.map(({ id, author, download_url }) => {
-    const originalSizes = extractImageSizesFromUrl(download_url);
-    const newSizes =
-      calculateImageSizesAspectRatioFitImage(desiredResize)(originalSizes);
-    const width = Math.round(newSizes.width);
-    const height = Math.round(newSizes.height);
+    // const originalSizes = extractImageSizesFromUrl(download_url);
+    // const newSizes =
+    //   calculateImageSizesAspectRatioFitImage(desiredResize)(originalSizes);
+
+    // const { width, height } = roundImageSizes(newSizes);
+
+    const { width, height } = pipe(
+      download_url,
+      extractImageSizesFromUrl,
+      calculateImageSizesAspectRatioFitImage(desiredResize),
+      roundImageSizes
+    );
+
     return {
       id,
       author,

@@ -6,6 +6,7 @@ import {
   tranformResponseForUI,
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,
+  roundImageSizes,
 } from './tranform';
 import { ImageSizes } from './type';
 
@@ -94,6 +95,15 @@ describe('transform', () => {
         height: 112,
       });
       expect(result.width / result.height).toBe(originalAspectRate);
+    });
+  });
+
+  describe('roundImageSizes', () => {
+    it('should round image sizes', () => {
+      expect(roundImageSizes({ width: 100.2, height: 80.8 })).toEqual({
+        width: 100,
+        height: 81,
+      });
     });
   });
 
