@@ -1,10 +1,13 @@
+import { OrganizeImportsMode } from 'typescript';
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import {
   getPaginationInfoFromHeader,
   modifySizeForImageUrl,
   tranformResponseForUI,
+  calculateImageSizesAspectRatioFitImage,
 } from './tranform';
+import { ImageSizes } from './type';
 
 describe('transform', () => {
   describe('modifySizeForImageUrl', () => {
@@ -75,6 +78,19 @@ describe('transform', () => {
           urlResized: 'https://picsum.photos/id/103/100/80',
         },
       ]);
+    });
+  });
+
+  describe('calculateImageSizesAspectRatioFitImage', () => {
+    it('should resize maintaining aspec ratio', () => {
+      const originalAspectRate = 500 / 280;
+      const result = calculateImageSizesAspectRatioFitImage(500, 280, 200, 160);
+
+      expect(result).toEqual<ImageSizes>({
+        width: 200,
+        height: 112,
+      });
+      expect(result.width / result.height).toBe(originalAspectRate);
     });
   });
 });
