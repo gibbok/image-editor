@@ -30,10 +30,10 @@ export const EditorPage = () => {
           Go to list
         </Button>
         {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
-          'loading'
+          'loading' // TODO add spinner
         ) : (
           <img
-            src={imageDetailsQuery.data.download_url} // TODOD check url is too big here
+            src={imageDetailsQuery.data.urlResized} // TODOD check url is too big here
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />
