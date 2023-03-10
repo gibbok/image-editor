@@ -5,6 +5,9 @@ import { PropertiesPanel } from './PropertiesPanel';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
 import { getImageIdFromImageIdQueryParam } from './utils';
 
+const PREVIEW_INIT_WIDTH_RESIZED = 250;
+const PREVIEW_INIT_HEIGHT_RESIZED = 166;
+
 export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
@@ -13,6 +16,10 @@ export const EditorPage = () => {
 
   const imageDetailsQuery = useGetImageDetails({
     imageId: imageIdParam,
+    imageSizes: {
+      width: PREVIEW_INIT_WIDTH_RESIZED,
+      height: PREVIEW_INIT_HEIGHT_RESIZED,
+    },
     onError: console.error,
   });
 
@@ -43,11 +50,3 @@ export const EditorPage = () => {
     </Box>
   );
 };
-
-/*
-TODO
-- get the type
-- retrive and render the image
-- adjust image
-
-*/
