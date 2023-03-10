@@ -1,5 +1,5 @@
 import { Images } from '../../../types-api';
-import { ImagesUI, Pagination } from '../../../types-ui';
+import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import { ImageSizes } from './type';
 
 export const modifySizeForImageUrl = (
@@ -17,7 +17,9 @@ export const tranformResponseForUI = (
     urlResized: modifySizeForImageUrl(download_url, desiredResize),
   }));
 
-export const getPaginationStateFromHeader = (header: string): Pagination => {
+export const getPaginationInfoFromHeader = (
+  header: string
+): PaginationMoveState => {
   const hasPrev = header.includes('rel="prev"');
   const hasNext = header.includes('rel="next"');
   if (hasPrev && hasNext) {

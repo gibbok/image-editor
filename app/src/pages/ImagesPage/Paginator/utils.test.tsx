@@ -1,9 +1,9 @@
-import { Pagination } from '../../types-ui';
-import { HideNextPrevButton, disablePrevNextButtons } from './Paginator';
+import { PaginationMoveState } from '../../../types-ui';
+import { disablePrevNextButtons, HideNextPrevButton } from './utils';
 
 describe('Paginator', () => {
   describe('handleChangePage', () => {
-    const cases: ReadonlyArray<[Pagination, HideNextPrevButton]> = [
+    const cases: ReadonlyArray<[PaginationMoveState, HideNextPrevButton]> = [
       ['prev-next', { disableNext: false, disablePrev: false }],
       ['prev', { disableNext: true, disablePrev: false }],
       ['next', { disableNext: false, disablePrev: true }],

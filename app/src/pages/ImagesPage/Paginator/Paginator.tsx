@@ -1,44 +1,14 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 
-import { Pagination, PaginationMove } from '../../types-ui';
+import { PaginationMoveState, PaginationMove } from '../../../types-ui';
+import { disablePrevNextButtons } from './utils';
 
 type PaginationProps = Readonly<{
   page: number;
-  variant: Pagination;
+  variant: PaginationMoveState;
   onChange: (movement: PaginationMove) => void;
 }>;
-
-export type HideNextPrevButton = Readonly<{
-  disableNext: boolean;
-  disablePrev: boolean;
-}>;
-export const disablePrevNextButtons = (
-  variant: Pagination
-): HideNextPrevButton => {
-  switch (variant) {
-    case 'prev-next':
-      return {
-        disableNext: false,
-        disablePrev: false,
-      };
-    case 'prev':
-      return {
-        disableNext: true,
-        disablePrev: false,
-      };
-    case 'next':
-      return {
-        disableNext: false,
-        disablePrev: true,
-      };
-    default:
-      return {
-        disableNext: true,
-        disablePrev: true,
-      };
-  }
-};
 
 export const Paginator = ({ page, variant, onChange }: PaginationProps) => {
   const visiblityButton = disablePrevNextButtons(variant);

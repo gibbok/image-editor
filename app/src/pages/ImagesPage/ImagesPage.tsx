@@ -7,7 +7,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Paginator } from './Paginator';
+import { Paginator } from './Paginator/Paginator';
 import { PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -85,3 +85,4 @@ export const ImagesPage = () => {
   );
 };
 // TODO make responsive the image list
+// TODO handle case with data returned but empty, no data

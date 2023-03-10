@@ -8,9 +8,9 @@ export type ImagesUI = ReadonlyArray<ImageUI>;
 
 export type PaginationMove = 'prev' | 'next';
 
-export type Pagination = PaginationMove | 'prev-next' | 'none';
+export type PaginationMoveState = PaginationMove | 'prev-next' | 'none';
 
 export type ResultImagesUI = Readonly<{
   images: ImagesUI;
-  pagination: Pagination;
+  pagination: PaginationMoveState;
 }>;

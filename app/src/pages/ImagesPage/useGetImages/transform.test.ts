@@ -1,7 +1,7 @@
 import { Images } from '../../../types-api';
-import { ImagesUI, Pagination } from '../../../types-ui';
+import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import {
-  getPaginationStateFromHeader,
+  getPaginationInfoFromHeader,
   modifySizeForImageUrl,
   tranformResponseForUI,
 } from './tranform';
@@ -19,8 +19,8 @@ describe('transform', () => {
     });
   });
 
-  describe('getPaginationStateFromHeader', () => {
-    const cases: ReadonlyArray<[string, Pagination]> = [
+  describe('getPaginationInfoFromHeader', () => {
+    const cases: ReadonlyArray<[string, PaginationMoveState]> = [
       ['<https://picsum.photos/v2/list?page=2&limit=30>; rel="next"', 'next'],
       [
         '<https://picsum.photos/v2/list?page=1&limit=30>; rel="prev", <https://picsum.photos/v2/list?page=3&limit=30>; rel="next"',
@@ -36,7 +36,7 @@ describe('transform', () => {
     test.each(cases)(
       'link header %p, returns pagination %p',
       (firstArg, expectedResult) =>
-        expect(getPaginationStateFromHeader(firstArg)).toBe(expectedResult)
+        expect(getPaginationInfoFromHeader(firstArg)).toBe(expectedResult)
     );
   });
 
