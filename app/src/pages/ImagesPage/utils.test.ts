@@ -12,12 +12,15 @@ describe('utils', () => {
       expect(getPageFromPageQueryParam('undefined')).toBe(1);
       expect(getPageFromPageQueryParam('null')).toBe(1);
       expect(getPageFromPageQueryParam(null)).toBe(1);
+      expect(getPageFromPageQueryParam('1.5')).toBe(1);
     });
   });
 
   describe('makeEditorUrl', () => {
     it('should return editor url', () => {
-      expect(makeEditorUrl('125')).toBe('editor?id=125');
+      expect(makeEditorUrl('125')).toBe(
+        'editor?id=125&width=800&height=600&gray=false&blur=1'
+      );
     });
   });
 

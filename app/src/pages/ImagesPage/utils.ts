@@ -4,7 +4,15 @@ export const getPageFromPageQueryParam = (pageStr: string | null): number => {
     return DEFAULT_PAGE;
   }
   const pageNumber = Number(pageStr);
-  return Number.isNaN(pageNumber) ? DEFAULT_PAGE : pageNumber;
+  if (
+    Number.isNaN(pageNumber) ||
+    !Number.isInteger(pageNumber) ||
+    pageNumber <= 0
+  ) {
+    return DEFAULT_PAGE;
+  }
+
+  return pageNumber;
 };
 
 export const makeEditorUrl = (imageId: string) =>
