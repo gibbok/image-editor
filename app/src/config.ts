@@ -11,7 +11,12 @@ export const LIST_THUMBNAILS_AMOUNT_PER_PAGE = 60;
 export const EDITOR_PREVIEW_INIT_WIDTH = 800;
 export const EDITOR_PREVIEW_INIT_HEIGHT = 600;
 export const EDITOR_MIN_WIDTH = 10;
+export const EDITOR_MAX_WIDTH = 10;
 export const EDITOR_MIN_HEIGHT = 10;
+export const EDITOR_MAX_HEIGHT = 10;
+
+export const EDITOR_MIN_BLUR = 1;
+export const EDITOR_MAX_BLUR = 10;
 
 export const configApp = () => {
   axios.defaults.baseURL = API_BASE_URL;
