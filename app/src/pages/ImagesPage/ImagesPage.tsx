@@ -15,9 +15,7 @@ import {
   makeEditorUrl,
   makePageQueryParam,
 } from './utils';
-
-const THUMBNAIL_WIDTH_RESIZED = 250;
-const THUMBNAIL_HEIGHT_RESIZED = 166;
+import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
@@ -27,8 +25,8 @@ export const ImagesPage = () => {
 
   const imagesQuery = useGetImages({
     imageSizes: {
-      width: THUMBNAIL_WIDTH_RESIZED,
-      height: THUMBNAIL_HEIGHT_RESIZED,
+      width: LIST_THUMBNAIL_WIDTH,
+      height: LIST_THUMBNAIL_HEIGHT,
     },
     page,
     onError: console.error, // TODO render error message
@@ -63,7 +61,7 @@ export const ImagesPage = () => {
           <ImageList
             sx={{ width: 500, height: 450 }}
             cols={3}
-            rowHeight={THUMBNAIL_HEIGHT_RESIZED}
+            rowHeight={LIST_THUMBNAIL_HEIGHT}
           >
             {imagesQuery.data.images.map((item) => (
               <ImageListItem key={item.id}>

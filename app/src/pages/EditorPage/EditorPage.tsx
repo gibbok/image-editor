@@ -1,23 +1,18 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { EDITOR_PREVIEW_INIT_WIDTH } from '../../config';
 import { PropertiesPanel } from './PropertiesPanel';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
-import {
-  getImageIdFromImageIdQueryParam,
-  makeEditorPageQueryParam,
-} from './utils';
-
-const PREVIEW_INIT_WIDTH_RESIZED = 800;
-const PREVIEW_INIT_HEIGHT_RESIZED = 600;
+import { getImageIdFromImageIdQueryParam } from './utils';
 
 export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
 
   const imageIdParam = getImageIdFromImageIdQueryParam(urlParams.get('id')); // TODO get default in case of wrong values
-  const widthParam = urlParams.get('width') ?? PREVIEW_INIT_WIDTH_RESIZED;
-  const heightParam = urlParams.get('height') ?? PREVIEW_INIT_HEIGHT_RESIZED;
+  const widthParam = urlParams.get('width') ?? EDITOR_PREVIEW_INIT_WIDTH;
+  const heightParam = urlParams.get('height') ?? EDITOR_PREVIEW_INIT_WIDTH;
   const grayParam = Boolean(urlParams.get('gray'));
   const blurParam = urlParams.get('blur') ?? 1;
 

@@ -6,14 +6,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import reportWebVitals from './reportWebVitals';
-import { setupApp } from './setup';
+import { configApp } from './config';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import { EditorPage } from './pages/EditorPage/EditorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ImagesPage } from './pages/ImagesPage/ImagesPage';
 
-setupApp();
+configApp();
 
 const queryClient = new QueryClient();
 

@@ -1,7 +1,7 @@
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import axios from 'axios';
-import { API_VERSION } from '../../../setup';
+import { API_VERSION } from '../../../config';
 import { ResponseImages } from '../../../types-api';
 import { ResultImagesUI } from '../../../types-ui';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
