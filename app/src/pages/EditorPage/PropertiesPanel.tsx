@@ -4,7 +4,6 @@ import {
   Checkbox,
   FormControl,
   FormControlLabel,
-  Input,
   TextField,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
@@ -81,11 +80,23 @@ export const PropertiesPanel = ({
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: yupResolver(schema) });
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      width,
+      height,
+      isGrayscale,
+      blur,
+    },
+  });
 
   const onSubmit = (data: FormData) => {
     setImageProps((prevState) => ({ ...prevState, data }));
   };
+
+  console.log('xxxx', errors);
+
+  const isDisabledApply = Object.keys(errors).length > 0;
 
   return (
     <Box mt={6}>
@@ -95,28 +106,31 @@ export const PropertiesPanel = ({
             name="width"
             control={control}
             render={({ field }) => (
-              <TextField
-                type="number"
-                label="Width"
-                {...field}
-                defaultValue={width}
-              />
+              <>
+                <TextField
+                  error={'width' in errors}
+                  type="number"
+                  label="Width"
+                  // defaultValue={width}
+                  helperText={errors.width?.message}
+                  {...field}
+                />
+              </>
             )}
           />
-          <p>{errors.width?.message}</p>
           <Controller
             name="height"
             control={control}
             render={({ field }) => (
               <TextField
+                error={'height' in errors}
                 type="number"
                 label="Height"
+                helperText={errors.height?.message}
                 {...field}
-                defaultValue={height}
               />
             )}
           />
-          <p>{errors.height?.message}</p>
           <Controller
             name="isGrayscale"
             control={control}
@@ -133,18 +147,17 @@ export const PropertiesPanel = ({
             control={control}
             render={({ field }) => (
               <TextField
+                error={'blur' in errors}
                 type="number"
                 label="Blur"
-                defaultValue={blur}
+                helperText={errors.blur?.message}
                 {...field}
               />
             )}
           />
-          <p>{errors.blur?.message}</p>
-          <Button type="submit" variant="outlined">
+          <Button type="submit" variant="outlined" disabled={isDisabledApply}>
             Apply
           </Button>
-          {/* <input type="submit" /> */}
         </Box>
       </FormControl>
     </Box>
