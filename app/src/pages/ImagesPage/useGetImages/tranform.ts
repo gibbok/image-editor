@@ -61,7 +61,7 @@ export const tranformResponseForUI = (
   response.map(({ id, author, download_url }) => ({
     id,
     author,
-    urlResized: getResizedUrl(download_url, desiredResize),
+    urlTransform: getResizedUrl(download_url, desiredResize),
   }));
 
 export const getPaginationInfoFromHeader = (

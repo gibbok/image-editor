@@ -53,7 +53,7 @@ export const useGetImageDetails: UseGetImageInfo = ({
           author: data.author,
           width: widthResized,
           height: heightResized,
-          urlResized: getResizedUrl(data.download_url, {
+          urlTransform: getResizedUrl(data.download_url, {
             width: widthResized,
             height: heightResized,
           }),

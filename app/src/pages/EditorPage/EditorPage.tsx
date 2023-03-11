@@ -36,7 +36,7 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={imageDetailsQuery.data.urlResized} // TODOD check url is too big here
+            src={imageDetailsQuery.data.urlTransform} // TODOD check url is too big here
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />

@@ -67,7 +67,7 @@ export const ImagesPage = () => {
               <ImageListItem key={item.id}>
                 <img
                   style={{ cursor: 'pointer' }}
-                  src={item.urlResized}
+                  src={item.urlTransform}
                   alt={item.author}
                   loading="lazy"
                   onClick={handleNavigateToEditor(item.id)}

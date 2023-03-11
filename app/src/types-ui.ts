@@ -1,7 +1,7 @@
 export type ImageUI = Readonly<{
   id: string;
   author: string;
-  urlResized: string;
+  urlTransform: string;
 }>;
 
 export type ImageInfoUI = ImageUI &

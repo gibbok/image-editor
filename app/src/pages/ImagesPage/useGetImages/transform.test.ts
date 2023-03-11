@@ -72,12 +72,12 @@ describe('transform', () => {
         {
           author: 'Ben Moore',
           id: '102',
-          urlResized: 'https://picsum.photos/id/102/100/75',
+          urlTransform: 'https://picsum.photos/id/102/100/75',
         },
         {
           author: 'Ilham Rahmansyah',
           id: '103',
-          urlResized: 'https://picsum.photos/id/103/100/75',
+          urlTransform: 'https://picsum.photos/id/103/100/75',
         },
       ]);
     });
