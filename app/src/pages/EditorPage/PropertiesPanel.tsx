@@ -2,8 +2,8 @@ import {
   Box,
   Button,
   Checkbox,
-  FormControl,
   FormControlLabel,
+  Grid,
   TextField,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
@@ -27,11 +27,6 @@ type PropertiesPanelProps = ImagePropertiesForChange &
     onDownload: (propsChange: ImagePropertiesForChange) => void;
   }>;
 
-type EventTextField = React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>;
-
-const clamp = (number: number, min: number, max: number) =>
-  Math.max(min, Math.min(number, max));
-
 const schema = yup
   .object({
     width: yup
@@ -48,7 +43,7 @@ const schema = yup
       .required()
       .min(EDITOR_MIN_HEIGHT)
       .max(EDITOR_MAX_HEIGHT),
-    isGrayscale: yup.boolean(),
+    isGrayscale: yup.boolean().required().oneOf([true, false]),
     blur: yup
       .number()
       .positive()
@@ -58,6 +53,7 @@ const schema = yup
       .max(EDITOR_MAX_BLUR),
   })
   .required();
+
 type FormData = yup.InferType<typeof schema>;
 
 export const PropertiesPanel = ({
@@ -69,13 +65,6 @@ export const PropertiesPanel = ({
   onApply,
   onDownload,
 }: PropertiesPanelProps) => {
-  const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
-    width,
-    height,
-    isGrayscale,
-    blur,
-  });
-
   const {
     control,
     handleSubmit,
@@ -91,75 +80,85 @@ export const PropertiesPanel = ({
   });
 
   const onSubmit = (data: FormData) => {
-    setImageProps((prevState) => ({ ...prevState, data }));
+    onApply(data);
   };
 
   const isDisabledApplyButton = Object.keys(errors).length > 0;
 
   return (
     <Box mt={6}>
-      <FormControl>
-        <Box component="form" onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="width"
-            control={control}
-            render={({ field }) => (
-              <>
+      <Box component="form" onSubmit={handleSubmit(onSubmit)}>
+        <Grid container direction={'column'} spacing={5}>
+          <Grid item>
+            <Controller
+              name="width"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <TextField
+                    error={'width' in errors}
+                    type="number"
+                    label="Width"
+                    helperText={errors.width?.message}
+                    {...field}
+                  />
+                </>
+              )}
+            />
+          </Grid>
+          <Grid item>
+            <Controller
+              name="height"
+              control={control}
+              render={({ field }) => (
                 <TextField
-                  error={'width' in errors}
+                  error={'height' in errors}
                   type="number"
-                  label="Width"
-                  helperText={errors.width?.message}
+                  label="Height"
+                  helperText={errors.height?.message}
                   {...field}
                 />
-              </>
-            )}
-          />
-          <Controller
-            name="height"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                error={'height' in errors}
-                type="number"
-                label="Height"
-                helperText={errors.height?.message}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="isGrayscale"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                control={<Checkbox defaultChecked={isGrayscale} {...field} />}
-                label="Grayscale"
-              />
-            )}
-          />
-          <Controller
-            name="blur"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                error={'blur' in errors}
-                type="number"
-                label="Blur"
-                helperText={errors.blur?.message}
-                {...field}
-              />
-            )}
-          />
-          <Button
-            type="submit"
-            variant="outlined"
-            disabled={isDisabledApplyButton}
-          >
-            Apply
-          </Button>
-        </Box>
-      </FormControl>
+              )}
+            />
+          </Grid>
+          <Grid item>
+            <Controller
+              name="isGrayscale"
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  control={<Checkbox defaultChecked={isGrayscale} {...field} />}
+                  label="Grayscale"
+                />
+              )}
+            />
+          </Grid>
+          <Grid item>
+            <Controller
+              name="blur"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  error={'blur' in errors}
+                  type="number"
+                  label="Blur"
+                  helperText={errors.blur?.message}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              type="submit"
+              variant="outlined"
+              disabled={isDisabledApplyButton}
+            >
+              Apply
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 };
