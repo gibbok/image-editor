@@ -6,6 +6,7 @@ export const API_MAX_IMAGE_SIZE = 5000;
 
 export const LIST_THUMBNAIL_WIDTH = 250;
 export const LIST_THUMBNAIL_HEIGHT = 166;
+export const LIST_THUMBNAILS_AMOUNT_PER_PAGE = 60;
 
 export const EDITOR_PREVIEW_INIT_WIDTH = 800;
 export const EDITOR_PREVIEW_INIT_HEIGHT = 600;
