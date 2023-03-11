@@ -15,14 +15,18 @@ export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
 
-  const imageIdParam = getImageIdFromImageIdQueryParam(urlParams.get('id'));
+  const imageIdParam = getImageIdFromImageIdQueryParam(urlParams.get('id')); // TODO get default in case of wrong values
+  const widthParam = urlParams.get('width') ?? PREVIEW_INIT_WIDTH_RESIZED;
+  const heightParam = urlParams.get('height') ?? PREVIEW_INIT_HEIGHT_RESIZED;
+  const grayParam = Boolean(urlParams.get('gray'));
+  const blurParam = urlParams.get('blur') ?? 1;
 
   const imageDetailsQuery = useGetImageDetails({
     imageId: imageIdParam,
-    imageSizes: {
-      width: PREVIEW_INIT_WIDTH_RESIZED,
-      height: PREVIEW_INIT_HEIGHT_RESIZED,
-    },
+    width: Number(widthParam),
+    height: Number(heightParam),
+    isGrayscale: grayParam,
+    blur: Number(blurParam),
     onError: console.error,
   });
 

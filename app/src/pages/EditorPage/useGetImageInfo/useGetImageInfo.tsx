@@ -9,7 +9,6 @@ import {
   getResizedUrl,
   roundImageSizes,
 } from '../../ImagesPage/useGetImages/tranform';
-import { ImageSizes } from '../../ImagesPage/useGetImages/type';
 import { pipe } from 'fp-ts/lib/function';
 
 const KEY_IMAGES = 'GET_IMAGE_DETAILS';
@@ -22,31 +21,44 @@ export const fetchImageDetails = ({
 export type UseGetImageInfo = (
   params: Readonly<{
     imageId: string;
-    imageSizes: ImageSizes;
+    width: number;
+    height: number;
+    isGrayscale: boolean;
+    blur: number;
     onError: (e: unknown) => void;
   }>
 ) => UseQueryResult<ImageInfoUI, unknown>;
 
 export const useGetImageDetails: UseGetImageInfo = ({
   imageId,
-  imageSizes,
+  width,
+  height,
+  isGrayscale,
+  blur,
   onError,
 }) =>
-  useQuery([KEY_IMAGES, { imageId }], () => fetchImageDetails({ imageId }), {
-    select: (data) => {
-      const { width, height } = pipe(
-        data.download_url,
-        extractImageSizesFromUrl,
-        calculateImageSizesAspectRatioFitImage(imageSizes),
-        roundImageSizes
-      );
-      return {
-        id: data.id,
-        author: data.author,
-        width,
-        height,
-        urlResized: getResizedUrl(data.download_url, imageSizes),
-      };
-    },
-    onError,
-  });
+  useQuery(
+    [KEY_IMAGES, { imageId, width, height, isGrayscale, blur }],
+    () => fetchImageDetails({ imageId }),
+    {
+      select: (data) => {
+        const { width: widthResized, height: heightResized } = pipe(
+          data.download_url,
+          extractImageSizesFromUrl,
+          calculateImageSizesAspectRatioFitImage({ width, height }),
+          roundImageSizes
+        );
+        return {
+          id: data.id,
+          author: data.author,
+          width: widthResized,
+          height: heightResized,
+          urlResized: getResizedUrl(data.download_url, {
+            width: widthResized,
+            height: heightResized,
+          }),
+        };
+      },
+      onError,
+    }
+  );

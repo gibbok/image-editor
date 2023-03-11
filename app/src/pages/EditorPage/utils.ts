@@ -6,8 +6,6 @@ export const getImageIdFromImageIdQueryParam = (imageIdStr: string | null) => {
   return imageIdStr;
 };
 
-type BlurValue = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-
 export const makeEditorPageQueryParam = ({
   width,
   height,
@@ -17,7 +15,7 @@ export const makeEditorPageQueryParam = ({
   width: number;
   height: number;
   isGrayscale: boolean;
-  blur: BlurValue;
+  blur: number;
 }>) =>
   `?${new URLSearchParams({
     width: width.toString(),
