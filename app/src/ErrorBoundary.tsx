@@ -1,19 +1,22 @@
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 
-type Props = Readonly<{
+type ErrorBoundaryProps = Readonly<{
   children?: ReactNode;
 }>;
 
-type State = Readonly<{
+type ErrorBoundaryState = Readonly<{
   hasError: boolean;
 }>;
 
-export class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
+  public state: ErrorBoundaryState = {
     hasError: false,
   };
 
-  public static getDerivedStateFromError(_: Error): State {
+  public static getDerivedStateFromError(_: Error): ErrorBoundaryState {
     return { hasError: true };
   }
 

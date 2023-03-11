@@ -5,24 +5,28 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { setupApp } from './setup';
+import { configApp } from './config';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import { EditorPage } from './pages/EditorPage/EditorPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ImagesPage } from './pages/ImagesPage/ImagesPage';
 
-setupApp();
+configApp();
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <ImagesPage />,
     errorElement: <ErrorPage />,
   },
   {
     path: '/editor',
     element: <EditorPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
@@ -31,7 +35,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

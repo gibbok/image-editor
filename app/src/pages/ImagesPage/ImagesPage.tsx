@@ -8,27 +8,25 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator/Paginator';
-import { PaginationMove } from '../../types-ui';
+import { ImageId, PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
 import {
-  getPageFromPageQueryParam,
+  getQueryParamsForImagesPage,
   makeEditorUrl,
   makePageQueryParam,
 } from './utils';
-
-const THUMBNAIL_WIDTH_RESIZED = 250;
-const THUMBNAIL_HEIGHT_RESIZED = 166;
+import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
-  const pageParam = getPageFromPageQueryParam(urlParams.get('page'));
+  const pageParam = getQueryParamsForImagesPage(urlParams).page;
   const [page, setPage] = React.useState(pageParam);
 
   const imagesQuery = useGetImages({
     imageSizes: {
-      width: THUMBNAIL_WIDTH_RESIZED,
-      height: THUMBNAIL_HEIGHT_RESIZED,
+      width: LIST_THUMBNAIL_WIDTH,
+      height: LIST_THUMBNAIL_HEIGHT,
     },
     page,
     onError: console.error, // TODO render error message
@@ -50,7 +48,7 @@ export const ImagesPage = () => {
     setPage((prevState) => (move === 'prev' ? prevState - 1 : prevState + 1));
   };
 
-  const handleNavigateToEditor = (imageId: string) => () => {
+  const handleNavigateToEditor = (imageId: ImageId) => () => {
     navigate(makeEditorUrl(imageId));
   };
 
@@ -60,15 +58,19 @@ export const ImagesPage = () => {
         <CircularProgress />
       ) : (
         <Box>
-          <ImageList sx={{ width: 800, height: 800 }} cols={3}>
+          <ImageList
+            sx={{ width: 500, height: 450 }}
+            cols={3}
+            rowHeight={LIST_THUMBNAIL_HEIGHT}
+          >
             {imagesQuery.data.images.map((item) => (
-              <ImageListItem key={item.id}>
+              <ImageListItem key={item.imageId}>
                 <img
                   style={{ cursor: 'pointer' }}
-                  src={item.urlResized}
+                  src={item.urlTransform}
                   alt={item.author}
                   loading="lazy"
-                  onClick={handleNavigateToEditor(item.id)}
+                  onClick={handleNavigateToEditor(item.imageId)}
                 />
                 <ImageListItemBar title={item.author} position="below" />
               </ImageListItem>
