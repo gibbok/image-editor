@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import axios from 'axios';
 import { Image } from '../../../types-api';
-import { ImageInfoUI, ImageUI } from '../../../types-ui';
+import { ImageInfoUI } from '../../../types-ui';
 import {
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,

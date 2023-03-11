@@ -3,10 +3,13 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PropertiesPanel } from './PropertiesPanel';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
-import { getImageIdFromImageIdQueryParam } from './utils';
+import {
+  getImageIdFromImageIdQueryParam,
+  makeEditorPageQueryParam,
+} from './utils';
 
-const PREVIEW_INIT_WIDTH_RESIZED = 250;
-const PREVIEW_INIT_HEIGHT_RESIZED = 166;
+const PREVIEW_INIT_WIDTH_RESIZED = 800;
+const PREVIEW_INIT_HEIGHT_RESIZED = 600;
 
 export const EditorPage = () => {
   const navigate = useNavigate();
@@ -28,8 +31,6 @@ export const EditorPage = () => {
   const handleGoBackToImagesList = () => {
     navigate(-1);
   };
-
-  console.log('xxx', imageDetailsQuery?.data);
 
   return (
     <Box display="flex">
