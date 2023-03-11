@@ -94,9 +94,7 @@ export const PropertiesPanel = ({
     setImageProps((prevState) => ({ ...prevState, data }));
   };
 
-  console.log('xxxx', errors);
-
-  const isDisabledApply = Object.keys(errors).length > 0;
+  const isDisabledApplyButton = Object.keys(errors).length > 0;
 
   return (
     <Box mt={6}>
@@ -111,7 +109,6 @@ export const PropertiesPanel = ({
                   error={'width' in errors}
                   type="number"
                   label="Width"
-                  // defaultValue={width}
                   helperText={errors.width?.message}
                   {...field}
                 />
@@ -136,12 +133,11 @@ export const PropertiesPanel = ({
             control={control}
             render={({ field }) => (
               <FormControlLabel
-                control={<Checkbox checked={isGrayscale} {...field} />}
+                control={<Checkbox defaultChecked={isGrayscale} {...field} />}
                 label="Grayscale"
               />
             )}
           />
-          <p>{errors.isGrayscale?.message}</p>
           <Controller
             name="blur"
             control={control}
@@ -155,7 +151,11 @@ export const PropertiesPanel = ({
               />
             )}
           />
-          <Button type="submit" variant="outlined" disabled={isDisabledApply}>
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled={isDisabledApplyButton}
+          >
             Apply
           </Button>
         </Box>
