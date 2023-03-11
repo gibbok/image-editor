@@ -1,31 +1,25 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { EDITOR_PREVIEW_INIT_WIDTH } from '../../config';
 import { PropertiesPanel } from './PropertiesPanel';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
-import { getImageIdFromImageIdQueryParam } from './utils';
+import { getEditorPageQueryParams } from './utils';
 
 export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
 
-  const imageIdParam = getImageIdFromImageIdQueryParam(urlParams.get('id')); // TODO get default in case of wrong values
-  const widthParam = urlParams.get('width') ?? EDITOR_PREVIEW_INIT_WIDTH;
-  const heightParam = urlParams.get('height') ?? EDITOR_PREVIEW_INIT_WIDTH;
-  const grayParam = Boolean(urlParams.get('gray'));
-  const blurParam = urlParams.get('blur') ?? 1;
+  const { imageId, width, height, isGrayscale, blur } =
+    getEditorPageQueryParams(urlParams);
 
   const imageDetailsQuery = useGetImageDetails({
-    imageId: imageIdParam,
-    width: Number(widthParam),
-    height: Number(heightParam),
-    isGrayscale: grayParam,
-    blur: Number(blurParam),
+    imageId,
+    width,
+    height,
+    isGrayscale,
+    blur,
     onError: console.error,
   });
-
-  const imageId = urlParams.get('id'); // TODO show id not found from server
 
   const handleGoBackToImagesList = () => {
     navigate(-1);

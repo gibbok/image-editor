@@ -11,7 +11,7 @@ import { Paginator } from './Paginator/Paginator';
 import { PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
 import {
-  getPageFromPageQueryParam,
+  getQueryParamsForImagesPage,
   makeEditorUrl,
   makePageQueryParam,
 } from './utils';
@@ -20,7 +20,7 @@ import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
 export const ImagesPage = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
-  const pageParam = getPageFromPageQueryParam(urlParams.get('page'));
+  const pageParam = getQueryParamsForImagesPage(urlParams).page;
   const [page, setPage] = React.useState(pageParam);
 
   const imagesQuery = useGetImages({
