@@ -8,7 +8,7 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator/Paginator';
-import { PaginationMove } from '../../types-ui';
+import { ImageId, PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
 import {
   getQueryParamsForImagesPage,
@@ -48,7 +48,7 @@ export const ImagesPage = () => {
     setPage((prevState) => (move === 'prev' ? prevState - 1 : prevState + 1));
   };
 
-  const handleNavigateToEditor = (imageId: string) => () => {
+  const handleNavigateToEditor = (imageId: ImageId) => () => {
     navigate(makeEditorUrl(imageId));
   };
 
@@ -64,13 +64,13 @@ export const ImagesPage = () => {
             rowHeight={LIST_THUMBNAIL_HEIGHT}
           >
             {imagesQuery.data.images.map((item) => (
-              <ImageListItem key={item.id}>
+              <ImageListItem key={item.imageId}>
                 <img
                   style={{ cursor: 'pointer' }}
                   src={item.urlTransform}
                   alt={item.author}
                   loading="lazy"
-                  onClick={handleNavigateToEditor(item.id)}
+                  onClick={handleNavigateToEditor(item.imageId)}
                 />
                 <ImageListItemBar title={item.author} position="below" />
               </ImageListItem>

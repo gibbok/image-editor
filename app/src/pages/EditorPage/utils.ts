@@ -5,7 +5,9 @@ import {
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
 } from '../../config';
+import { ImageId } from '../../types-ui';
 import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
+import { ImagePropertiesForChange } from './types';
 
 export const makeEditorPageQueryParam = ({
   width,
@@ -25,13 +27,10 @@ export const makeEditorPageQueryParam = ({
     blur: blur.toString(),
   })}`;
 
-export type EditorQueryParams = Readonly<{
-  imageId: string;
-  width: number;
-  height: number;
-  isGrayscale: boolean;
-  blur: number;
-}>;
+export type EditorQueryParams = ImagePropertiesForChange &
+  Readonly<{
+    imageId: ImageId;
+  }>;
 
 export const getImageIdFromImageIdQueryParam = (imageIdStr: string | null) => {
   const DEFAULT_IMAGE_ID = '1';

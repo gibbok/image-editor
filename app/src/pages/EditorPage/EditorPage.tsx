@@ -42,7 +42,7 @@ export const EditorPage = () => {
           />
         )}
       </Box>
-      <PropertiesPanel />
+      {/* <PropertiesPanel /> */}
     </Box>
   );
 };

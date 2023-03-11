@@ -71,12 +71,12 @@ describe('transform', () => {
       ).toEqual<ImagesUI>([
         {
           author: 'Ben Moore',
-          id: '102',
+          imageId: '102',
           urlTransform: 'https://picsum.photos/id/102/100/75',
         },
         {
           author: 'Ilham Rahmansyah',
-          id: '103',
+          imageId: '103',
           urlTransform: 'https://picsum.photos/id/103/100/75',
         },
       ]);

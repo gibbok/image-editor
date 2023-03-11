@@ -1,5 +1,7 @@
+export type ImageId = string;
+
 export type ImageUI = Readonly<{
-  id: string;
+  imageId: ImageId;
   author: string;
   urlTransform: string;
 }>;

@@ -1,6 +1,7 @@
+import { ImageId } from '../../types-ui';
 import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
 
-export const makeEditorUrl = (imageId: string) =>
+export const makeEditorUrl = (imageId: ImageId) =>
   `editor?id=${imageId}&width=800&height=600&gray=false&blur=1`; // TODO make it configurable
 
 export const makePageQueryParam = (page: number) =>

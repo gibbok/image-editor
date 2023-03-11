@@ -59,7 +59,7 @@ export const tranformResponseForUI = (
   desiredResize: ImageSizes
 ): ImagesUI =>
   response.map(({ id, author, download_url }) => ({
-    id,
+    imageId: id,
     author,
     urlTransform: getResizedUrl(download_url, desiredResize),
   }));
