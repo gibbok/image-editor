@@ -14,12 +14,14 @@ import { ImagePropertiesForChange } from './types';
 
 export const makeEditorPageQueryParam = ({
   imageId,
+  page,
   width,
   height,
   isGrayscale,
   blur,
 }: Readonly<{
   imageId: ImageId;
+  page: number;
   width: number;
   height: number;
   isGrayscale: boolean;
@@ -27,6 +29,7 @@ export const makeEditorPageQueryParam = ({
 }>) =>
   `?${new URLSearchParams({
     imageId: imageId,
+    page: page.toString(),
     width: width.toString(),
     height: height.toString(),
     grayscale: isGrayscale.toString(),

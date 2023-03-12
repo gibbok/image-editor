@@ -27,38 +27,50 @@ export const EditorPage = () => {
     onError: console.error,
   });
 
-  // React.useEffect(() => {
-  //   if (
-  //     qp.width !== imageProps.width ||
-  //     qp.height !== imageProps.height ||
-  //     qp.isGrayscale !== imageProps.isGrayscale ||
-  //     qp.blur !== imageProps.blur
-  //   ) {
-  //     setImageProps({
-  //       width: qp.width,
-  //       height: qp.height,
-  //       isGrayscale: qp.isGrayscale,
-  //       blur: qp.blur,
-  //     });
-  //   }
+  React.useEffect(() => {
+    if (
+      qp.width === imageProps.width &&
+      qp.height === imageProps.height &&
+      qp.isGrayscale === imageProps.isGrayscale &&
+      qp.blur === imageProps.blur
+    ) {
+      return;
+    }
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
+    setImageProps({
+      width: qp.width,
+      height: qp.height,
+      isGrayscale: qp.isGrayscale,
+      blur: qp.blur,
+    });
 
-  // React.useEffect(() => {
-  //   setUrlsParams(
-  //     makeEditorPageQueryParam({
-  //       ...imageProps,
-  //       imageId: qp.imageId,
-  //     })
-  //   );
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [
-  //   imageProps.width,
-  //   imageProps.height,
-  //   imageProps.isGrayscale,
-  //   imageProps.blur,
-  // ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
+
+  React.useEffect(() => {
+    debugger;
+    if (
+      imageProps.width === qp.width &&
+      imageProps.height === qp.height &&
+      imageProps.isGrayscale === qp.isGrayscale &&
+      imageProps.blur === qp.blur
+    ) {
+      return;
+    }
+    setUrlsParams(
+      makeEditorPageQueryParam({
+        ...imageProps,
+        imageId: qp.imageId,
+        page: qp.page,
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    imageProps.width,
+    imageProps.height,
+    imageProps.isGrayscale,
+    imageProps.blur,
+  ]);
 
   const handleGoBackToImagesList = () => {
     navigate(`/?page=${qp.page}`);
