@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^9.0.1",
     "prettier": "2.8.4"
   }
 }
