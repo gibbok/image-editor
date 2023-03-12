@@ -1,58 +1,7 @@
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
+import { makeUrlWithFitImageSizes } from '../../../utils-urls';
 import { ImageSizes } from './type';
-import { pipe } from 'fp-ts/lib/function';
-
-/**
- * Conserve aspect ratio of the original region.
- * Use it when shrinking/enlarging images to fit into an area.
- */
-
-type SourceImageSizes = ImageSizes;
-type MaxImageSizes = ImageSizes;
-type CalculateImageSizesAspectRatioFitImage = (
-  maximumSizes: MaxImageSizes
-) => (sourceSizes: SourceImageSizes) => ImageSizes;
-export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
-  (maximumSizes) => (sourceSizes) => {
-    const ratio = Math.min(
-      maximumSizes.width / sourceSizes.width,
-      maximumSizes.height / sourceSizes.height
-    );
-
-    return {
-      width: sourceSizes.width * ratio,
-      height: sourceSizes.height * ratio,
-    };
-  };
-export const roundImageSizes = (sizes: ImageSizes): ImageSizes => ({
-  width: Math.round(sizes.width),
-  height: Math.round(sizes.height),
-});
-
-export const extractImageSizesFromUrl = (str: string): ImageSizes => {
-  const tokens = str.split('/').reverse();
-  const [heightStr, widthStr] = tokens;
-
-  return {
-    width: Math.round(Number(widthStr)),
-    height: Math.round(Number(heightStr)), // TODO in case of error fallback to default value
-  };
-};
-
-export const modifySizeForImageUrl =
-  (url: string) =>
-  ({ width, height }: ImageSizes) =>
-    url.replace(/\d+\/\d+$/, width + '/' + height);
-
-export const getResizedUrl = (originalUrl: string, desiredResize: ImageSizes) =>
-  pipe(
-    originalUrl,
-    extractImageSizesFromUrl,
-    calculateImageSizesAspectRatioFitImage(desiredResize),
-    roundImageSizes,
-    modifySizeForImageUrl(originalUrl)
-  );
 
 export const tranformResponseForUI = (
   response: Images,
@@ -61,7 +10,10 @@ export const tranformResponseForUI = (
   response.map(({ id, author, download_url }) => ({
     imageId: id,
     author,
-    urlTransform: getResizedUrl(download_url, desiredResize),
+    urlTransform: makeUrlWithFitImageSizes({
+      originalUrl: download_url,
+      desiredSizes: desiredResize,
+    }),
   }));
 
 export const getPaginationInfoFromHeader = (

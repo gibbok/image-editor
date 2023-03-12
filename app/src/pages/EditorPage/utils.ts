@@ -6,41 +6,50 @@ import {
   EDITOR_PREVIEW_INIT_WIDTH,
 } from '../../config';
 import { ImageId } from '../../types-ui';
-import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
-import { ImagePropertiesForChange } from './types';
+import {
+  getBooleanFromQueryParamOrUseDefault,
+  getIntNumberFromQueryParamOrUseDefault,
+} from '../../utils-urls';
+import { ImageState } from './types';
 
-export const makeEditorPageQueryParam = ({
+export type EditorPageQueryParams = Readonly<{
+  imageId: ImageId;
+  page: number;
+  width: number;
+  height: number;
+  isGrayscale: boolean;
+  blur: number;
+}>;
+export const makeEditorPageQueryParams = ({
+  imageId,
+  page,
   width,
   height,
   isGrayscale,
   blur,
 }: Readonly<{
+  imageId: ImageId;
+  page: number;
   width: number;
   height: number;
   isGrayscale: boolean;
   blur: number;
 }>) =>
   `?${new URLSearchParams({
+    imageId: imageId,
+    page: page.toString(),
     width: width.toString(),
     height: height.toString(),
-    gray: isGrayscale.toString(),
+    grayscale: isGrayscale.toString(),
     blur: blur.toString(),
   })}`;
 
-export type EditorQueryParams = ImagePropertiesForChange &
+export type EditorQueryParams = ImageState &
   Readonly<{
     imageId: ImageId;
+    page: number;
   }>;
 
-export const getImageIdFromImageIdQueryParam = (imageIdStr: string | null) => {
-  const DEFAULT_IMAGE_ID = '1';
-  if (imageIdStr === null) {
-    return DEFAULT_IMAGE_ID;
-  }
-  return imageIdStr;
-};
-
-// TODO add test
 export const getEditorPageQueryParams = (
   urlParams: URLSearchParams
 ): EditorQueryParams => {
@@ -48,7 +57,14 @@ export const getEditorPageQueryParams = (
     1,
     1,
     Number.MAX_SAFE_INTEGER
-  )(urlParams.get('id')).toString();
+  )(urlParams.get('imageId')).toString();
+
+  const page = getIntNumberFromQueryParamOrUseDefault(
+    1,
+    1,
+    Number.MAX_SAFE_INTEGER
+  )(urlParams.get('page'));
+
   const width = getIntNumberFromQueryParamOrUseDefault(
     EDITOR_PREVIEW_INIT_WIDTH,
     EDITOR_MIN_WIDTH,
@@ -61,7 +77,9 @@ export const getEditorPageQueryParams = (
     API_MAX_IMAGE_SIZE
   )(urlParams.get('height'));
 
-  const gray = Boolean(urlParams.get('gray'));
+  const isGrayscale = getBooleanFromQueryParamOrUseDefault(
+    urlParams.get('grayscale')
+  );
 
   const blur = getIntNumberFromQueryParamOrUseDefault(
     1,
@@ -73,7 +91,21 @@ export const getEditorPageQueryParams = (
     imageId,
     width,
     height,
-    isGrayscale: gray,
+    isGrayscale,
     blur,
+    page,
   };
 };
+
+export const isEditorPageQueryParamsSameAsImageState = (
+  qp: EditorPageQueryParams,
+  imageState: ImageState
+) =>
+  imageState.width === qp.width &&
+  imageState.height === qp.height &&
+  imageState.isGrayscale === qp.isGrayscale &&
+  imageState.blur === qp.blur
+    ? true
+    : false;
+
+export const makeUrlToImagesList = (page: number) => `/?page=${page}`;

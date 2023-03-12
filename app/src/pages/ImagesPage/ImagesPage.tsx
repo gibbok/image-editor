@@ -11,16 +11,16 @@ import { Paginator } from './Paginator/Paginator';
 import { ImageId, PaginationMove } from '../../types-ui';
 import { useNavigate } from 'react-router-dom';
 import {
-  getQueryParamsForImagesPage,
+  getImagesPageQueryParams,
   makeEditorUrl,
-  makePageQueryParam,
+  makeImagesPageQueryParams,
 } from './utils';
 import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
-  const pageParam = getQueryParamsForImagesPage(urlParams).page;
+  const pageParam = getImagesPageQueryParams(urlParams).page;
   const [page, setPage] = React.useState(pageParam);
 
   const imagesQuery = useGetImages({
@@ -39,7 +39,7 @@ export const ImagesPage = () => {
 
   React.useEffect(() => {
     if (page !== pageParam) {
-      setUrlsParams(makePageQueryParam(page));
+      setUrlsParams(makeImagesPageQueryParams(page));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
@@ -49,7 +49,7 @@ export const ImagesPage = () => {
   };
 
   const handleNavigateToEditor = (imageId: ImageId) => () => {
-    navigate(makeEditorUrl(imageId));
+    navigate(makeEditorUrl(imageId, page));
   };
 
   return (
@@ -88,3 +88,4 @@ export const ImagesPage = () => {
 };
 // TODO make responsive the image list
 // TODO handle case with data returned but empty, no data
+// TODO add snackbar
