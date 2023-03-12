@@ -13,12 +13,12 @@ export const EditorPage = () => {
   const { imageId, width, height, isGrayscale, blur } =
     getEditorPageQueryParams(urlParams);
 
-  // const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
-  //   width,
-  //   height,
-  //   isGrayscale,
-  //   blur,
-  // });
+  const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
+    width,
+    height,
+    isGrayscale,
+    blur,
+  });
 
   const imageDetailsQuery = useGetImageDetails({
     imageId,
@@ -31,6 +31,13 @@ export const EditorPage = () => {
 
   const handleGoBackToImagesList = () => {
     navigate(-1);
+  };
+
+  const handleApply = (changes: ImagePropertiesForChange) => {
+    setImageProps((prevState) => ({
+      ...prevState,
+      changes,
+    }));
   };
 
   return (
@@ -56,7 +63,7 @@ export const EditorPage = () => {
         isGrayscale={isGrayscale}
         blur={blur}
         onReset={() => console.log('on reset')}
-        onApply={(x) => console.log('on apply', JSON.stringify(x))}
+        onApply={handleApply}
         onDownload={(x) => console.log('on download', x)}
       />
     </Box>

@@ -15,7 +15,11 @@ const KEY_IMAGES = 'GET_IMAGE_DETAILS';
 
 export const fetchImageDetails = ({
   imageId,
-}: Readonly<{ imageId: ImageId }>): Promise<Image> =>
+  width,
+  height,
+  isGrayscale,
+  blur,
+}: ImagePropertiesForChange & Readonly<{ imageId: ImageId }>): Promise<Image> =>
   axios.get(`id/${imageId}/info`).then((response) => response.data);
 
 export type UseGetImageInfo = (
