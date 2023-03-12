@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import axios from 'axios';
 import { Image } from '../../../types-api';
 import { ImageId, ImageInfoUI } from '../../../types-ui';
-import { makeUrlWithFitImageSizes } from '../../../utils';
+import { makeUrlWithFitImageSizes } from '../../../utils-urls';
 import { calculateImageSizeForPreviewImage } from './utils';
 
 const KEY_IMAGES = 'GET_IMAGE_DETAILS';

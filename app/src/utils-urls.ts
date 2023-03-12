@@ -19,9 +19,9 @@ export const getIntNumberFromQueryParamOrUseDefault =
     return value;
   };
 
-export const getBooleanFromQueryParamOrUseDefault =
-  (defaultValue: boolean) => (valueParam: string | null) =>
-    valueParam === null ? false : valueParam === 'true';
+export const getBooleanFromQueryParamOrUseDefault = (
+  valueParam: string | null
+) => (valueParam === null ? false : valueParam === 'true');
 
 /**
  * Conserve aspect ratio of the original region.
@@ -50,13 +50,14 @@ export const roundImageSizes = (sizes: ImageSizes): ImageSizes => ({
   height: Math.round(sizes.height),
 });
 
+// TODO improve unhappy path
 export const extractImageSizesFromUrl = (str: string): ImageSizes => {
   const tokens = str.split('/').reverse();
   const [heightStr, widthStr] = tokens;
 
   return {
     width: Math.round(Number(widthStr)),
-    height: Math.round(Number(heightStr)), // TODO in case of error fallback to default value
+    height: Math.round(Number(heightStr)),
   };
 };
 

@@ -1,14 +1,14 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { makeUrlWithSizesGrayscaleBlur } from '../../utils';
+import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
 import {
   getEditorPageQueryParams,
-  isEditorPageQueryParamsSameAsPageState as isEditorPageQueryParamsSameAsImageState,
-  makeEditorPageQueryParam,
+  isEditorPageQueryParamsSameAsImageState as isEditorPageQueryParamsSameAsImageState,
+  makeEditorPageQueryParams,
   makeUrlToImagesList,
 } from './utils';
 
@@ -50,7 +50,7 @@ export const EditorPage = () => {
       return;
     }
     setUrlsParams(
-      makeEditorPageQueryParam({
+      makeEditorPageQueryParams({
         ...imageState,
         imageId: qp.imageId,
         page: qp.page,

@@ -1,6 +1,6 @@
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
-import { makeUrlWithFitImageSizes } from '../../../utils';
+import { makeUrlWithFitImageSizes } from '../../../utils-urls';
 import { ImageSizes } from './type';
 
 export const tranformResponseForUI = (

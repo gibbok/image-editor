@@ -6,13 +6,12 @@ import {
   roundImageSizes,
   extractImageSizesFromUrl,
   makeUrlWithFitImageSizes,
-} from '../../../utils';
+} from '../../../utils-urls';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
 import { ImageSizes } from './type';
 
 describe('transform', () => {
   describe('modifySizeForImageUrl', () => {
-    // TODO add more test here
     it('should modify url with given width and height', () => {
       expect(
         modifySizeForImageUrl('https://picsum.photos/id/3/5000/3333')({
@@ -109,18 +108,18 @@ describe('transform', () => {
 
   describe('extractImageSizesFromUrl', () => {
     it('should extract width and height from url', () => {
+      // TODO add test unhappy path
       expect(
         extractImageSizesFromUrl('https://picsum.photos/id/103/2592/1936')
       ).toEqual<ImageSizes>({
         width: 2592,
         height: 1936,
       });
-      // TOD add example of bad case use default value
     });
   });
 
-  describe('getResizedUrl', () => {
-    it('should return an url which fit the desired image size with grayscale and blur', () => {
+  describe('makeUrlWithFitImageSizes', () => {
+    it('should return an url which fit the desired image sizes maintaining the original aspect ration', () => {
       expect(
         makeUrlWithFitImageSizes({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
@@ -130,6 +129,7 @@ describe('transform', () => {
           },
         })
       ).toBe('https://picsum.photos/id/103/200/149');
+
       expect(
         makeUrlWithFitImageSizes({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',

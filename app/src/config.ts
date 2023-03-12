@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-const API_BASE_URL = 'https://picsum.photos/';
+export const API_BASE_URL = 'https://picsum.photos/';
 export const API_VERSION = 'v2';
 export const API_MAX_IMAGE_SIZE = 5000;
 
@@ -17,7 +15,3 @@ export const EDITOR_MAX_HEIGHT = 5000;
 
 export const EDITOR_MIN_BLUR = 1;
 export const EDITOR_MAX_BLUR = 10;
-
-export const configApp = () => {
-  axios.defaults.baseURL = API_BASE_URL;
-};
