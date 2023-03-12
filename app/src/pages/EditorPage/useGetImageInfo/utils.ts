@@ -3,7 +3,7 @@ import {
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,
   roundImageSizes,
-} from '../../ImagesPage/useGetImages/tranform';
+} from '../../../utils';
 import { ImageSizes } from '../../ImagesPage/useGetImages/type';
 
 export const calculateImageSizeForPreviewImage = (

@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getResizedUrl2 } from '../ImagesPage/useGetImages/tranform';
+import { makeUrlWithSizesGrayscaleBlur } from '../../utils';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
@@ -68,8 +68,8 @@ export const EditorPage = () => {
     navigate(makeUrlToImagesList(qp.page));
   };
 
-  const handleApply = (data: ImageState) => {
-    setImageState(data);
+  const handleApply = (dataImage: ImageState) => {
+    setImageState(dataImage);
   };
 
   return (
@@ -83,9 +83,9 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={getResizedUrl2({
+            src={makeUrlWithSizesGrayscaleBlur({
               originalUrl: imageDetailsQuery.data.urlTransform,
-              desiredResize: {
+              desiredSizes: {
                 width: imageState.width,
                 height: imageState.height,
               },

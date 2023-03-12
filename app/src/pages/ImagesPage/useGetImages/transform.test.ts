@@ -1,14 +1,13 @@
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import {
-  getPaginationInfoFromHeader,
   modifySizeForImageUrl,
-  tranformResponseForUI,
   calculateImageSizesAspectRatioFitImage,
-  extractImageSizesFromUrl,
   roundImageSizes,
-  getResizedUrl,
-} from './tranform';
+  extractImageSizesFromUrl,
+  makeUrlWithFitImageSizes,
+} from '../../../utils';
+import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
 import { ImageSizes } from './type';
 
 describe('transform', () => {
@@ -123,7 +122,7 @@ describe('transform', () => {
   describe('getResizedUrl', () => {
     it('should return an url which fit the desired image size with grayscale and blur', () => {
       expect(
-        getResizedUrl({
+        makeUrlWithFitImageSizes({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
           desiredSizes: {
             width: 200,
@@ -132,7 +131,7 @@ describe('transform', () => {
         })
       ).toBe('https://picsum.photos/id/103/200/149');
       expect(
-        getResizedUrl({
+        makeUrlWithFitImageSizes({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
           desiredSizes: {
             width: 200,
