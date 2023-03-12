@@ -48,7 +48,6 @@ export const EditorPage = () => {
   }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
 
   React.useEffect(() => {
-    debugger;
     if (
       imageProps.width === qp.width &&
       imageProps.height === qp.height &&
