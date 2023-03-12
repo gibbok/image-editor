@@ -36,6 +36,8 @@ export const EditorPage = () => {
     setImageProps(data);
   };
 
+  console.log('xxx', JSON.stringify(imageDetailsQuery.data));
+
   return (
     <Box display="flex">
       <Box>

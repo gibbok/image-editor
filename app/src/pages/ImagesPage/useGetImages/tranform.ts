@@ -78,10 +78,7 @@ export const getResizedUrl2 = ({
   blur: number;
 }>) =>
   pipe(
-    originalUrl,
-    extractImageSizesFromUrl,
-    calculateImageSizesAspectRatioFitImage(desiredResize),
-    roundImageSizes,
+    desiredResize,
     modifySizeForImageUrl(originalUrl),
     appendBlur(blur),
     appendGrayscale(isGrayscale)
