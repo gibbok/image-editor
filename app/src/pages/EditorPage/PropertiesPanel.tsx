@@ -18,13 +18,13 @@ import {
   EDITOR_MIN_HEIGHT,
   EDITOR_MIN_WIDTH,
 } from '../../config';
-import { ImagePropertiesForChange } from './types';
+import { ImageState } from './types';
 
-type PropertiesPanelProps = ImagePropertiesForChange &
+type PropertiesPanelProps = ImageState &
   Readonly<{
     onReset: () => void;
-    onApply: (propsChange: ImagePropertiesForChange) => void;
-    onDownload: (propsChange: ImagePropertiesForChange) => void;
+    onApply: (propsChange: ImageState) => void;
+    onDownload: (propsChange: ImageState) => void;
   }>;
 
 const schema = yup

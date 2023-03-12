@@ -3,21 +3,22 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { getResizedUrl2 } from '../ImagesPage/useGetImages/tranform';
 import { PropertiesPanel } from './PropertiesPanel';
-import { ImagePropertiesForChange } from './types';
+import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
 import {
   getEditorPageQueryParams,
-  isEditorPageQueryParamsSameAsPageState,
+  isEditorPageQueryParamsSameAsPageState as isEditorPageQueryParamsSameAsImageState,
   makeEditorPageQueryParam,
+  makeUrlToImagesList,
 } from './utils';
 
 export const EditorPage = () => {
   const navigate = useNavigate();
-  let [urlParams, setUrlsParams] = useSearchParams();
+  const [urlParams, setUrlsParams] = useSearchParams();
 
   const qp = getEditorPageQueryParams(urlParams);
 
-  const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
+  const [imageState, setImageState] = React.useState<ImageState>({
     width: qp.width,
     height: qp.height,
     isGrayscale: qp.isGrayscale,
@@ -26,16 +27,16 @@ export const EditorPage = () => {
 
   const imageDetailsQuery = useGetImageDetails({
     imageId: qp.imageId,
-    previewWidth: imageProps.width,
-    previewHeight: imageProps.height,
+    previewWidth: imageState.width,
+    previewHeight: imageState.height,
     onError: console.error,
   });
 
   React.useEffect(() => {
-    if (isEditorPageQueryParamsSameAsPageState(qp, imageProps)) {
+    if (isEditorPageQueryParamsSameAsImageState(qp, imageState)) {
       return;
     }
-    setImageProps({
+    setImageState({
       width: qp.width,
       height: qp.height,
       isGrayscale: qp.isGrayscale,
@@ -45,30 +46,30 @@ export const EditorPage = () => {
   }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
 
   React.useEffect(() => {
-    if (isEditorPageQueryParamsSameAsPageState(qp, imageProps)) {
+    if (isEditorPageQueryParamsSameAsImageState(qp, imageState)) {
       return;
     }
     setUrlsParams(
       makeEditorPageQueryParam({
-        ...imageProps,
+        ...imageState,
         imageId: qp.imageId,
         page: qp.page,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    imageProps.width,
-    imageProps.height,
-    imageProps.isGrayscale,
-    imageProps.blur,
+    imageState.width,
+    imageState.height,
+    imageState.isGrayscale,
+    imageState.blur,
   ]);
 
   const handleGoBackToImagesList = () => {
-    navigate(`/?page=${qp.page}`);
+    navigate(makeUrlToImagesList(qp.page));
   };
 
-  const handleApply = (data: ImagePropertiesForChange) => {
-    setImageProps(data);
+  const handleApply = (data: ImageState) => {
+    setImageState(data);
   };
 
   return (
@@ -85,11 +86,11 @@ export const EditorPage = () => {
             src={getResizedUrl2({
               originalUrl: imageDetailsQuery.data.urlTransform,
               desiredResize: {
-                width: imageProps.width,
-                height: imageProps.height,
+                width: imageState.width,
+                height: imageState.height,
               },
-              isGrayscale: imageProps.isGrayscale,
-              blur: imageProps.blur,
+              isGrayscale: imageState.isGrayscale,
+              blur: imageState.blur,
             })}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
@@ -97,10 +98,10 @@ export const EditorPage = () => {
         )}
       </Box>
       <PropertiesPanel
-        width={imageProps.width}
-        height={imageProps.height}
-        isGrayscale={imageProps.isGrayscale}
-        blur={imageProps.blur}
+        width={imageState.width}
+        height={imageState.height}
+        isGrayscale={imageState.isGrayscale}
+        blur={imageState.blur}
         onReset={() => console.log('on reset')}
         onApply={handleApply}
         onDownload={(x) => console.log('on download', x)}

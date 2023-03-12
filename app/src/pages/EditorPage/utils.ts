@@ -10,7 +10,7 @@ import {
   getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
 } from '../../utils';
-import { ImagePropertiesForChange } from './types';
+import { ImageState } from './types';
 
 export type EditorPageQueryParams = Readonly<{
   imageId: ImageId;
@@ -44,7 +44,7 @@ export const makeEditorPageQueryParam = ({
     blur: blur.toString(),
   })}`;
 
-export type EditorQueryParams = ImagePropertiesForChange &
+export type EditorQueryParams = ImageState &
   Readonly<{
     imageId: ImageId;
     page: number;
@@ -108,7 +108,7 @@ export const getEditorPageQueryParams = (
 
 export const isEditorPageQueryParamsSameAsPageState = (
   qp: EditorPageQueryParams,
-  imageProps: ImagePropertiesForChange
+  imageProps: ImageState
 ) =>
   imageProps.width === qp.width &&
   imageProps.height === qp.height &&
@@ -116,3 +116,5 @@ export const isEditorPageQueryParamsSameAsPageState = (
   imageProps.blur === qp.blur
     ? true
     : false;
+
+export const makeUrlToImagesList = (page: number) => `/?page=${page}`;
