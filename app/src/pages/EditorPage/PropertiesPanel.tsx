@@ -22,7 +22,6 @@ import { ImageState } from './types';
 
 type PropertiesPanelProps = ImageState &
   Readonly<{
-    onReset: () => void;
     onApply: (propsChange: ImageState) => void;
     onDownload: (propsChange: ImageState) => void;
   }>;
@@ -61,7 +60,6 @@ export const PropertiesPanel = ({
   height,
   isGrayscale,
   blur,
-  onReset,
   onApply,
   onDownload,
 }: PropertiesPanelProps) => {

@@ -102,9 +102,8 @@ export const EditorPage = () => {
         height={imageState.height}
         isGrayscale={imageState.isGrayscale}
         blur={imageState.blur}
-        onReset={() => console.log('on reset')}
         onApply={handleApply}
-        onDownload={(x) => console.log('on download', x)}
+        onDownload={(x) => console.log('on download', x)} // TODO
       />
     </Box>
   );
