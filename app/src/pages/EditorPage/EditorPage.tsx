@@ -1,10 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  getResizedUrl,
-  getResizedUrl2,
-} from '../ImagesPage/useGetImages/tranform';
+import { getResizedUrl2 } from '../ImagesPage/useGetImages/tranform';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImagePropertiesForChange } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
@@ -28,8 +25,6 @@ export const EditorPage = () => {
     imageId,
     width: imageProps.width,
     height: imageProps.height,
-    isGrayscale: imageProps.isGrayscale,
-    blur: imageProps.blur,
     onError: console.error,
   });
 
@@ -40,9 +35,6 @@ export const EditorPage = () => {
   const handleApply = (data: ImagePropertiesForChange) => {
     setImageProps(data);
   };
-
-  console.log('xxx', JSON.stringify(imageProps));
-  // console.log('xxxx', imageDetailsQuery?.data?.urlTransform);
 
   return (
     <Box display="flex">

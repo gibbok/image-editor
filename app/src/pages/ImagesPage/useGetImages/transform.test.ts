@@ -72,12 +72,12 @@ describe('transform', () => {
         {
           author: 'Ben Moore',
           imageId: '102',
-          urlTransform: 'https://picsum.photos/id/102/100/75?blur=1',
+          urlTransform: 'https://picsum.photos/id/102/100/75',
         },
         {
           author: 'Ilham Rahmansyah',
           imageId: '103',
-          urlTransform: 'https://picsum.photos/id/103/100/75?blur=1',
+          urlTransform: 'https://picsum.photos/id/103/100/75',
         },
       ]);
     });
@@ -129,10 +129,8 @@ describe('transform', () => {
             width: 200,
             height: 160,
           },
-          isGrayscale: false,
-          blur: 1,
         })
-      ).toBe('https://picsum.photos/id/103/200/149?blur=1');
+      ).toBe('https://picsum.photos/id/103/200/149');
       expect(
         getResizedUrl({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
@@ -140,10 +138,8 @@ describe('transform', () => {
             width: 200,
             height: 160,
           },
-          isGrayscale: true,
-          blur: 10,
         })
-      ).toBe('https://picsum.photos/id/103/200/149?blur=10&grayscale');
+      ).toBe('https://picsum.photos/id/103/200/149');
     });
   });
 });

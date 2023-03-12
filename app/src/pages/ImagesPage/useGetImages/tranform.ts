@@ -54,13 +54,9 @@ export const appendBlur = (blur: number) => (url: string) =>
 export const getResizedUrl = ({
   originalUrl,
   desiredResize,
-  isGrayscale,
-  blur,
 }: Readonly<{
   originalUrl: string;
   desiredResize: ImageSizes;
-  isGrayscale: boolean;
-  blur: number;
 }>) =>
   pipe(
     originalUrl,
@@ -68,8 +64,6 @@ export const getResizedUrl = ({
     calculateImageSizesAspectRatioFitImage(desiredResize),
     roundImageSizes,
     modifySizeForImageUrl(originalUrl)
-    // appendBlur(blur),
-    // appendGrayscale(isGrayscale)
   );
 
 export const getResizedUrl2 = ({
@@ -103,8 +97,6 @@ export const tranformResponseForUI = (
     urlTransform: getResizedUrl({
       originalUrl: download_url,
       desiredResize,
-      isGrayscale: false,
-      blur: 1,
     }),
   }));
 

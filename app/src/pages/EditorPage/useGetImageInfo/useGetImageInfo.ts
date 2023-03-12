@@ -6,11 +6,9 @@ import {
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,
   getResizedUrl,
-  getResizedUrl2,
   roundImageSizes,
 } from '../../ImagesPage/useGetImages/tranform';
 import { pipe } from 'fp-ts/lib/function';
-import { ImagePropertiesForChange } from '../types';
 
 const KEY_IMAGES = 'GET_IMAGE_DETAILS';
 
@@ -20,19 +18,18 @@ export const fetchImageDetails = ({
   axios.get(`id/${imageId}/info`).then((response) => response.data);
 
 export type UseGetImageInfo = (
-  params: ImagePropertiesForChange &
-    Readonly<{
-      imageId: ImageId;
-      onError: (e: unknown) => void;
-    }>
+  params: Readonly<{
+    imageId: ImageId;
+    width: number;
+    height: number;
+    onError: (e: unknown) => void;
+  }>
 ) => UseQueryResult<ImageInfoUI, unknown>;
 
 export const useGetImageDetails: UseGetImageInfo = ({
   imageId,
   width,
   height,
-  isGrayscale,
-  blur,
   onError,
 }) =>
   useQuery([KEY_IMAGES, { imageId }], () => fetchImageDetails({ imageId }), {
@@ -57,8 +54,6 @@ export const useGetImageDetails: UseGetImageInfo = ({
             width: widthResized,
             height: heightResized,
           },
-          isGrayscale,
-          blur,
         }),
       };
     },
