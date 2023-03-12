@@ -27,41 +27,41 @@ export const EditorPage = () => {
     onError: console.error,
   });
 
-  React.useEffect(() => {
-    if (
-      qp.width !== imageProps.width ||
-      qp.height !== imageProps.height ||
-      qp.isGrayscale !== imageProps.isGrayscale ||
-      qp.blur !== imageProps.blur
-    ) {
-      setImageProps({
-        width: qp.width,
-        height: qp.height,
-        isGrayscale: qp.isGrayscale,
-        blur: qp.blur,
-      });
-    }
+  // React.useEffect(() => {
+  //   if (
+  //     qp.width !== imageProps.width ||
+  //     qp.height !== imageProps.height ||
+  //     qp.isGrayscale !== imageProps.isGrayscale ||
+  //     qp.blur !== imageProps.blur
+  //   ) {
+  //     setImageProps({
+  //       width: qp.width,
+  //       height: qp.height,
+  //       isGrayscale: qp.isGrayscale,
+  //       blur: qp.blur,
+  //     });
+  //   }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
 
-  React.useEffect(() => {
-    setUrlsParams(
-      makeEditorPageQueryParam({
-        ...imageProps,
-        imageId: qp.imageId,
-      })
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    imageProps.width,
-    imageProps.height,
-    imageProps.isGrayscale,
-    imageProps.blur,
-  ]);
+  // React.useEffect(() => {
+  //   setUrlsParams(
+  //     makeEditorPageQueryParam({
+  //       ...imageProps,
+  //       imageId: qp.imageId,
+  //     })
+  //   );
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [
+  //   imageProps.width,
+  //   imageProps.height,
+  //   imageProps.isGrayscale,
+  //   imageProps.blur,
+  // ]);
 
   const handleGoBackToImagesList = () => {
-    navigate(-1);
+    navigate(`/?page=${qp.page}`);
   };
 
   const handleApply = (data: ImagePropertiesForChange) => {

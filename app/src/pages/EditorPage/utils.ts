@@ -36,6 +36,7 @@ export const makeEditorPageQueryParam = ({
 export type EditorQueryParams = ImagePropertiesForChange &
   Readonly<{
     imageId: ImageId;
+    page: number;
   }>;
 
 export const getImageIdFromImageIdQueryParam = (imageIdStr: string | null) => {
@@ -55,6 +56,13 @@ export const getEditorPageQueryParams = (
     1,
     Number.MAX_SAFE_INTEGER
   )(urlParams.get('imageId')).toString();
+
+  const page = getIntNumberFromQueryParamOrUseDefault(
+    1,
+    1,
+    Number.MAX_SAFE_INTEGER
+  )(urlParams.get('page'));
+
   const width = getIntNumberFromQueryParamOrUseDefault(
     EDITOR_PREVIEW_INIT_WIDTH,
     EDITOR_MIN_WIDTH,
@@ -83,5 +91,6 @@ export const getEditorPageQueryParams = (
     height,
     isGrayscale,
     blur,
+    page,
   };
 };

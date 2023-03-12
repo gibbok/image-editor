@@ -49,7 +49,7 @@ export const ImagesPage = () => {
   };
 
   const handleNavigateToEditor = (imageId: ImageId) => () => {
-    navigate(makeEditorUrl(imageId));
+    navigate(makeEditorUrl(imageId, page));
   };
 
   return (
