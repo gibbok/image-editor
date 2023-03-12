@@ -30,6 +30,25 @@ export const EditorPage = () => {
 
   React.useEffect(() => {
     debugger;
+    if (
+      width !== imageProps.width ||
+      height !== imageProps.height ||
+      isGrayscale !== imageProps.isGrayscale ||
+      blur !== imageProps.blur
+    ) {
+      debugger;
+      setImageProps({
+        width,
+        height,
+        isGrayscale,
+        blur,
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, isGrayscale, blur]);
+
+  React.useEffect(() => {
     setUrlsParams(makeEditorPageQueryParam({ ...imageProps, imageId }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
