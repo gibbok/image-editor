@@ -5,7 +5,11 @@ import { getResizedUrl2 } from '../ImagesPage/useGetImages/tranform';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImagePropertiesForChange } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
-import { getEditorPageQueryParams, makeEditorPageQueryParam } from './utils';
+import {
+  getEditorPageQueryParams,
+  isEditorPageQueryParamsSameAsPageState,
+  makeEditorPageQueryParam,
+} from './utils';
 
 export const EditorPage = () => {
   const navigate = useNavigate();
@@ -28,14 +32,17 @@ export const EditorPage = () => {
   });
 
   React.useEffect(() => {
-    if (
-      qp.width === imageProps.width &&
-      qp.height === imageProps.height &&
-      qp.isGrayscale === imageProps.isGrayscale &&
-      qp.blur === imageProps.blur
-    ) {
+    if (isEditorPageQueryParamsSameAsPageState(qp, imageProps)) {
       return;
     }
+    // if (
+    //   qp.width === imageProps.width &&
+    //   qp.height === imageProps.height &&
+    //   qp.isGrayscale === imageProps.isGrayscale &&
+    //   qp.blur === imageProps.blur
+    // ) {
+    //   return;
+    // }
 
     setImageProps({
       width: qp.width,
@@ -48,12 +55,15 @@ export const EditorPage = () => {
   }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
 
   React.useEffect(() => {
-    if (
-      imageProps.width === qp.width &&
-      imageProps.height === qp.height &&
-      imageProps.isGrayscale === qp.isGrayscale &&
-      imageProps.blur === qp.blur
-    ) {
+    // if (
+    //   imageProps.width === qp.width &&
+    //   imageProps.height === qp.height &&
+    //   imageProps.isGrayscale === qp.isGrayscale &&
+    //   imageProps.blur === qp.blur
+    // ) {
+    //   return;
+    // }
+    if (isEditorPageQueryParamsSameAsPageState(qp, imageProps)) {
       return;
     }
     setUrlsParams(

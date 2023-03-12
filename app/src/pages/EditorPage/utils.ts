@@ -12,6 +12,14 @@ import {
 } from '../../utils';
 import { ImagePropertiesForChange } from './types';
 
+export type EditorPageQueryParams = Readonly<{
+  imageId: ImageId;
+  page: number;
+  width: number;
+  height: number;
+  isGrayscale: boolean;
+  blur: number;
+}>;
 export const makeEditorPageQueryParam = ({
   imageId,
   page,
@@ -97,3 +105,14 @@ export const getEditorPageQueryParams = (
     page,
   };
 };
+
+export const isEditorPageQueryParamsSameAsPageState = (
+  qp: EditorPageQueryParams,
+  imageProps: ImagePropertiesForChange
+) =>
+  imageProps.width === qp.width &&
+  imageProps.height === qp.height &&
+  imageProps.isGrayscale === qp.isGrayscale &&
+  imageProps.blur === qp.blur
+    ? true
+    : false;
