@@ -53,10 +53,10 @@ export const appendBlur = (blur: number) => (url: string) =>
 
 export const getResizedUrl = ({
   originalUrl,
-  desiredResize,
+  desiredSizes: desiredResize,
 }: Readonly<{
   originalUrl: string;
-  desiredResize: ImageSizes;
+  desiredSizes: ImageSizes;
 }>) =>
   pipe(
     originalUrl,
@@ -93,7 +93,7 @@ export const tranformResponseForUI = (
     author,
     urlTransform: getResizedUrl({
       originalUrl: download_url,
-      desiredResize,
+      desiredSizes: desiredResize,
     }),
   }));
 

@@ -125,7 +125,7 @@ describe('transform', () => {
       expect(
         getResizedUrl({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
-          desiredResize: {
+          desiredSizes: {
             width: 200,
             height: 160,
           },
@@ -134,7 +134,7 @@ describe('transform', () => {
       expect(
         getResizedUrl({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
-          desiredResize: {
+          desiredSizes: {
             width: 200,
             height: 160,
           },

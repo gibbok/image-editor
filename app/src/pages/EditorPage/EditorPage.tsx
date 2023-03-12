@@ -26,8 +26,8 @@ export const EditorPage = () => {
 
   const imageDetailsQuery = useGetImageDetails({
     imageId: qp.imageId,
-    width: imageProps.width,
-    height: imageProps.height,
+    previewWidth: imageProps.width,
+    previewHeight: imageProps.height,
     onError: console.error,
   });
 

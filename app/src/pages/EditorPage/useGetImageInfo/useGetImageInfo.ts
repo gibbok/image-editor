@@ -2,13 +2,8 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import axios from 'axios';
 import { Image } from '../../../types-api';
 import { ImageId, ImageInfoUI } from '../../../types-ui';
-import {
-  calculateImageSizesAspectRatioFitImage,
-  extractImageSizesFromUrl,
-  getResizedUrl,
-  roundImageSizes,
-} from '../../ImagesPage/useGetImages/tranform';
-import { pipe } from 'fp-ts/lib/function';
+import { getResizedUrl } from '../../ImagesPage/useGetImages/tranform';
+import { calculateImageSizeForPreviewImage } from './utils';
 
 const KEY_IMAGES = 'GET_IMAGE_DETAILS';
 
@@ -20,29 +15,27 @@ export const fetchImageDetails = ({
 export type UseGetImageInfo = (
   params: Readonly<{
     imageId: ImageId;
-    width: number;
-    height: number;
+    previewWidth: number;
+    previewHeight: number;
     onError: (e: unknown) => void;
   }>
 ) => UseQueryResult<ImageInfoUI, unknown>;
 
 export const useGetImageDetails: UseGetImageInfo = ({
   imageId,
-  width,
-  height,
+  previewWidth,
+  previewHeight,
   onError,
 }) =>
   useQuery([KEY_IMAGES, { imageId }], () => fetchImageDetails({ imageId }), {
     select: (data) => {
-      const { width: widthResized, height: heightResized } = pipe(
-        data.download_url,
-        extractImageSizesFromUrl,
-        calculateImageSizesAspectRatioFitImage({
-          width,
-          height,
-        }),
-        roundImageSizes
-      );
+      const { width: widthResized, height: heightResized } =
+        calculateImageSizeForPreviewImage(
+          data.download_url,
+          previewWidth,
+          previewHeight
+        );
+
       return {
         imageId: data.id,
         author: data.author,
@@ -50,7 +43,7 @@ export const useGetImageDetails: UseGetImageInfo = ({
         height: heightResized,
         urlTransform: getResizedUrl({
           originalUrl: data.download_url,
-          desiredResize: {
+          desiredSizes: {
             width: widthResized,
             height: heightResized,
           },
