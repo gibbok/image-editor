@@ -1,4 +1,3 @@
-import { height } from '@mui/system';
 import {
   API_MAX_IMAGE_SIZE,
   EDITOR_MIN_HEIGHT,

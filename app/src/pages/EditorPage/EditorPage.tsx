@@ -11,45 +11,47 @@ export const EditorPage = () => {
   const navigate = useNavigate();
   let [urlParams, setUrlsParams] = useSearchParams();
 
-  const { imageId, width, height, isGrayscale, blur } =
-    getEditorPageQueryParams(urlParams);
+  const qp = getEditorPageQueryParams(urlParams);
 
   const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
-    width,
-    height,
-    isGrayscale,
-    blur,
+    width: qp.width,
+    height: qp.height,
+    isGrayscale: qp.isGrayscale,
+    blur: qp.blur,
   });
 
   const imageDetailsQuery = useGetImageDetails({
-    imageId,
+    imageId: qp.imageId,
     width: imageProps.width,
     height: imageProps.height,
     onError: console.error,
   });
 
   React.useEffect(() => {
-    debugger;
     if (
-      width !== imageProps.width ||
-      height !== imageProps.height ||
-      isGrayscale !== imageProps.isGrayscale ||
-      blur !== imageProps.blur
+      qp.width !== imageProps.width ||
+      qp.height !== imageProps.height ||
+      qp.isGrayscale !== imageProps.isGrayscale ||
+      qp.blur !== imageProps.blur
     ) {
-      debugger;
       setImageProps({
-        width,
-        height,
-        isGrayscale,
-        blur,
+        width: qp.width,
+        height: qp.height,
+        isGrayscale: qp.isGrayscale,
+        blur: qp.blur,
       });
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width, height, isGrayscale, blur]);
+  }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
 
   React.useEffect(() => {
-    setUrlsParams(makeEditorPageQueryParam({ ...imageProps, imageId }));
+    setUrlsParams(
+      makeEditorPageQueryParam({
+        ...imageProps,
+        imageId: qp.imageId,
+      })
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     imageProps.width,
@@ -69,7 +71,7 @@ export const EditorPage = () => {
   return (
     <Box display="flex">
       <Box>
-        Editor page {imageId}
+        Editor page {qp.imageId}
         <Button variant="outlined" onClick={handleGoBackToImagesList}>
           Go to list
         </Button>
@@ -92,10 +94,10 @@ export const EditorPage = () => {
         )}
       </Box>
       <PropertiesPanel
-        width={width}
-        height={height}
-        isGrayscale={isGrayscale}
-        blur={blur}
+        width={imageProps.width}
+        height={imageProps.height}
+        isGrayscale={imageProps.isGrayscale}
+        blur={imageProps.blur}
         onReset={() => console.log('on reset')}
         onApply={handleApply}
         onDownload={(x) => console.log('on download', x)}
