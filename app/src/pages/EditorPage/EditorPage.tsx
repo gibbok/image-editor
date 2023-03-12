@@ -5,7 +5,7 @@ import { getResizedUrl2 } from '../ImagesPage/useGetImages/tranform';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImagePropertiesForChange } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
-import { getEditorPageQueryParams } from './utils';
+import { getEditorPageQueryParams, makeEditorPageQueryParam } from './utils';
 
 export const EditorPage = () => {
   const navigate = useNavigate();
@@ -27,6 +27,16 @@ export const EditorPage = () => {
     height: imageProps.height,
     onError: console.error,
   });
+
+  React.useEffect(() => {
+    setUrlsParams(makeEditorPageQueryParam(imageProps));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    imageProps.width,
+    imageProps.height,
+    imageProps.isGrayscale,
+    imageProps.blur,
+  ]);
 
   const handleGoBackToImagesList = () => {
     navigate(-1);
