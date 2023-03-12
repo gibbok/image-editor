@@ -67,6 +67,27 @@ export const getResizedUrl = ({
     extractImageSizesFromUrl,
     calculateImageSizesAspectRatioFitImage(desiredResize),
     roundImageSizes,
+    modifySizeForImageUrl(originalUrl)
+    // appendBlur(blur),
+    // appendGrayscale(isGrayscale)
+  );
+
+export const getResizedUrl2 = ({
+  originalUrl,
+  desiredResize,
+  isGrayscale,
+  blur,
+}: Readonly<{
+  originalUrl: string;
+  desiredResize: ImageSizes;
+  isGrayscale: boolean;
+  blur: number;
+}>) =>
+  pipe(
+    originalUrl,
+    extractImageSizesFromUrl,
+    calculateImageSizesAspectRatioFitImage(desiredResize),
+    roundImageSizes,
     modifySizeForImageUrl(originalUrl),
     appendBlur(blur),
     appendGrayscale(isGrayscale)

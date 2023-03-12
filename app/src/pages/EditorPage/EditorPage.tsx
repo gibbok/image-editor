@@ -1,7 +1,10 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { getResizedUrl } from '../ImagesPage/useGetImages/tranform';
+import {
+  getResizedUrl,
+  getResizedUrl2,
+} from '../ImagesPage/useGetImages/tranform';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImagePropertiesForChange } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
@@ -23,10 +26,10 @@ export const EditorPage = () => {
 
   const imageDetailsQuery = useGetImageDetails({
     imageId,
-    width,
-    height,
-    isGrayscale,
-    blur,
+    width: imageProps.width,
+    height: imageProps.height,
+    isGrayscale: imageProps.isGrayscale,
+    blur: imageProps.blur,
     onError: console.error,
   });
 
@@ -35,11 +38,11 @@ export const EditorPage = () => {
   };
 
   const handleApply = (data: ImagePropertiesForChange) => {
-    setImageProps((prevState) => ({
-      ...prevState,
-      data,
-    }));
+    setImageProps(data);
   };
+
+  console.log('xxx', JSON.stringify(imageProps));
+  // console.log('xxxx', imageDetailsQuery?.data?.urlTransform);
 
   return (
     <Box display="flex">
@@ -52,7 +55,15 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={imageDetailsQuery.data.urlTransform}
+            src={getResizedUrl2({
+              originalUrl: imageDetailsQuery.data.urlTransform,
+              desiredResize: {
+                width: imageProps.width,
+                height: imageProps.height,
+              },
+              isGrayscale: imageProps.isGrayscale,
+              blur: imageProps.blur,
+            })}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />
@@ -64,7 +75,7 @@ export const EditorPage = () => {
         isGrayscale={isGrayscale}
         blur={blur}
         onReset={() => console.log('on reset')}
-        onApply={(x) => console.log('on apply', JSON.stringify(x))}
+        onApply={handleApply}
         onDownload={(x) => console.log('on download', x)}
       />
     </Box>

@@ -6,6 +6,7 @@ import {
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,
   getResizedUrl,
+  getResizedUrl2,
   roundImageSizes,
 } from '../../ImagesPage/useGetImages/tranform';
 import { pipe } from 'fp-ts/lib/function';
