@@ -29,7 +29,7 @@ export const useGetImageDetails: UseGetImageInfo = ({
 }) =>
   useQuery([KEY_IMAGES, { imageId }], () => fetchImageDetails({ imageId }), {
     select: (data) => {
-      const { width: widthResized, height: heightResized } =
+      const { width: resizedWidth, height: resizedHeight } =
         calculateImageSizeForPreviewImage(
           data.download_url,
           previewWidth,
@@ -39,13 +39,13 @@ export const useGetImageDetails: UseGetImageInfo = ({
       return {
         imageId: data.id,
         author: data.author,
-        width: widthResized,
-        height: heightResized,
+        width: resizedWidth,
+        height: resizedHeight,
         urlTransform: getResizedUrl({
           originalUrl: data.download_url,
           desiredSizes: {
-            width: widthResized,
-            height: heightResized,
+            width: resizedWidth,
+            height: resizedHeight,
           },
         }),
       };
