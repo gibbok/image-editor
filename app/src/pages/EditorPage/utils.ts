@@ -6,7 +6,10 @@ import {
   EDITOR_PREVIEW_INIT_WIDTH,
 } from '../../config';
 import { ImageId } from '../../types-ui';
-import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
+import {
+  getBooleanFromQueryParamOrUseDefault,
+  getIntNumberFromQueryParamOrUseDefault,
+} from '../../utils';
 import { ImagePropertiesForChange } from './types';
 
 export const makeEditorPageQueryParam = ({
@@ -61,8 +64,9 @@ export const getEditorPageQueryParams = (
     API_MAX_IMAGE_SIZE
   )(urlParams.get('height'));
 
-  const grayscale = urlParams.get('grayscale');
-  const isGrayscale = grayscale === null ? false : grayscale === 'true'; // TODO better type here, use an enum or so
+  const isGrayscale = getBooleanFromQueryParamOrUseDefault(false)(
+    urlParams.get('grayscale')
+  );
 
   const blur = getIntNumberFromQueryParamOrUseDefault(
     1,

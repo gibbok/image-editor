@@ -15,3 +15,7 @@ export const getIntNumberFromQueryParamOrUseDefault =
     }
     return value;
   };
+
+export const getBooleanFromQueryParamOrUseDefault =
+  (defaultValue: boolean) => (valueParam: string | null) =>
+    valueParam === null ? false : valueParam === 'true';
