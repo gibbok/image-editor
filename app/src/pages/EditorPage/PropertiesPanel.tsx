@@ -79,6 +79,8 @@ export const PropertiesPanel = ({
     },
   });
 
+  console.log('xxx isGrayscale', isGrayscale);
+  console.log('xxx blur', blur);
   const onSubmit = (data: FormData) => {
     onApply(data);
   };

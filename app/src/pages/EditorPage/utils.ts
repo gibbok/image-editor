@@ -61,7 +61,8 @@ export const getEditorPageQueryParams = (
     API_MAX_IMAGE_SIZE
   )(urlParams.get('height'));
 
-  const gray = Boolean(urlParams.get('gray'));
+  const grayscale = urlParams.get('grayscale');
+  const isGrayscale = grayscale === null ? false : grayscale === 'true'; // TODO better type here, use an enum or so
 
   const blur = getIntNumberFromQueryParamOrUseDefault(
     1,
@@ -73,7 +74,7 @@ export const getEditorPageQueryParams = (
     imageId,
     width,
     height,
-    isGrayscale: gray,
+    isGrayscale,
     blur,
   };
 };

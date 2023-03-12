@@ -45,13 +45,31 @@ export const modifySizeForImageUrl =
   ({ width, height }: ImageSizes) =>
     url.replace(/\d+\/\d+$/, width + '/' + height);
 
-export const getResizedUrl = (originalUrl: string, desiredResize: ImageSizes) =>
+export const appendGrayscale = (isGrayscale: boolean) => (url: string) =>
+  `${url}${isGrayscale ? '&grayscale' : ''}`;
+
+export const appendBlur = (blur: number) => (url: string) =>
+  `${url}?blur=${blur}`;
+
+export const getResizedUrl = ({
+  originalUrl,
+  desiredResize,
+  isGrayscale,
+  blur,
+}: Readonly<{
+  originalUrl: string;
+  desiredResize: ImageSizes;
+  isGrayscale: boolean;
+  blur: number;
+}>) =>
   pipe(
     originalUrl,
     extractImageSizesFromUrl,
     calculateImageSizesAspectRatioFitImage(desiredResize),
     roundImageSizes,
-    modifySizeForImageUrl(originalUrl)
+    modifySizeForImageUrl(originalUrl),
+    appendBlur(blur),
+    appendGrayscale(isGrayscale)
   );
 
 export const tranformResponseForUI = (
@@ -61,7 +79,12 @@ export const tranformResponseForUI = (
   response.map(({ id, author, download_url }) => ({
     imageId: id,
     author,
-    urlTransform: getResizedUrl(download_url, desiredResize),
+    urlTransform: getResizedUrl({
+      originalUrl: download_url,
+      desiredResize,
+      isGrayscale: false,
+      blur: 1,
+    }),
   }));
 
 export const getPaginationInfoFromHeader = (

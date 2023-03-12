@@ -34,28 +34,32 @@ export const useGetImageDetails: UseGetImageInfo = ({
   blur,
   onError,
 }) =>
-  useQuery(
-    [KEY_IMAGES, { imageId, width, height, isGrayscale, blur }],
-    () => fetchImageDetails({ imageId }),
-    {
-      select: (data) => {
-        const { width: widthResized, height: heightResized } = pipe(
-          data.download_url,
-          extractImageSizesFromUrl,
-          calculateImageSizesAspectRatioFitImage({ width, height }),
-          roundImageSizes
-        );
-        return {
-          imageId: data.id,
-          author: data.author,
-          width: widthResized,
-          height: heightResized,
-          urlTransform: getResizedUrl(data.download_url, {
+  useQuery([KEY_IMAGES, { imageId }], () => fetchImageDetails({ imageId }), {
+    select: (data) => {
+      const { width: widthResized, height: heightResized } = pipe(
+        data.download_url,
+        extractImageSizesFromUrl,
+        calculateImageSizesAspectRatioFitImage({
+          width,
+          height,
+        }),
+        roundImageSizes
+      );
+      return {
+        imageId: data.id,
+        author: data.author,
+        width: widthResized,
+        height: heightResized,
+        urlTransform: getResizedUrl({
+          originalUrl: data.download_url,
+          desiredResize: {
             width: widthResized,
             height: heightResized,
-          }),
-        };
-      },
-      onError,
-    }
-  );
+          },
+          isGrayscale,
+          blur,
+        }),
+      };
+    },
+    onError,
+  });

@@ -1,6 +1,7 @@
 import { Box, Button } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { getResizedUrl } from '../ImagesPage/useGetImages/tranform';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImagePropertiesForChange } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
@@ -13,12 +14,12 @@ export const EditorPage = () => {
   const { imageId, width, height, isGrayscale, blur } =
     getEditorPageQueryParams(urlParams);
 
-  // const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
-  //   width,
-  //   height,
-  //   isGrayscale,
-  //   blur,
-  // });
+  const [imageProps, setImageProps] = React.useState<ImagePropertiesForChange>({
+    width,
+    height,
+    isGrayscale,
+    blur,
+  });
 
   const imageDetailsQuery = useGetImageDetails({
     imageId,
@@ -33,6 +34,13 @@ export const EditorPage = () => {
     navigate(-1);
   };
 
+  const handleApply = (data: ImagePropertiesForChange) => {
+    setImageProps((prevState) => ({
+      ...prevState,
+      data,
+    }));
+  };
+
   return (
     <Box display="flex">
       <Box>
@@ -44,7 +52,7 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={imageDetailsQuery.data.urlTransform} // TODOD check url is too big here
+            src={imageDetailsQuery.data.urlTransform}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />
