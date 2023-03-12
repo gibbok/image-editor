@@ -35,34 +35,16 @@ export const EditorPage = () => {
     if (isEditorPageQueryParamsSameAsPageState(qp, imageProps)) {
       return;
     }
-    // if (
-    //   qp.width === imageProps.width &&
-    //   qp.height === imageProps.height &&
-    //   qp.isGrayscale === imageProps.isGrayscale &&
-    //   qp.blur === imageProps.blur
-    // ) {
-    //   return;
-    // }
-
     setImageProps({
       width: qp.width,
       height: qp.height,
       isGrayscale: qp.isGrayscale,
       blur: qp.blur,
     });
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
 
   React.useEffect(() => {
-    // if (
-    //   imageProps.width === qp.width &&
-    //   imageProps.height === qp.height &&
-    //   imageProps.isGrayscale === qp.isGrayscale &&
-    //   imageProps.blur === qp.blur
-    // ) {
-    //   return;
-    // }
     if (isEditorPageQueryParamsSameAsPageState(qp, imageProps)) {
       return;
     }
