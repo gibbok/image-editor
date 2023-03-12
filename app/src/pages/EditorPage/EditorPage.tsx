@@ -29,7 +29,8 @@ export const EditorPage = () => {
   });
 
   React.useEffect(() => {
-    setUrlsParams(makeEditorPageQueryParam(imageProps));
+    debugger;
+    setUrlsParams(makeEditorPageQueryParam({ ...imageProps, imageId }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     imageProps.width,
@@ -45,8 +46,6 @@ export const EditorPage = () => {
   const handleApply = (data: ImagePropertiesForChange) => {
     setImageProps(data);
   };
-
-  console.log('xxx', JSON.stringify(imageDetailsQuery.data));
 
   return (
     <Box display="flex">

@@ -14,20 +14,23 @@ import {
 import { ImagePropertiesForChange } from './types';
 
 export const makeEditorPageQueryParam = ({
+  imageId,
   width,
   height,
   isGrayscale,
   blur,
 }: Readonly<{
+  imageId: ImageId;
   width: number;
   height: number;
   isGrayscale: boolean;
   blur: number;
 }>) =>
   `?${new URLSearchParams({
+    imageId: imageId,
     width: width.toString(),
     height: height.toString(),
-    gray: isGrayscale.toString(),
+    grayscale: isGrayscale.toString(),
     blur: blur.toString(),
   })}`;
 
@@ -52,7 +55,7 @@ export const getEditorPageQueryParams = (
     1,
     1,
     Number.MAX_SAFE_INTEGER
-  )(urlParams.get('id')).toString();
+  )(urlParams.get('imageId')).toString();
   const width = getIntNumberFromQueryParamOrUseDefault(
     EDITOR_PREVIEW_INIT_WIDTH,
     EDITOR_MIN_WIDTH,
