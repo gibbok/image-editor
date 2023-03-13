@@ -62,7 +62,6 @@ export const ImagesPage = () => {
           <ImageList
             sx={{ width: '100%', maxWidth: 1024, height: '100%' }}
             cols={3}
-            // rowHeight={LIST_THUMBNAIL_HEIGHT}
           >
             {imagesQuery.data.images.map((item) => (
               <ImageListItem key={item.imageId}>
