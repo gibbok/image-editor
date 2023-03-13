@@ -17,7 +17,7 @@ import {
   makeImagesPageQueryParams,
 } from './utils';
 
-export const ContainerImagesPage = () => {
+export const ImagesPageContainer = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
   const pageQueryParam = getImagesPageQueryParams(urlParams).page;

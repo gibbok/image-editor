@@ -13,7 +13,7 @@ import { EditorPage } from './pages/EditorPage/EditorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout } from './components/Layout/Layout';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
-import { ContainerImagesPage } from './pages/ImagesPage/ContainerImagesPage';
+import { ImagesPageContainer } from './pages/ImagesPage/ImagesPageContainer';
 import { logError } from './utils';
 
 initApp();
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <Layout title="Image Editor">
-        <ContainerImagesPage />
+        <ImagesPageContainer />
       </Layout>
     ),
     errorElement: <ErrorPage />,
