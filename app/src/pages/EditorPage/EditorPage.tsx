@@ -108,13 +108,7 @@ export const EditorPage = () => {
   const isLoading = !imageDetailsQuery.data || imageDetailsQuery.isLoading;
   return (
     <Grid container mt={2} display="flex" justifyContent="center">
-      <Grid
-        item
-        sx={{
-          minWidth: { EDITOR_PREVIEW_INIT_WIDTH },
-          maxHeight: EDITOR_PREVIEW_INIT_HEIGHT,
-        }}
-      >
+      <Grid item>
         {isLoading ? (
           <Skeleton
             variant="rectangular"
