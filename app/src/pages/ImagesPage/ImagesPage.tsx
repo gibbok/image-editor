@@ -15,7 +15,12 @@ import {
   makeEditorUrl,
   makeImagesPageQueryParams,
 } from './utils';
-import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
+import {
+  EDITOR_PREVIEW_INIT_HEIGHT,
+  EDITOR_PREVIEW_INIT_WIDTH,
+  LIST_THUMBNAIL_HEIGHT,
+  LIST_THUMBNAIL_WIDTH,
+} from '../../config';
 import { Grid, Paper } from '@mui/material';
 
 export const ImagesPage = () => {
@@ -50,7 +55,14 @@ export const ImagesPage = () => {
   };
 
   const handleNavigateToEditor = (imageId: ImageId) => () => {
-    navigate(makeEditorUrl(imageId, page));
+    navigate(
+      makeEditorUrl(
+        imageId,
+        page,
+        EDITOR_PREVIEW_INIT_WIDTH,
+        EDITOR_PREVIEW_INIT_HEIGHT
+      )
+    );
   };
 
   return (
