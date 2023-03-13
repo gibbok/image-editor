@@ -23,15 +23,15 @@ export const fetchImages = ({
 
 export type UseGetImages = (
   params: Readonly<{
-    imageSizes: ImageSize;
+    imageSize: ImageSize;
     page: number;
     onError: (e: unknown) => void;
   }>
 ) => UseQueryResult<ResultImagesUI, unknown>;
-export const useGetImages: UseGetImages = ({ imageSizes, page, onError }) =>
+export const useGetImages: UseGetImages = ({ imageSize, page, onError }) =>
   useQuery([KEY_IMAGES, { page }], () => fetchImages({ page }), {
     select: (data) => ({
-      images: tranformResponseForUI(data.images, imageSizes),
+      images: tranformResponseForUI(data.images, imageSize),
       pagination: getPaginationInfoFromHeader(data.linkHeader),
     }),
     onError,

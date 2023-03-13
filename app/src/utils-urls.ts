@@ -28,12 +28,12 @@ export const getBooleanFromQueryParamOrUseDefault = (
  * Use it when shrinking/enlarging images to fit into an area.
  */
 type SourceImageSizes = ImageSize;
-type MaxImageSizes = ImageSize; // TODO do not use aliases
+type MaxImageSize = ImageSize; // TODO do not use aliases
 type CalculateImageSizesAspectRatioFitImage = (
-  maximumSizes: MaxImageSizes
+  maximumSizes: MaxImageSize
 ) => (sourceSizes: SourceImageSizes) => ImageSize;
 // TODO use singular everywhere, think about using inline types instead
-export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
+export const calculateImageSizeAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
   (maximumSizes) => (sourceSizes) => {
     const ratio = Math.min(
       maximumSizes.width / sourceSizes.width,
@@ -47,7 +47,7 @@ export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRa
   };
 
 //TODO maybe we do not need this fucntion
-export const roundImageSizes = (sizes: ImageSize): ImageSize => ({
+export const roundImageSize = (sizes: ImageSize): ImageSize => ({
   width: Math.round(sizes.width),
   height: Math.round(sizes.height),
 });
@@ -55,7 +55,7 @@ export const roundImageSizes = (sizes: ImageSize): ImageSize => ({
 // TODO improve unhappy path
 // TODO use singular
 // TODO remove this code because I got this info from the api
-export const extractImageSizesFromUrl = (str: string): ImageSize => {
+export const extractImageSizeFromUrl = (str: string): ImageSize => {
   const tokens = str.split('/').reverse();
   const [heightStr, widthStr] = tokens;
 
@@ -78,28 +78,28 @@ export const appendGrayscale = (isGrayscale: boolean) => (url: string) =>
 export const appendBlur = (blur: number) => (url: string) =>
   `${url}?blur=${blur}`;
 
-export const makeUrlWithFitImageSizes = ({
+export const makeUrlWithFitImageSize = ({
   originalUrl,
-  desiredSizes: desiredResize,
+  desiredSize: desiredResize,
 }: Readonly<{
   originalUrl: string;
-  desiredSizes: ImageSize;
+  desiredSize: ImageSize;
 }>) =>
   pipe(
     originalUrl,
-    extractImageSizesFromUrl,
-    calculateImageSizesAspectRatioFitImage(desiredResize),
-    roundImageSizes,
+    extractImageSizeFromUrl,
+    calculateImageSizeAspectRatioFitImage(desiredResize),
+    roundImageSize,
     modifySizeForImageUrl(originalUrl)
   );
 
-export const makeUrlWithSizesGrayscaleBlur =
+export const makeUrlWithSizeGrayscaleBlur =
   ({
-    desiredSizes,
+    desiredSize: desiredSizes,
     isGrayscale,
     blur,
   }: Readonly<{
-    desiredSizes: ImageSize;
+    desiredSize: ImageSize;
     isGrayscale: boolean;
     blur: number;
   }>) =>

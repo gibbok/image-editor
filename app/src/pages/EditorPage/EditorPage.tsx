@@ -7,7 +7,7 @@ import {
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
 } from '../../config';
-import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
+import { makeUrlWithSizeGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
@@ -81,8 +81,8 @@ export const EditorPage = () => {
     setImageState(dataImage);
   };
 
-  const makeImageUrl = makeUrlWithSizesGrayscaleBlur({
-    desiredSizes: {
+  const makeImageUrl = makeUrlWithSizeGrayscaleBlur({
+    desiredSize: {
       width: imageState.width,
       height: imageState.height,
     },

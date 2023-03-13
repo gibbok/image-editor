@@ -1,8 +1,8 @@
 import { pipe } from 'fp-ts/lib/function';
 import {
-  calculateImageSizesAspectRatioFitImage,
-  extractImageSizesFromUrl,
-  roundImageSizes,
+  calculateImageSizeAspectRatioFitImage,
+  extractImageSizeFromUrl,
+  roundImageSize,
 } from '../../../utils-urls';
 import { ImageSize } from '../../ImagesPage/useGetImages/type';
 
@@ -13,10 +13,10 @@ export const calculateImageSizeForPreviewImage = (
 ): ImageSize =>
   pipe(
     url,
-    extractImageSizesFromUrl,
-    calculateImageSizesAspectRatioFitImage({
+    extractImageSizeFromUrl,
+    calculateImageSizeAspectRatioFitImage({
       width: desiredWidth,
       height: desiredHeight,
     }),
-    roundImageSizes
+    roundImageSize
   );

@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import axios from 'axios';
 import { Image } from '../../../types-api';
 import { ImageId, ImageInfoUI } from '../../../types-ui';
-import { makeUrlWithFitImageSizes } from '../../../utils-urls';
+import { makeUrlWithFitImageSize } from '../../../utils-urls';
 import { calculateImageSizeForPreviewImage } from './utils';
 
 const KEY_IMAGES = 'GET_IMAGE_DETAILS';
@@ -41,9 +41,9 @@ export const useGetImageDetails: UseGetImageInfo = ({
         author: data.author,
         width: resizedWidth,
         height: resizedHeight,
-        urlTransform: makeUrlWithFitImageSizes({
+        urlTransform: makeUrlWithFitImageSize({
           originalUrl: data.download_url,
-          desiredSizes: {
+          desiredSize: {
             width: resizedWidth,
             height: resizedHeight,
           },

@@ -30,7 +30,7 @@ export const ImagesPage = () => {
   const [page, setPage] = React.useState(pageParam);
 
   const imagesQuery = useGetImages({
-    imageSizes: {
+    imageSize: {
       width: LIST_THUMBNAIL_WIDTH,
       height: LIST_THUMBNAIL_HEIGHT,
     },
