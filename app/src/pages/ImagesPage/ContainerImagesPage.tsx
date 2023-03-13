@@ -1,6 +1,6 @@
-import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 import {
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
@@ -34,11 +34,7 @@ export const ContainerImagesPage = () => {
     return <ImagesPage status="loading" />;
   }
   if (imagesQuery.isError) {
-    return (
-      <Box>
-        <Typography variant="h1">Sorry.. there was an error</Typography>
-      </Box>
-    );
+    return <ErrorMessage />;
   }
 
   const handleNavigateToEditor = (imageId: ImageId) => {
