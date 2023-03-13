@@ -44,6 +44,8 @@ export const EditorPageContainer = () => {
         pipe(
           makeFileName(EDITOR_FILE_NAME_PREFIX)({
             ...data,
+            width: queryParams.width,
+            height: queryParams.height,
             imageId: data.imageId,
             isGrayscale: queryParams.isGrayscale,
             blur: queryParams.blur,
@@ -51,8 +53,8 @@ export const EditorPageContainer = () => {
           downloadImage(
             makeUrlWithSizeGrayscaleBlur({
               desiredSize: {
-                width: imageDetailsQuery.data.width,
-                height: imageDetailsQuery.data.height,
+                width: queryParams.width,
+                height: queryParams.height,
               },
               isGrayscale: queryParams.isGrayscale,
               blur: queryParams.blur,
