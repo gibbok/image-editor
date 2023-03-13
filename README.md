@@ -36,3 +36,17 @@ The state of the application is kept in a query string so it can be easily track
 - The `containers` are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for what.
 - E2E could be an area of improvement, `Cypress` could be a good candidate.
 - Tooling like `Story Book` could be used to enhance developer productivity and documentation of the UI components.
+
+## Screenshots
+
+Image List:
+
+![Screenshot 2023-03-13 at 11 36 37 PM](https://user-images.githubusercontent.com/17195702/224848085-4510d4ef-b467-4d6d-bc9a-dd052016fe2d.png)
+
+Image Editor:
+
+![Screenshot 2023-03-13 at 11 36 46 PM](https://user-images.githubusercontent.com/17195702/224848106-a4fa3172-0857-4eed-97e7-cff617aff9c5.png)
+
+Downloaded files in the OS:
+
+![Screenshot 2023-03-13 at 11 37 42 PM](https://user-images.githubusercontent.com/17195702/224848113-65c09758-3288-4bf3-9c62-79b605f6a929.png)
