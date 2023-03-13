@@ -13,7 +13,7 @@ import { EditorPage } from './pages/EditorPage/EditorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ImagesPage } from './pages/ImagesPage/ImagesPage';
 import { Layout } from './components/Layout/Layout';
-import { ErrorBoundary } from './ErrorBoundary';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 
 initApp();
 
