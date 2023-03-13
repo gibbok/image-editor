@@ -1,6 +1,5 @@
 import {
   getEditorPageQueryParams,
-  // isEditorPageQueryParamsSameAsImageState,
   makeEditorPageQueryParams,
   makeFileName,
 } from './utils';
@@ -50,48 +49,6 @@ describe('utils', () => {
       });
     });
   });
-
-  // describe('isEditorPageQueryParamsSameAsImageState', () => {
-  //   it('should compare query params and image state', () => {
-  //     expect(
-  //       isEditorPageQueryParamsSameAsImageState(
-  //         {
-  //           imageId: '1',
-  //           page: 1,
-  //           width: 800,
-  //           height: 600,
-  //           isGrayscale: false,
-  //           blur: 1,
-  //         },
-  //         {
-  //           width: 800,
-  //           height: 600,
-  //           isGrayscale: false,
-  //           blur: 1,
-  //         }
-  //       )
-  //     ).toBe(true);
-
-  //     expect(
-  //       isEditorPageQueryParamsSameAsImageState(
-  //         {
-  //           imageId: '1',
-  //           page: 1,
-  //           width: 800,
-  //           height: 600,
-  //           isGrayscale: false,
-  //           blur: 1,
-  //         },
-  //         {
-  //           width: 1024,
-  //           height: 768,
-  //           isGrayscale: true,
-  //           blur: 2,
-  //         }
-  //       )
-  //     ).toBe(false);
-  //   });
-  // });
 
   describe('makeFileName', () => {
     expect(
