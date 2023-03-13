@@ -30,7 +30,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/editor',
-    element: <EditorPage />,
+    element: (
+      <Layout title="Edit image">
+        <EditorPage />
+      </Layout>
+    ),
     errorElement: <ErrorPage />,
   },
 ]);

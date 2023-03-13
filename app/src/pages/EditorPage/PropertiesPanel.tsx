@@ -19,9 +19,11 @@ import {
   EDITOR_MIN_WIDTH,
 } from '../../config';
 import { ImageState } from './types';
+import { ImageId } from '../../types-ui';
 
 type PropertiesPanelProps = ImageState &
   Readonly<{
+    imageId: ImageId;
     onApply: (propsChange: ImageState) => void;
     onDownload: () => void;
   }>;
@@ -56,6 +58,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 export const PropertiesPanel = ({
+  imageId,
   width,
   height,
   isGrayscale,
@@ -98,6 +101,7 @@ export const PropertiesPanel = ({
     <Box mt={6}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container direction={'column'} spacing={5}>
+          <Grid item>Image Id: {imageId}</Grid>
           <Grid item>
             <Controller
               name="width"

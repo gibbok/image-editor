@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Paper } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -105,10 +105,6 @@ export const EditorPage = () => {
   return (
     <Box display="flex">
       <Box>
-        Editor page {qp.imageId}
-        <Button variant="outlined" onClick={handleGoBackToImagesList}>
-          Go to list
-        </Button>
         {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
           'loading' // TODO add spinner
         ) : (
@@ -120,6 +116,7 @@ export const EditorPage = () => {
         )}
       </Box>
       <PropertiesPanel
+        imageId={qp.imageId}
         width={imageState.width}
         height={imageState.height}
         isGrayscale={imageState.isGrayscale}
@@ -127,6 +124,21 @@ export const EditorPage = () => {
         onApply={handleApply}
         onDownload={handleDownload}
       />
+      <Paper
+        sx={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+        elevation={3}
+      >
+        <Box p={2} display="flex" justifyContent="center">
+          <Button variant="contained" onClick={handleGoBackToImagesList}>
+            Go to Image List
+          </Button>
+        </Box>
+      </Paper>
     </Box>
   );
 };

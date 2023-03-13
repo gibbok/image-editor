@@ -16,7 +16,7 @@ import {
   makeImagesPageQueryParams,
 } from './utils';
 import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
-import { BottomNavigation, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
@@ -98,6 +98,6 @@ export const ImagesPage = () => {
     </Box>
   );
 };
-// TODO make responsive the image list
 // TODO handle case with data returned but empty, no data
 // TODO add snackbar
+// TODO publish on github static
