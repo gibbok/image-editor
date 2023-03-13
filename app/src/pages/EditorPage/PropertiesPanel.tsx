@@ -99,7 +99,7 @@ export const PropertiesPanel = ({
   }, [width, height, isGrayscale, blur]);
 
   return (
-    <Box mt={6}>
+    <Box>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container direction={'column'} spacing={5}>
           <Grid item>

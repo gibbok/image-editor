@@ -123,8 +123,8 @@ export const EditorPage = () => {
           />
         )}
       </Grid>
-      <Grid item sx={{ minWidth: 300 }}>
-        <Box ml={5}>
+      <Grid item>
+        <Box ml={5} mt={1} style={{ width: 200 }}>
           <PropertiesPanel
             imageId={qp.imageId}
             width={imageState.width}
