@@ -21,7 +21,7 @@ import {
   LIST_THUMBNAIL_HEIGHT,
   LIST_THUMBNAIL_WIDTH,
 } from '../../config';
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, Typography } from '@mui/material';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
@@ -69,6 +69,8 @@ export const ImagesPage = () => {
     <Grid display="flex" justifyContent="center">
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
+      ) : imagesQuery.data.images.length === 0 ? (
+        <Typography variant="body2">No data</Typography>
       ) : (
         <Grid item>
           <ImageList
@@ -110,6 +112,5 @@ export const ImagesPage = () => {
     </Grid>
   );
 };
-// TODO handle case with data returned but empty, no data
 // TODO add snackbar
 // TODO publish on github static
