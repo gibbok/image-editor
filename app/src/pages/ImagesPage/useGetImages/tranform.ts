@@ -1,12 +1,12 @@
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import { makeUrlWithFitImageSizes } from '../../../utils-urls';
-import { ImageSizes } from './type';
+import { ImageSize } from './type';
 
 // TODO use better naming
 export const tranformResponseForUI = (
   response: Images,
-  desiredResize: ImageSizes // TODO rename to singular
+  desiredResize: ImageSize // TODO rename to singular
 ): ImagesUI =>
   response.map(({ id, author, download_url }) => ({
     imageId: id,

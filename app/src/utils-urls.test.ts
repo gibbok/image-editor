@@ -1,4 +1,4 @@
-import { ImageSizes } from './pages/ImagesPage/useGetImages/type';
+import { ImageSize } from './pages/ImagesPage/useGetImages/type';
 import {
   calculateImageSizesAspectRatioFitImage,
   extractImageSizesFromUrl,
@@ -27,7 +27,7 @@ describe('utils-urls', () => {
         height: 160,
       })({ width: 500, height: 280 });
 
-      expect(result).toEqual<ImageSizes>({
+      expect(result).toEqual<ImageSize>({
         width: 200,
         height: 112,
       });
@@ -49,7 +49,7 @@ describe('utils-urls', () => {
       // TODO add test unhappy path
       expect(
         extractImageSizesFromUrl('https://picsum.photos/id/103/2592/1936')
-      ).toEqual<ImageSizes>({
+      ).toEqual<ImageSize>({
         width: 2592,
         height: 1936,
       });

@@ -5,7 +5,7 @@ import { API_VERSION, LIST_THUMBNAILS_AMOUNT_PER_PAGE } from '../../../config';
 import { ResponseImages } from '../../../types-api';
 import { ResultImagesUI } from '../../../types-ui';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
-import { ImageSizes } from './type';
+import { ImageSize } from './type';
 
 const KEY_IMAGES = 'GET_IMAGES';
 
@@ -23,7 +23,7 @@ export const fetchImages = ({
 
 export type UseGetImages = (
   params: Readonly<{
-    imageSizes: ImageSizes;
+    imageSizes: ImageSize;
     page: number;
     onError: (e: unknown) => void;
   }>

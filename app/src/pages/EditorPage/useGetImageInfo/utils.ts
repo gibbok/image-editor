@@ -4,13 +4,13 @@ import {
   extractImageSizesFromUrl,
   roundImageSizes,
 } from '../../../utils-urls';
-import { ImageSizes } from '../../ImagesPage/useGetImages/type';
+import { ImageSize } from '../../ImagesPage/useGetImages/type';
 
 export const calculateImageSizeForPreviewImage = (
   url: string,
   desiredWidth: number,
   desiredHeight: number
-): ImageSizes =>
+): ImageSize =>
   pipe(
     url,
     extractImageSizesFromUrl,

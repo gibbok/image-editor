@@ -1,5 +1,5 @@
 import { pipe } from 'fp-ts/lib/function';
-import { ImageSizes } from './pages/ImagesPage/useGetImages/type';
+import { ImageSize } from './pages/ImagesPage/useGetImages/type';
 
 export const getIntNumberFromQueryParamOrUseDefault =
   (defaultValue: number, minValue: number, maxValue: number) =>
@@ -27,11 +27,11 @@ export const getBooleanFromQueryParamOrUseDefault = (
  * Conserve aspect ratio of the original region.
  * Use it when shrinking/enlarging images to fit into an area.
  */
-type SourceImageSizes = ImageSizes;
-type MaxImageSizes = ImageSizes; // TODO do not use aliases
+type SourceImageSizes = ImageSize;
+type MaxImageSizes = ImageSize; // TODO do not use aliases
 type CalculateImageSizesAspectRatioFitImage = (
   maximumSizes: MaxImageSizes
-) => (sourceSizes: SourceImageSizes) => ImageSizes;
+) => (sourceSizes: SourceImageSizes) => ImageSize;
 // TODO use singular everywhere, think about using inline types instead
 export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
   (maximumSizes) => (sourceSizes) => {
@@ -47,7 +47,7 @@ export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRa
   };
 
 //TODO maybe we do not need this fucntion
-export const roundImageSizes = (sizes: ImageSizes): ImageSizes => ({
+export const roundImageSizes = (sizes: ImageSize): ImageSize => ({
   width: Math.round(sizes.width),
   height: Math.round(sizes.height),
 });
@@ -55,7 +55,7 @@ export const roundImageSizes = (sizes: ImageSizes): ImageSizes => ({
 // TODO improve unhappy path
 // TODO use singular
 // TODO remove this code because I got this info from the api
-export const extractImageSizesFromUrl = (str: string): ImageSizes => {
+export const extractImageSizesFromUrl = (str: string): ImageSize => {
   const tokens = str.split('/').reverse();
   const [heightStr, widthStr] = tokens;
 
@@ -69,7 +69,7 @@ export const extractImageSizesFromUrl = (str: string): ImageSizes => {
 // TODO I can create a new url because I have this info from the api, so I can remove this code
 export const modifySizeForImageUrl =
   (url: string) =>
-  ({ width, height }: ImageSizes) =>
+  ({ width, height }: ImageSize) =>
     url.replace(/\d+\/\d+$/, width + '/' + height);
 
 export const appendGrayscale = (isGrayscale: boolean) => (url: string) =>
@@ -83,7 +83,7 @@ export const makeUrlWithFitImageSizes = ({
   desiredSizes: desiredResize,
 }: Readonly<{
   originalUrl: string;
-  desiredSizes: ImageSizes;
+  desiredSizes: ImageSize;
 }>) =>
   pipe(
     originalUrl,
@@ -99,7 +99,7 @@ export const makeUrlWithSizesGrayscaleBlur =
     isGrayscale,
     blur,
   }: Readonly<{
-    desiredSizes: ImageSizes;
+    desiredSizes: ImageSize;
     isGrayscale: boolean;
     blur: number;
   }>) =>
