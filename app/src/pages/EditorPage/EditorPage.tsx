@@ -76,24 +76,25 @@ export const EditorPage = () => {
     setImageState(dataImage);
   };
 
+  const imageHey = makeUrlWithSizesGrayscaleBlur({
+    desiredSizes: {
+      width: imageState.width,
+      height: imageState.height,
+    },
+    isGrayscale: imageState.isGrayscale,
+    blur: imageState.blur,
+  });
+
   const handleDownload = () => {
     if (imageDetailsQuery.data) {
-      const url = makeUrlWithSizesGrayscaleBlur({
-        originalUrl: imageDetailsQuery.data.urlTransform,
-        desiredSizes: {
-          width: imageState.width,
-          height: imageState.height,
-        },
-        isGrayscale: imageState.isGrayscale,
-        blur: imageState.blur,
-      });
-      pipe(
-        makeFileName(EDITOR_FILE_NAME_PREFIX)({
-          ...imageState,
-          imageId: qp.imageId,
-        }),
-        downloadImage(url)
-      );
+      imageDetailsQuery.data &&
+        pipe(
+          makeFileName(EDITOR_FILE_NAME_PREFIX)({
+            ...imageState,
+            imageId: qp.imageId,
+          }),
+          downloadImage(imageHey(imageDetailsQuery.data.urlTransform))
+        );
     }
   };
 
@@ -108,15 +109,7 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={makeUrlWithSizesGrayscaleBlur({
-              originalUrl: imageDetailsQuery.data.urlTransform,
-              desiredSizes: {
-                width: imageState.width,
-                height: imageState.height,
-              },
-              isGrayscale: imageState.isGrayscale,
-              blur: imageState.blur,
-            })}
+            src={imageHey(imageDetailsQuery.data.urlTransform)}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />
