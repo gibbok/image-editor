@@ -110,16 +110,30 @@ export const isEditorPageQueryParamsSameAsImageState = (
 
 export const makeUrlToImagesList = (page: number) => `/?page=${page}`;
 
-export async function toDataUrl(url: string) {
+// TODO add error handing
+const toDataUrl = async (url: string) => {
   const blob = await fetch(url).then((res) => res.blob());
   return URL.createObjectURL(blob);
-}
+};
 
-export async function downloadImage(url: string) {
+export const downloadImage = (url: string) => async (nameFile: string) => {
   const a = document.createElement('a');
   a.href = await toDataUrl(url);
-  a.download = 'myImage.png';
+  a.download = nameFile;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-}
+};
+
+export const makeFileName =
+  (prefix: string) =>
+  ({
+    imageId,
+    width,
+    height,
+    isGrayscale,
+    blur,
+  }: ImageState & Readonly<{ imageId: ImageId }>) =>
+    `${prefix}-${imageId}-width-${width}-height-${height}${
+      isGrayscale ? '-grayscale' : ''
+    }-blur-${blur}`;

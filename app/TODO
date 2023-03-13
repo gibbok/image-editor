@@ -1,3 +1,5 @@
+bug, when moving in history the image properties does not get updated
+
 - add ErrorBoundary or we can still use errorElement
 
 x - add cursore hand on images

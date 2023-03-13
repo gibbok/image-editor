@@ -154,12 +154,12 @@ export const PropertiesPanel = ({
             >
               Apply
             </Button>
-            <Button onClick={onDownload} type="submit" variant="outlined">
-              Download
-            </Button>
           </Grid>
         </Grid>
       </Box>
+      <Button onClick={onDownload} type="submit" variant="outlined">
+        Download
+      </Button>
     </Box>
   );
 };

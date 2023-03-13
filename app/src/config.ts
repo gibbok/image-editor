@@ -15,3 +15,5 @@ export const EDITOR_MAX_HEIGHT = 5000;
 
 export const EDITOR_MIN_BLUR = 1;
 export const EDITOR_MAX_BLUR = 10;
+
+export const EDITOR_FILE_NAME_PREFIX = 'imageId';

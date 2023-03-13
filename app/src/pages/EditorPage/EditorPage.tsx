@@ -2,6 +2,7 @@ import { Box, Button } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { EDITOR_FILE_NAME_PREFIX } from '../../config';
 import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
@@ -11,8 +12,8 @@ import {
   getEditorPageQueryParams,
   isEditorPageQueryParamsSameAsImageState,
   makeEditorPageQueryParams,
+  makeFileName,
   makeUrlToImagesList,
-  toDataUrl,
 } from './utils';
 
 export const EditorPage = () => {
@@ -86,7 +87,13 @@ export const EditorPage = () => {
         isGrayscale: imageState.isGrayscale,
         blur: imageState.blur,
       });
-      downloadImage(url);
+      pipe(
+        makeFileName(EDITOR_FILE_NAME_PREFIX)({
+          ...imageState,
+          imageId: qp.imageId,
+        }),
+        downloadImage(url)
+      );
     }
   };
 
