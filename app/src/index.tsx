@@ -13,6 +13,7 @@ import { EditorPage } from './pages/EditorPage/EditorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ImagesPage } from './pages/ImagesPage/ImagesPage';
 import { Layout } from './components/Layout/Layout';
+import { ErrorBoundary } from './ErrorBoundary';
 
 initApp();
 
@@ -39,14 +40,18 @@ const router = createBrowserRouter([
   },
 ]);
 
+// TODO check if the node is there
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
