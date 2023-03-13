@@ -2,7 +2,10 @@ import { Box, Button, Grid, Paper } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { EDITOR_FILE_NAME_PREFIX } from '../../config';
+import {
+  EDITOR_FILE_NAME_PREFIX,
+  EDITOR_PREVIEW_INIT_WIDTH,
+} from '../../config';
 import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
@@ -103,8 +106,8 @@ export const EditorPage = () => {
   };
 
   return (
-    <Grid container>
-      <Grid item>
+    <Grid container mt={2} display="flex" justifyContent="center">
+      <Grid item sx={{ minWidth: { EDITOR_PREVIEW_INIT_WIDTH } }}>
         {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
           'loading' // TODO add spinner
         ) : (
@@ -115,16 +118,18 @@ export const EditorPage = () => {
           />
         )}
       </Grid>
-      <Grid item>
-        <PropertiesPanel
-          imageId={qp.imageId}
-          width={imageState.width}
-          height={imageState.height}
-          isGrayscale={imageState.isGrayscale}
-          blur={imageState.blur}
-          onApply={handleApply}
-          onDownload={handleDownload}
-        />
+      <Grid item sx={{ minWidth: 300 }}>
+        <Box ml={5}>
+          <PropertiesPanel
+            imageId={qp.imageId}
+            width={imageState.width}
+            height={imageState.height}
+            isGrayscale={imageState.isGrayscale}
+            blur={imageState.blur}
+            onApply={handleApply}
+            onDownload={handleDownload}
+          />
+        </Box>
       </Grid>
       <Paper
         sx={{

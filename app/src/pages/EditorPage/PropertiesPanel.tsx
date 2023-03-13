@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Grid,
   TextField,
+  Typography,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -101,7 +102,9 @@ export const PropertiesPanel = ({
     <Box mt={6}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container direction={'column'} spacing={5}>
-          <Grid item>Image Id: {imageId}</Grid>
+          <Grid item>
+            <Typography variant="body2">Image Id: {imageId}</Typography>
+          </Grid>
           <Grid item>
             <Controller
               name="width"
