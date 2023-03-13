@@ -54,7 +54,7 @@ export const ImagesPage = () => {
   };
 
   return (
-    <Box>
+    <Box display="flex" justifyContent="center">
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
       ) : (
