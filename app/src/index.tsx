@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <Layout>
+      <Layout title="Image Editor">
         <ImagesPage />
       </Layout>
     ),
