@@ -14,6 +14,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout } from './components/Layout/Layout';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import { ContainerImagesPage } from './pages/ImagesPage/ContainerImagesPage';
+import { logError } from './utils';
 
 initApp();
 
@@ -40,12 +41,11 @@ const router = createBrowserRouter([
   },
 ]);
 
-// TODO check if the node is there
 const root = ReactDOM.createRoot(
   document.getElementById('root') ??
     (() => {
       const message = 'Missing root';
-      console.error(message);
+      logError(message);
       throw new Error(message);
     })()
 );
