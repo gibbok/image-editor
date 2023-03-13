@@ -9,7 +9,7 @@ import {
 } from '../../config';
 import { makeUrlWithSizeGrayscaleBlur } from '../../utils';
 import { PropertiesPanel } from './PropertiesPanel';
-import { ImageState } from './types';
+import { ImageChanges } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
 import * as O from 'fp-ts/Option';
 import {
@@ -25,44 +25,49 @@ export const EditorPage = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
 
-  const qp = getEditorPageQueryParams(urlParams);
+  const queryParams = getEditorPageQueryParams(urlParams);
 
-  const [imageState, setImageState] = React.useState<ImageState>({
-    width: qp.width,
-    height: qp.height,
-    isGrayscale: qp.isGrayscale,
-    blur: qp.blur,
+  const [imageState, setImageState] = React.useState<ImageChanges>({
+    width: queryParams.width,
+    height: queryParams.height,
+    isGrayscale: queryParams.isGrayscale,
+    blur: queryParams.blur,
   });
 
   const imageDetailsQuery = useGetImageDetails({
-    imageId: qp.imageId,
+    imageId: queryParams.imageId,
     previewWidth: imageState.width,
     previewHeight: imageState.height,
     onError: console.error, // TODOD add snackbar
   });
 
   React.useEffect(() => {
-    if (isEditorPageQueryParamsSameAsImageState(qp, imageState)) {
+    if (isEditorPageQueryParamsSameAsImageState(queryParams, imageState)) {
       return;
     }
     setImageState({
-      width: qp.width,
-      height: qp.height,
-      isGrayscale: qp.isGrayscale,
-      blur: qp.blur,
+      width: queryParams.width,
+      height: queryParams.height,
+      isGrayscale: queryParams.isGrayscale,
+      blur: queryParams.blur,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [qp.width, qp.height, qp.isGrayscale, qp.blur]);
+  }, [
+    queryParams.width,
+    queryParams.height,
+    queryParams.isGrayscale,
+    queryParams.blur,
+  ]);
 
   React.useEffect(() => {
-    if (isEditorPageQueryParamsSameAsImageState(qp, imageState)) {
+    if (isEditorPageQueryParamsSameAsImageState(queryParams, imageState)) {
       return;
     }
     setUrlsParams(
       makeEditorPageQueryParams({
         ...imageState,
-        imageId: qp.imageId,
-        page: qp.page,
+        imageId: queryParams.imageId,
+        page: queryParams.page,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,10 +79,10 @@ export const EditorPage = () => {
   ]);
 
   const handleGoBackToImagesList = () => {
-    navigate(makeUrlToImagesList(qp.page));
+    navigate(makeUrlToImagesList(queryParams.page));
   };
 
-  const handleApply = (dataImage: ImageState) => {
+  const handleApply = (dataImage: ImageChanges) => {
     setImageState(dataImage);
   };
 
@@ -98,7 +103,7 @@ export const EditorPage = () => {
         pipe(
           makeFileName(EDITOR_FILE_NAME_PREFIX)({
             ...imageState,
-            imageId: qp.imageId,
+            imageId: queryParams.imageId,
           }),
           downloadImage(makeImageUrl(data.imageId))
         )
@@ -126,7 +131,7 @@ export const EditorPage = () => {
       <Grid item>
         <Box ml={4} mt={1} style={{ width: 200 }}>
           <PropertiesPanel
-            imageId={qp.imageId}
+            imageId={queryParams.imageId}
             width={imageState.width}
             height={imageState.height}
             isGrayscale={imageState.isGrayscale}

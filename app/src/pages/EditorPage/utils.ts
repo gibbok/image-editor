@@ -10,7 +10,7 @@ import {
   getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
 } from '../../utils';
-import { ImageState } from './types';
+import { ImageChanges } from './types';
 
 export type EditorPageQueryParams = Readonly<{
   imageId: ImageId;
@@ -44,7 +44,7 @@ export const makeEditorPageQueryParams = ({
     blur: blur.toString(),
   })}`;
 
-export type EditorQueryParams = ImageState &
+export type EditorQueryParams = ImageChanges &
   Readonly<{
     imageId: ImageId;
     page: number;
@@ -99,7 +99,7 @@ export const getEditorPageQueryParams = (
 
 export const isEditorPageQueryParamsSameAsImageState = (
   qp: EditorPageQueryParams,
-  imageState: ImageState
+  imageState: ImageChanges
 ) =>
   imageState.width === qp.width &&
   imageState.height === qp.height &&
@@ -133,7 +133,7 @@ export const makeFileName =
     height,
     isGrayscale,
     blur,
-  }: ImageState & Readonly<{ imageId: ImageId }>) =>
+  }: ImageChanges & Readonly<{ imageId: ImageId }>) =>
     `${prefix}-${imageId}-width-${width}-height-${height}${
       isGrayscale ? '-grayscale' : ''
     }-blur-${blur}`;

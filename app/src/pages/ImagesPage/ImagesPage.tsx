@@ -26,8 +26,10 @@ import { Grid, Paper, Typography } from '@mui/material';
 export const ImagesPage = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
-  const pageParam = getImagesPageQueryParams(urlParams).page;
-  const [page, setPage] = React.useState(pageParam);
+
+  const pageQueryParam = getImagesPageQueryParams(urlParams).page;
+
+  const [page, setPage] = React.useState(pageQueryParam);
 
   const imagesQuery = useGetImages({
     imageSize: {
@@ -39,12 +41,12 @@ export const ImagesPage = () => {
   });
 
   React.useEffect(() => {
-    setPage(pageParam);
+    setPage(pageQueryParam);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageParam]);
+  }, [pageQueryParam]);
 
   React.useEffect(() => {
-    if (page !== pageParam) {
+    if (page !== pageQueryParam) {
       setUrlsParams(makeImagesPageQueryParams(page));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
