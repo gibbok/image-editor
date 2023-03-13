@@ -16,7 +16,7 @@ import {
   makeImagesPageQueryParams,
 } from './utils';
 import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
-import { Paper } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
@@ -54,11 +54,11 @@ export const ImagesPage = () => {
   };
 
   return (
-    <Box display="flex" justifyContent="center">
+    <Grid display="flex" justifyContent="center">
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
       ) : (
-        <Box>
+        <Grid item>
           <ImageList
             sx={{ width: '100%', maxWidth: 1024, height: '100%' }}
             cols={3}
@@ -93,9 +93,9 @@ export const ImagesPage = () => {
               />
             </Box>
           </Paper>
-        </Box>
+        </Grid>
       )}
-    </Box>
+    </Grid>
   );
 };
 // TODO handle case with data returned but empty, no data
