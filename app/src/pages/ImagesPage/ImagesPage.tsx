@@ -16,6 +16,7 @@ import {
   makeImagesPageQueryParams,
 } from './utils';
 import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
+import { BottomNavigation, Paper } from '@mui/material';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
@@ -76,11 +77,23 @@ export const ImagesPage = () => {
               </ImageListItem>
             ))}
           </ImageList>
-          <Paginator
-            page={page}
-            variant={imagesQuery.data.pagination}
-            onChange={handleChangePage}
-          />
+          <Paper
+            sx={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+            }}
+            elevation={3}
+          >
+            <Box p={2} display="flex" justifyContent="center">
+              <Paginator
+                page={page}
+                variant={imagesQuery.data.pagination}
+                onChange={handleChangePage}
+              />
+            </Box>
+          </Paper>
         </Box>
       )}
     </Box>
