@@ -21,6 +21,7 @@ export class ErrorBoundary extends Component<
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // TODO implment a function for logging errors in a centralize way
     console.error('Uncaught error:', error, errorInfo);
   }
 

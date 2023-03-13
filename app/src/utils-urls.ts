@@ -28,10 +28,11 @@ export const getBooleanFromQueryParamOrUseDefault = (
  * Use it when shrinking/enlarging images to fit into an area.
  */
 type SourceImageSizes = ImageSizes;
-type MaxImageSizes = ImageSizes;
+type MaxImageSizes = ImageSizes; // TODO do not use aliases
 type CalculateImageSizesAspectRatioFitImage = (
   maximumSizes: MaxImageSizes
 ) => (sourceSizes: SourceImageSizes) => ImageSizes;
+// TODO use singular everywhere, think about using inline types instead
 export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
   (maximumSizes) => (sourceSizes) => {
     const ratio = Math.min(
@@ -40,27 +41,32 @@ export const calculateImageSizesAspectRatioFitImage: CalculateImageSizesAspectRa
     );
 
     return {
-      width: sourceSizes.width * ratio,
+      width: sourceSizes.width * ratio, // TODO do rounding here
       height: sourceSizes.height * ratio,
     };
   };
 
+//TODO maybe we do not need this fucntion
 export const roundImageSizes = (sizes: ImageSizes): ImageSizes => ({
   width: Math.round(sizes.width),
   height: Math.round(sizes.height),
 });
 
 // TODO improve unhappy path
+// TODO use singular
+// TODO remove this code because I got this info from the api
 export const extractImageSizesFromUrl = (str: string): ImageSizes => {
   const tokens = str.split('/').reverse();
   const [heightStr, widthStr] = tokens;
 
   return {
-    width: Math.round(Number(widthStr)),
+    width: Math.round(Number(widthStr)), // TODO rounding should not needed
     height: Math.round(Number(heightStr)),
   };
 };
 
+// TODO use token instead in a common function utils
+// TODO I can create a new url because I have this info from the api, so I can remove this code
 export const modifySizeForImageUrl =
   (url: string) =>
   ({ width, height }: ImageSizes) =>
