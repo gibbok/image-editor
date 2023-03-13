@@ -31,13 +31,6 @@ export const ImagesPageContainer = () => {
     onError: logError,
   });
 
-  if (imagesQuery.isLoading) {
-    return <ImagesPage status="loading" />;
-  }
-  if (imagesQuery.isError) {
-    return <ErrorMessage />;
-  }
-
   const handleNavigateToEditor = (imageId: ImageId) => {
     navigate(
       makeEditorUrl(
@@ -53,6 +46,13 @@ export const ImagesPageContainer = () => {
     const newPage = move === 'prev' ? pageQueryParam - 1 : pageQueryParam + 1;
     setUrlsParams(makeImagesPageQueryParams(newPage));
   };
+
+  if (imagesQuery.isLoading) {
+    return <ImagesPage status="loading" />;
+  }
+  if (imagesQuery.isError) {
+    return <ErrorMessage />;
+  }
 
   return (
     <ImagesPage
