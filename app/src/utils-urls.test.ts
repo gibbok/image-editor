@@ -1,7 +1,6 @@
 import { ImageSize } from './pages/ImagesPage/useGetImages/type';
 import {
   calculateImageSizeAspectRatioFitImage,
-  extractImageSizeFromUrl,
   makeUrlWithFitImageSize,
   makeUrlForImage,
 } from './utils-urls';
@@ -31,18 +30,6 @@ describe('utils-urls', () => {
         height: 112,
       });
       expect(result.width / result.height).toBe(originalAspectRate);
-    });
-  });
-
-  describe('extractImageSizeFromUrl', () => {
-    it('should extract width and height from url', () => {
-      // TODO add test unhappy path
-      expect(
-        extractImageSizeFromUrl('https://picsum.photos/id/103/2592/1936')
-      ).toEqual<ImageSize>({
-        width: 2592,
-        height: 1936,
-      });
     });
   });
 

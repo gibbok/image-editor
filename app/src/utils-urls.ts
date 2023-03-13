@@ -34,7 +34,6 @@ type MaxImageSize = ImageSize; // TODO do not use aliases
 type CalculateImageSizesAspectRatioFitImage = (
   maximumSizes: MaxImageSize
 ) => (sourceSizes: SourceImageSizes) => ImageSize;
-// TODO use singular everywhere, think about using inline types instead
 export const calculateImageSizeAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
   (maximumSizes) => (sourceSizes) => {
     const ratio = Math.min(
@@ -47,19 +46,6 @@ export const calculateImageSizeAspectRatioFitImage: CalculateImageSizesAspectRat
       height: Math.round(sourceSizes.height * ratio),
     };
   };
-
-// TODO improve unhappy path
-// TODO use singular
-// TODO remove this code because I got this info from the api
-export const extractImageSizeFromUrl = (str: string): ImageSize => {
-  const tokens = str.split('/').reverse();
-  const [heightStr, widthStr] = tokens;
-
-  return {
-    width: Math.round(Number(widthStr)), // TODO rounding should not needed
-    height: Math.round(Number(heightStr)),
-  };
-};
 
 // TODO use token instead in a common function utils
 // TODO I can create a new url because I have this info from the api, so I can remove this code
