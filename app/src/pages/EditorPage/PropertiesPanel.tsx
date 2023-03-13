@@ -143,7 +143,13 @@ export const PropertiesPanel = ({
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={<Checkbox defaultChecked={isGrayscale} {...field} />}
+                  control={
+                    <Checkbox
+                      defaultChecked={isGrayscale}
+                      {...field}
+                      checked={field.value}
+                    />
+                  }
                   label="Grayscale"
                 />
               )}
