@@ -1,4 +1,5 @@
 import { pipe } from 'fp-ts/lib/function';
+import { API_BASE_URL } from './config';
 import { ImageSize } from './pages/ImagesPage/useGetImages/type';
 import { ImageId } from './types-ui';
 
@@ -62,10 +63,13 @@ export const extractImageSizeFromUrl = (str: string): ImageSize => {
 
 // TODO use token instead in a common function utils
 // TODO I can create a new url because I have this info from the api, so I can remove this code
-export const makeUrlForImage =
+export const baseMakeUrlForImage =
+  (apiBaseUrl: string) =>
   (imageId: string) =>
   ({ width, height }: ImageSize) =>
-    `https://picsum.photos/id/${imageId}/${width}/${height}`;
+    `${apiBaseUrl}id/${imageId}/${width}/${height}`;
+
+export const makeUrlForImage = baseMakeUrlForImage(API_BASE_URL);
 
 export const appendGrayscale = (isGrayscale: boolean) => (url: string) =>
   `${url}${isGrayscale ? '&grayscale' : ''}`;
