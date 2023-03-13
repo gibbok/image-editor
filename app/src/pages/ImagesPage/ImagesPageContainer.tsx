@@ -20,14 +20,15 @@ import {
 export const ImagesPageContainer = () => {
   const navigate = useNavigate();
   const [urlParams, setUrlsParams] = useSearchParams();
-  const pageQueryParam = getImagesPageQueryParams(urlParams).page;
+
+  const queryParams = getImagesPageQueryParams(urlParams);
 
   const imagesQuery = useGetImages({
     imageSize: {
       width: LIST_THUMBNAIL_WIDTH,
       height: LIST_THUMBNAIL_HEIGHT,
     },
-    page: pageQueryParam,
+    page: queryParams.page,
     onError: logError,
   });
 
@@ -35,7 +36,7 @@ export const ImagesPageContainer = () => {
     navigate(
       makeEditorUrl(
         imageId,
-        pageQueryParam,
+        queryParams.page,
         EDITOR_PREVIEW_INIT_WIDTH,
         EDITOR_PREVIEW_INIT_HEIGHT
       )
@@ -43,7 +44,8 @@ export const ImagesPageContainer = () => {
   };
 
   const handlePageChange = (move: PaginationMove) => {
-    const newPage = move === 'prev' ? pageQueryParam - 1 : pageQueryParam + 1;
+    const newPage =
+      move === 'prev' ? queryParams.page - 1 : queryParams.page + 1;
     setUrlsParams(makeImagesPageQueryParams(newPage));
   };
 
@@ -57,7 +59,7 @@ export const ImagesPageContainer = () => {
   return (
     <ImagesPage
       status="loaded"
-      page={pageQueryParam}
+      page={queryParams.page}
       data={imagesQuery.data}
       onNavigateToEidtor={handleNavigateToEditor}
       onChangePage={handlePageChange}
