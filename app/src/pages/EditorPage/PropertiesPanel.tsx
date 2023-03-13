@@ -66,6 +66,7 @@ export const PropertiesPanel = ({
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -82,6 +83,16 @@ export const PropertiesPanel = ({
   };
 
   const isDisabledApplyButton = Object.keys(errors).length > 0;
+
+  React.useEffect(() => {
+    reset({
+      width,
+      height,
+      isGrayscale,
+      blur,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, isGrayscale, blur]);
 
   return (
     <Box mt={6}>

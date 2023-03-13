@@ -97,6 +97,8 @@ export const EditorPage = () => {
     }
   };
 
+  console.log('xxx imageState', JSON.stringify(imageState));
+
   return (
     <Box display="flex">
       <Box>
@@ -128,7 +130,7 @@ export const EditorPage = () => {
         isGrayscale={imageState.isGrayscale}
         blur={imageState.blur}
         onApply={handleApply}
-        onDownload={handleDownload} // TODO
+        onDownload={handleDownload}
       />
     </Box>
   );

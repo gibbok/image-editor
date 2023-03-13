@@ -59,7 +59,7 @@ export const ImagesPage = () => {
       ) : (
         <Box>
           <ImageList
-            sx={{ width: 800, height: 600 }}
+            sx={{ width: 800, height: 800 }}
             cols={3}
             gap={30}
             rowHeight={LIST_THUMBNAIL_HEIGHT}
