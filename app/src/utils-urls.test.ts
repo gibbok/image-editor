@@ -3,14 +3,14 @@ import {
   calculateImageSizeAspectRatioFitImage,
   extractImageSizeFromUrl,
   makeUrlWithFitImageSize,
-  modifySizeForImageUrl,
+  makeUrlForImage,
 } from './utils-urls';
 
 describe('utils-urls', () => {
   describe('modifySizeForImageUrl', () => {
     it('should modify url with given width and height', () => {
       expect(
-        modifySizeForImageUrl('https://picsum.photos/id/3/5000/3333')({
+        makeUrlForImage('3')({
           width: 200,
           height: 100,
         })
@@ -50,7 +50,7 @@ describe('utils-urls', () => {
     it('should return an url which fit the desired image sizes maintaining the original aspect ration', () => {
       expect(
         makeUrlWithFitImageSize({
-          originalUrl: 'https://picsum.photos/id/103/2592/1936',
+          imageId: '103',
           currentSize: {
             width: 2592,
             height: 1936,
@@ -64,7 +64,7 @@ describe('utils-urls', () => {
 
       expect(
         makeUrlWithFitImageSize({
-          originalUrl: 'https://picsum.photos/id/103/2592/1936',
+          imageId: '103',
           currentSize: {
             width: 2592,
             height: 1936,

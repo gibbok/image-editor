@@ -1,5 +1,6 @@
 import { pipe } from 'fp-ts/lib/function';
 import { ImageSize } from './pages/ImagesPage/useGetImages/type';
+import { ImageId } from './types-ui';
 
 export const getIntNumberFromQueryParamOrUseDefault =
   (defaultValue: number, minValue: number, maxValue: number) =>
@@ -61,10 +62,10 @@ export const extractImageSizeFromUrl = (str: string): ImageSize => {
 
 // TODO use token instead in a common function utils
 // TODO I can create a new url because I have this info from the api, so I can remove this code
-export const modifySizeForImageUrl =
-  (url: string) =>
+export const makeUrlForImage =
+  (imageId: string) =>
   ({ width, height }: ImageSize) =>
-    url.replace(/\d+\/\d+$/, width + '/' + height);
+    `https://picsum.photos/id/${imageId}/${width}/${height}`;
 
 export const appendGrayscale = (isGrayscale: boolean) => (url: string) =>
   `${url}${isGrayscale ? '&grayscale' : ''}`;
@@ -73,23 +74,23 @@ export const appendBlur = (blur: number) => (url: string) =>
   `${url}?blur=${blur}`;
 
 export const makeUrlWithFitImageSize = ({
+  imageId,
   currentSize,
-  originalUrl,
-  desiredSize: desiredResize,
+  desiredSize,
 }: Readonly<{
+  imageId: ImageId;
   currentSize: ImageSize;
-  originalUrl: string;
   desiredSize: ImageSize;
 }>) =>
   pipe(
     currentSize,
-    calculateImageSizeAspectRatioFitImage(desiredResize),
-    modifySizeForImageUrl(originalUrl)
+    calculateImageSizeAspectRatioFitImage(desiredSize),
+    makeUrlForImage(imageId)
   );
 
 export const makeUrlWithSizeGrayscaleBlur =
   ({
-    desiredSize: desiredSizes,
+    desiredSize,
     isGrayscale,
     blur,
   }: Readonly<{
@@ -97,10 +98,10 @@ export const makeUrlWithSizeGrayscaleBlur =
     isGrayscale: boolean;
     blur: number;
   }>) =>
-  (originalUrl: string) =>
+  (imageId: ImageId) =>
     pipe(
-      desiredSizes,
-      modifySizeForImageUrl(originalUrl),
+      desiredSize,
+      makeUrlForImage(imageId),
       appendBlur(blur),
       appendGrayscale(isGrayscale)
     );

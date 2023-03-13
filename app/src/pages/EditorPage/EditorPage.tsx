@@ -100,7 +100,7 @@ export const EditorPage = () => {
             ...imageState,
             imageId: qp.imageId,
           }),
-          downloadImage(makeImageUrl(data.urlTransform))
+          downloadImage(makeImageUrl(data.imageId))
         )
       )
     );
@@ -117,7 +117,7 @@ export const EditorPage = () => {
           />
         ) : (
           <img
-            src={makeImageUrl(imageDetailsQuery.data.urlTransform)}
+            src={makeImageUrl(imageDetailsQuery.data.imageId)}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />

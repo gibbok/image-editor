@@ -42,11 +42,11 @@ export const useGetImageDetails: UseGetImageInfo = ({
         width: resizedWidth,
         height: resizedHeight,
         urlTransform: makeUrlWithFitImageSize({
+          imageId: data.id,
           currentSize: {
             width: data.width,
             height: data.height,
           },
-          originalUrl: data.download_url,
           desiredSize: {
             width: resizedWidth,
             height: resizedHeight,

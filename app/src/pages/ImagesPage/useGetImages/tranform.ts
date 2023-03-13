@@ -13,7 +13,7 @@ export const tranformResponseForUI = (
     author,
     urlTransform: makeUrlWithFitImageSize({
       currentSize: { width, height },
-      originalUrl: download_url,
+      imageId: id,
       desiredSize,
     }),
   }));
