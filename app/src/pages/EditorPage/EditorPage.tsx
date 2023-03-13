@@ -7,6 +7,7 @@ import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
+import * as O from 'fp-ts/Option';
 import {
   downloadImage,
   getEditorPageQueryParams,
@@ -76,7 +77,7 @@ export const EditorPage = () => {
     setImageState(dataImage);
   };
 
-  const imageHey = makeUrlWithSizesGrayscaleBlur({
+  const makeImageUrl = makeUrlWithSizesGrayscaleBlur({
     desiredSizes: {
       width: imageState.width,
       height: imageState.height,
@@ -86,16 +87,19 @@ export const EditorPage = () => {
   });
 
   const handleDownload = () => {
-    if (imageDetailsQuery.data) {
-      imageDetailsQuery.data &&
+    pipe(
+      imageDetailsQuery.data,
+      O.fromNullable,
+      O.map((data) =>
         pipe(
           makeFileName(EDITOR_FILE_NAME_PREFIX)({
             ...imageState,
             imageId: qp.imageId,
           }),
-          downloadImage(imageHey(imageDetailsQuery.data.urlTransform))
-        );
-    }
+          downloadImage(makeImageUrl(data.urlTransform))
+        )
+      )
+    );
   };
 
   return (
@@ -109,7 +113,7 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={imageHey(imageDetailsQuery.data.urlTransform)}
+            src={makeImageUrl(imageDetailsQuery.data.urlTransform)}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />
