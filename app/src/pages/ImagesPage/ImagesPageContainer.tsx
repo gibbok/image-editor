@@ -55,7 +55,7 @@ export const ImagesPageContainer = () => {
   if (imagesQuery.isError) {
     return <ErrorMessage />;
   }
-
+  console.log('xxx', JSON.stringify(imagesQuery.data));
   return (
     <ImagesPage
       status={ComponentStatus.Loaded}
