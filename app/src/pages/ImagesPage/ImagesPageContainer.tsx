@@ -36,14 +36,14 @@ export const ImagesPageContainer = () => {
 
   const handleNavigateToEditor = (imageId: ImageId) => {
     navigate(
-      makeEditorUrl(
+      makeEditorUrl({
         imageId,
-        queryParams.page,
-        EDITOR_PREVIEW_INIT_WIDTH,
-        EDITOR_PREVIEW_INIT_HEIGHT,
-        EDITOR_DEFAULT_GRAYSCALE,
-        EDITOR_DEFAULT_BLUR
-      )
+        page: queryParams.page,
+        width: EDITOR_PREVIEW_INIT_WIDTH,
+        height: EDITOR_PREVIEW_INIT_HEIGHT,
+        isGrayscale: EDITOR_DEFAULT_GRAYSCALE,
+        blur: EDITOR_DEFAULT_BLUR,
+      })
     );
   };
 

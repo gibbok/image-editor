@@ -7,7 +7,16 @@ import {
 describe('utils', () => {
   describe('makeEditorUrl', () => {
     it('should return editor url', () => {
-      expect(makeEditorUrl('125', 1, 800, 600, false, 1)).toBe(
+      expect(
+        makeEditorUrl({
+          imageId: '125',
+          page: 1,
+          width: 800,
+          height: 600,
+          isGrayscale: false,
+          blur: 1,
+        })
+      ).toBe(
         'editor?imageId=125&page=1&width=800&height=600&grayscale=false&blur=1'
       );
     });
