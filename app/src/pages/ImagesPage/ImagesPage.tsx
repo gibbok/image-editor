@@ -15,7 +15,13 @@ import {
   makeEditorUrl,
   makeImagesPageQueryParams,
 } from './utils';
-import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../config';
+import {
+  EDITOR_PREVIEW_INIT_HEIGHT,
+  EDITOR_PREVIEW_INIT_WIDTH,
+  LIST_THUMBNAIL_HEIGHT,
+  LIST_THUMBNAIL_WIDTH,
+} from '../../config';
+import { Grid, Paper } from '@mui/material';
 
 export const ImagesPage = () => {
   const navigate = useNavigate();
@@ -49,20 +55,25 @@ export const ImagesPage = () => {
   };
 
   const handleNavigateToEditor = (imageId: ImageId) => () => {
-    navigate(makeEditorUrl(imageId, page));
+    navigate(
+      makeEditorUrl(
+        imageId,
+        page,
+        EDITOR_PREVIEW_INIT_WIDTH,
+        EDITOR_PREVIEW_INIT_HEIGHT
+      )
+    );
   };
 
   return (
-    <Box>
+    <Grid display="flex" justifyContent="center">
       {!imagesQuery.data || imagesQuery.isLoading ? (
         <CircularProgress />
       ) : (
-        <Box>
+        <Grid item>
           <ImageList
-            sx={{ width: 800, height: 800 }}
+            sx={{ width: '100%', maxWidth: 1024, height: '100%' }}
             cols={3}
-            gap={30}
-            rowHeight={LIST_THUMBNAIL_HEIGHT}
           >
             {imagesQuery.data.images.map((item) => (
               <ImageListItem key={item.imageId}>
@@ -77,16 +88,28 @@ export const ImagesPage = () => {
               </ImageListItem>
             ))}
           </ImageList>
-          <Paginator
-            page={page}
-            variant={imagesQuery.data.pagination}
-            onChange={handleChangePage}
-          />
-        </Box>
+          <Paper
+            sx={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              right: 0,
+            }}
+            elevation={3}
+          >
+            <Box p={2} display="flex" justifyContent="center">
+              <Paginator
+                page={page}
+                variant={imagesQuery.data.pagination}
+                onChange={handleChangePage}
+              />
+            </Box>
+          </Paper>
+        </Grid>
       )}
-    </Box>
+    </Grid>
   );
 };
-// TODO make responsive the image list
 // TODO handle case with data returned but empty, no data
 // TODO add snackbar
+// TODO publish on github static

@@ -1,8 +1,12 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Grid, Paper, Skeleton } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { EDITOR_FILE_NAME_PREFIX } from '../../config';
+import {
+  EDITOR_FILE_NAME_PREFIX,
+  EDITOR_PREVIEW_INIT_HEIGHT,
+  EDITOR_PREVIEW_INIT_WIDTH,
+} from '../../config';
 import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
@@ -101,16 +105,16 @@ export const EditorPage = () => {
       )
     );
   };
-
+  const isLoading = !imageDetailsQuery.data || imageDetailsQuery.isLoading;
   return (
-    <Box display="flex">
-      <Box>
-        Editor page {qp.imageId}
-        <Button variant="outlined" onClick={handleGoBackToImagesList}>
-          Go to list
-        </Button>
-        {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
-          'loading' // TODO add spinner
+    <Grid container mt={2} display="flex" justifyContent="center">
+      <Grid item>
+        {isLoading ? (
+          <Skeleton
+            variant="rectangular"
+            width={EDITOR_PREVIEW_INIT_WIDTH}
+            height={EDITOR_PREVIEW_INIT_HEIGHT}
+          />
         ) : (
           <img
             src={makeImageUrl(imageDetailsQuery.data.urlTransform)}
@@ -118,15 +122,35 @@ export const EditorPage = () => {
             loading="lazy"
           />
         )}
-      </Box>
-      <PropertiesPanel
-        width={imageState.width}
-        height={imageState.height}
-        isGrayscale={imageState.isGrayscale}
-        blur={imageState.blur}
-        onApply={handleApply}
-        onDownload={handleDownload}
-      />
-    </Box>
+      </Grid>
+      <Grid item>
+        <Box ml={4} mt={1} style={{ width: 200 }}>
+          <PropertiesPanel
+            imageId={qp.imageId}
+            width={imageState.width}
+            height={imageState.height}
+            isGrayscale={imageState.isGrayscale}
+            blur={imageState.blur}
+            onApply={handleApply}
+            onDownload={handleDownload}
+          />
+        </Box>
+      </Grid>
+      <Paper
+        sx={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+        }}
+        elevation={3}
+      >
+        <Box p={2} display="flex" justifyContent="center">
+          <Button variant="contained" onClick={handleGoBackToImagesList}>
+            Go to Image List
+          </Button>
+        </Box>
+      </Paper>
+    </Grid>
   );
 };

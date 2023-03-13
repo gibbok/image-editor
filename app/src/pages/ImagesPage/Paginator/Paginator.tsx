@@ -19,16 +19,18 @@ export const Paginator = ({ page, variant, onChange }: PaginationProps) => {
 
   return (
     <Box display="flex" alignItems="center">
-      <Box mr={2}>
+      <Box display="flex" mr={2}>
+        <Box mr={3}>
+          <Button
+            variant="contained"
+            disabled={visiblityButton.disablePrev}
+            onClick={handleClickButton('prev')}
+          >
+            Prev
+          </Button>
+        </Box>
         <Button
-          variant="outlined"
-          disabled={visiblityButton.disablePrev}
-          onClick={handleClickButton('prev')}
-        >
-          Prev
-        </Button>
-        <Button
-          variant="outlined"
+          variant="contained"
           disabled={visiblityButton.disableNext}
           onClick={handleClickButton('next')}
         >

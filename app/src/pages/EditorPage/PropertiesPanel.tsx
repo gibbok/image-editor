@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Grid,
   TextField,
+  Typography,
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,9 +20,11 @@ import {
   EDITOR_MIN_WIDTH,
 } from '../../config';
 import { ImageState } from './types';
+import { ImageId } from '../../types-ui';
 
 type PropertiesPanelProps = ImageState &
   Readonly<{
+    imageId: ImageId;
     onApply: (propsChange: ImageState) => void;
     onDownload: () => void;
   }>;
@@ -56,6 +59,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 export const PropertiesPanel = ({
+  imageId,
   width,
   height,
   isGrayscale,
@@ -95,9 +99,12 @@ export const PropertiesPanel = ({
   }, [width, height, isGrayscale, blur]);
 
   return (
-    <Box mt={6}>
+    <Box>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container direction={'column'} spacing={5}>
+          <Grid item>
+            <Typography variant="body2">Image Id: {imageId}</Typography>
+          </Grid>
           <Grid item>
             <Controller
               name="width"
@@ -159,8 +166,9 @@ export const PropertiesPanel = ({
           </Grid>
           <Grid item>
             <Button
+              fullWidth
               type="submit"
-              variant="outlined"
+              variant="contained"
               disabled={isDisabledApplyButton}
             >
               Apply
@@ -168,9 +176,16 @@ export const PropertiesPanel = ({
           </Grid>
         </Grid>
       </Box>
-      <Button onClick={onDownload} type="submit" variant="outlined">
-        Download
-      </Button>
+      <Box mt={3}>
+        <Button
+          fullWidth
+          onClick={onDownload}
+          type="submit"
+          variant="contained"
+        >
+          Download
+        </Button>
+      </Box>
     </Box>
   );
 };
