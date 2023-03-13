@@ -1,6 +1,6 @@
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
-import { makeUrlWithFitImageSize } from '../../../utils-urls';
+import { makeUrlWithFitImageSize } from '../../../utils';
 import { ImageSize } from './type';
 
 // TODO use better naming

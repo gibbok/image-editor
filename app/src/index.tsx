@@ -42,7 +42,12 @@ const router = createBrowserRouter([
 
 // TODO check if the node is there
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') ??
+    (() => {
+      const message = 'Missing root';
+      console.error(message);
+      throw new Error(message);
+    })()
 );
 
 root.render(

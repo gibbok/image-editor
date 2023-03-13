@@ -3,9 +3,9 @@ import {
   calculateImageSizeAspectRatioFitImage,
   makeUrlWithFitImageSize,
   makeUrlForImage,
-} from './utils-urls';
+} from './utils';
 
-describe('utils-urls', () => {
+describe('utils', () => {
   describe('modifySizeForImageUrl', () => {
     it('should modify url with given width and height', () => {
       expect(

@@ -1,5 +1,5 @@
 import { ImageId } from '../../types-ui';
-import { getIntNumberFromQueryParamOrUseDefault } from '../../utils-urls';
+import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
 
 export const makeEditorUrl = (
   imageId: ImageId,

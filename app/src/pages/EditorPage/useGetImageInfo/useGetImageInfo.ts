@@ -5,7 +5,7 @@ import { ImageId, ImageInfoUI } from '../../../types-ui';
 import {
   calculateImageSizeAspectRatioFitImage,
   makeUrlWithFitImageSize,
-} from '../../../utils-urls';
+} from '../../../utils';
 
 const KEY_IMAGES = 'GET_IMAGE_DETAILS';
 

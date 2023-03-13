@@ -1,5 +1,5 @@
 import { pipe } from 'fp-ts/lib/function';
-import { calculateImageSizeAspectRatioFitImage } from '../../../utils-urls';
+import { calculateImageSizeAspectRatioFitImage } from '../../../utils';
 import { ImageSize } from '../../ImagesPage/useGetImages/type';
 
 export const calculateImageSizeForPreviewImage = (

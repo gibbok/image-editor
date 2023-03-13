@@ -9,7 +9,7 @@ import { ImageId } from '../../types-ui';
 import {
   getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
-} from '../../utils-urls';
+} from '../../utils';
 import { ImageState } from './types';
 
 export type EditorPageQueryParams = Readonly<{

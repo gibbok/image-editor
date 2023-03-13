@@ -7,7 +7,7 @@ import {
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
 } from '../../config';
-import { makeUrlWithSizeGrayscaleBlur } from '../../utils-urls';
+import { makeUrlWithSizeGrayscaleBlur } from '../../utils';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
@@ -38,7 +38,7 @@ export const EditorPage = () => {
     imageId: qp.imageId,
     previewWidth: imageState.width,
     previewHeight: imageState.height,
-    onError: console.error,
+    onError: console.error, // TODOD add snackbar
   });
 
   React.useEffect(() => {

@@ -95,3 +95,6 @@ export const makeUrlWithSizeGrayscaleBlur =
       appendBlur(blur),
       appendGrayscale(isGrayscale)
     );
+
+// TODO log errors to an external system or use an error tracking system like Sentry
+export const logError = (...args: unknown[]) => console.error(args);
