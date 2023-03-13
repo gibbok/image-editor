@@ -1,16 +1,9 @@
-bug, when moving in history the image properties does not get updated
-
-- add ErrorBoundary or we can still use errorElement
-
-x - add cursore hand on images
+# TODO
 
 - show error with a snack bar
-- add more tests
-- clean deps in packageos
 - look into memo
 - look into warning react
 - look into warning in testing
-- downalod button
 - test more manually
 
-3+3+3+4+3
+3+3+3+4+3+4+4
