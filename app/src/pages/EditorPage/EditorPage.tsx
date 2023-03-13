@@ -97,8 +97,6 @@ export const EditorPage = () => {
     }
   };
 
-  console.log('xxx imageState', JSON.stringify(imageState));
-
   return (
     <Box display="flex">
       <Box>
