@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 import {
+  EDITOR_DEFAULT_BLUR,
+  EDITOR_DEFAULT_GRAYSCALE,
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
   LIST_THUMBNAIL_HEIGHT,
@@ -38,7 +40,9 @@ export const ImagesPageContainer = () => {
         imageId,
         queryParams.page,
         EDITOR_PREVIEW_INIT_WIDTH,
-        EDITOR_PREVIEW_INIT_HEIGHT
+        EDITOR_PREVIEW_INIT_HEIGHT,
+        EDITOR_DEFAULT_GRAYSCALE,
+        EDITOR_DEFAULT_BLUR
       )
     );
   };

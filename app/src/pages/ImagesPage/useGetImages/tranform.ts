@@ -3,10 +3,9 @@ import { ImagesUI, PaginationMoveState } from '../../../types-ui';
 import { makeUrlWithFitImageSize } from '../../../utils';
 import { ImageSize } from './type';
 
-// TODO use better naming
 export const tranformResponseForUI = (
   response: Images,
-  desiredSize: ImageSize // TODO rename to singular
+  desiredSize: ImageSize
 ): ImagesUI =>
   response.map(({ id, author, download_url, width, height }) => ({
     imageId: id,

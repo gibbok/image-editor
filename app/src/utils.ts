@@ -42,13 +42,11 @@ export const calculateImageSizeAspectRatioFitImage: CalculateImageSizesAspectRat
     );
 
     return {
-      width: Math.round(sourceSizes.width * ratio), // TODO do rounding here
+      width: Math.round(sourceSizes.width * ratio),
       height: Math.round(sourceSizes.height * ratio),
     };
   };
 
-// TODO use token instead in a common function utils
-// TODO I can create a new url because I have this info from the api, so I can remove this code
 export const baseMakeUrlForImage =
   (apiBaseUrl: string) =>
   (imageId: string) =>

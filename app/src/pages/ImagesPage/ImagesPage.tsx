@@ -78,5 +78,5 @@ export const ImagesPage = (props: ImagesPageProps) => {
     </Grid>
   );
 };
-// TODO add snackbar
+
 // TODO publish on github static

@@ -5,9 +5,11 @@ export const makeEditorUrl = (
   imageId: ImageId,
   page: number,
   width: number,
-  height: number
+  height: number,
+  isGrayscale: boolean,
+  blur: number
 ) =>
-  `editor?imageId=${imageId}&page=${page}&width=${width}&height=${height}&grayscale=false&blur=1`; // TODO make it configurable
+  `editor?imageId=${imageId}&page=${page}&width=${width}&height=${height}&grayscale=${isGrayscale}&blur=${blur}`;
 
 export const makeImagesPageQueryParams = (page: number) =>
   `?${new URLSearchParams({ page: page.toString() })}`;
