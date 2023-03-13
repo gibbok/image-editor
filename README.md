@@ -27,7 +27,7 @@ I love open source for more code, please look at my GitHub projects: <https://gi
 
 The container files are responsible for effects, including, data fetching, reading and updating query string, and error handling, the rest of the components are `dumb` they have no side effects and so they are pure. By using these techniques we can more easily separate concerns and allow quickly test all our components. I would be more than happy to discuss this with you in a meeting more about this approach.
 
-The state of the application is kept in a query string so it can be easily tracked with browser history. Users can also bookmark it and open the editor in any state.
+The state of the application is kept in query strings so it can be easily tracked with browser history. Users can also bookmark it and open the editor in any state.
 
 ## Area of improvements
 
