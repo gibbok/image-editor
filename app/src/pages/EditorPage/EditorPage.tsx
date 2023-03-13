@@ -1,4 +1,5 @@
 import { Box, Button } from '@mui/material';
+import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
@@ -6,10 +7,12 @@ import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
 import {
+  downloadImage,
   getEditorPageQueryParams,
-  isEditorPageQueryParamsSameAsImageState as isEditorPageQueryParamsSameAsImageState,
+  isEditorPageQueryParamsSameAsImageState,
   makeEditorPageQueryParams,
   makeUrlToImagesList,
+  toDataUrl,
 } from './utils';
 
 export const EditorPage = () => {
@@ -72,6 +75,21 @@ export const EditorPage = () => {
     setImageState(dataImage);
   };
 
+  const handleDownload = () => {
+    if (imageDetailsQuery.data) {
+      const url = makeUrlWithSizesGrayscaleBlur({
+        originalUrl: imageDetailsQuery.data.urlTransform,
+        desiredSizes: {
+          width: imageState.width,
+          height: imageState.height,
+        },
+        isGrayscale: imageState.isGrayscale,
+        blur: imageState.blur,
+      });
+      downloadImage(url);
+    }
+  };
+
   return (
     <Box display="flex">
       <Box>
@@ -103,7 +121,7 @@ export const EditorPage = () => {
         isGrayscale={imageState.isGrayscale}
         blur={imageState.blur}
         onApply={handleApply}
-        onDownload={(x) => console.log('on download', x)} // TODO
+        onDownload={handleDownload} // TODO
       />
     </Box>
   );

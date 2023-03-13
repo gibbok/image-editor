@@ -23,7 +23,7 @@ import { ImageState } from './types';
 type PropertiesPanelProps = ImageState &
   Readonly<{
     onApply: (propsChange: ImageState) => void;
-    onDownload: (propsChange: ImageState) => void;
+    onDownload: () => void;
   }>;
 
 const schema = yup
@@ -153,6 +153,9 @@ export const PropertiesPanel = ({
               disabled={isDisabledApplyButton}
             >
               Apply
+            </Button>
+            <Button onClick={onDownload} type="submit" variant="outlined">
+              Download
             </Button>
           </Grid>
         </Grid>

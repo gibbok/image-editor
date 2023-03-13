@@ -109,3 +109,17 @@ export const isEditorPageQueryParamsSameAsImageState = (
     : false;
 
 export const makeUrlToImagesList = (page: number) => `/?page=${page}`;
+
+export async function toDataUrl(url: string) {
+  const blob = await fetch(url).then((res) => res.blob());
+  return URL.createObjectURL(blob);
+}
+
+export async function downloadImage(url: string) {
+  const a = document.createElement('a');
+  a.href = await toDataUrl(url);
+  a.download = 'myImage.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
