@@ -1,9 +1,10 @@
-import { Box, Button, Grid, Paper } from '@mui/material';
+import { Box, Button, Grid, Paper, Skeleton } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   EDITOR_FILE_NAME_PREFIX,
+  EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
 } from '../../config';
 import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
@@ -104,12 +105,22 @@ export const EditorPage = () => {
       )
     );
   };
-
+  const isLoading = !imageDetailsQuery.data || imageDetailsQuery.isLoading;
   return (
     <Grid container mt={2} display="flex" justifyContent="center">
-      <Grid item sx={{ minWidth: { EDITOR_PREVIEW_INIT_WIDTH } }}>
-        {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
-          'loading' // TODO add spinner
+      <Grid
+        item
+        sx={{
+          minWidth: { EDITOR_PREVIEW_INIT_WIDTH },
+          maxHeight: EDITOR_PREVIEW_INIT_HEIGHT,
+        }}
+      >
+        {isLoading ? (
+          <Skeleton
+            variant="rectangular"
+            width={EDITOR_PREVIEW_INIT_WIDTH}
+            height={EDITOR_PREVIEW_INIT_HEIGHT}
+          />
         ) : (
           <img
             src={makeImageUrl(imageDetailsQuery.data.urlTransform)}
