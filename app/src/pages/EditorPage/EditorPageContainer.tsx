@@ -15,6 +15,7 @@ import {
 } from './utils';
 import * as O from 'fp-ts/Option';
 import { EDITOR_FILE_NAME_PREFIX } from '../../config';
+import { ComponentStatus } from '../../types-ui';
 
 export const EditorPageContainer = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export const EditorPageContainer = () => {
   });
 
   if (imageDetailsQuery.isLoading) {
-    return <EditorPage status="loading" />;
+    return <EditorPage status={ComponentStatus.Loading} />;
   }
   if (imageDetailsQuery.isError) {
     return <ErrorMessage />;
@@ -78,7 +79,7 @@ export const EditorPageContainer = () => {
 
   return (
     <EditorPage
-      status="loaded"
+      status={ComponentStatus.Loaded}
       data={{
         ...imageDetailsQuery.data,
         imageId: queryParams.imageId,
