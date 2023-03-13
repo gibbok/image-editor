@@ -12,6 +12,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import { EditorPage } from './pages/EditorPage/EditorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ImagesPage } from './pages/ImagesPage/ImagesPage';
+import { Layout } from './components/Layout/Layout';
 
 initApp();
 
@@ -20,7 +21,11 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <ImagesPage />,
+    element: (
+      <Layout>
+        <ImagesPage />
+      </Layout>
+    ),
     errorElement: <ErrorPage />,
   },
   {
