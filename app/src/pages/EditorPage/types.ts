@@ -1,4 +1,4 @@
-export type ImageState = Readonly<{
+export type ImageChanges = Readonly<{
   width: number;
   height: number;
   isGrayscale: boolean;

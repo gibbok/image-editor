@@ -1,4 +1,6 @@
+import { Typography } from '@mui/material';
 import React, { Component, ReactNode, ErrorInfo } from 'react';
+import { logError } from '../../utils';
 
 type ErrorBoundaryProps = Readonly<{
   children?: ReactNode;
@@ -21,12 +23,12 @@ export class ErrorBoundary extends Component<
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    logError('Uncaught error:', error, errorInfo);
   }
 
   public render() {
     if (this.state.hasError) {
-      return <h1>Sorry.. there was an error</h1>;
+      return <Typography variant="h1">Sorry.. there was an error</Typography>;
     }
 
     return this.props.children;

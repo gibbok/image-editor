@@ -1,18 +1,19 @@
 import { Images } from '../../../types-api';
 import { ImagesUI, PaginationMoveState } from '../../../types-ui';
-import { makeUrlWithFitImageSizes } from '../../../utils-urls';
-import { ImageSizes } from './type';
+import { makeUrlWithFitImageSize } from '../../../utils';
+import { ImageSize } from './type';
 
 export const tranformResponseForUI = (
-  response: Images,
-  desiredResize: ImageSizes
+  images: Images,
+  desiredSize: ImageSize
 ): ImagesUI =>
-  response.map(({ id, author, download_url }) => ({
+  images.map(({ id, author, width, height }) => ({
     imageId: id,
     author,
-    urlTransform: makeUrlWithFitImageSizes({
-      originalUrl: download_url,
-      desiredSizes: desiredResize,
+    urlTransform: makeUrlWithFitImageSize({
+      currentSize: { width, height },
+      imageId: id,
+      desiredSize,
     }),
   }));
 

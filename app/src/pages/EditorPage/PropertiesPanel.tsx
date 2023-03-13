@@ -19,13 +19,13 @@ import {
   EDITOR_MIN_HEIGHT,
   EDITOR_MIN_WIDTH,
 } from '../../config';
-import { ImageState } from './types';
+import { ImageChanges } from './types';
 import { ImageId } from '../../types-ui';
 
-type PropertiesPanelProps = ImageState &
+type PropertiesPanelProps = ImageChanges &
   Readonly<{
     imageId: ImageId;
-    onApply: (propsChange: ImageState) => void;
+    onApply: (propsChange: ImageChanges) => void;
     onDownload: () => void;
   }>;
 

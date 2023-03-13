@@ -1,4 +1,4 @@
-export type ImageSizes = Readonly<{
+export type ImageSize = Readonly<{
   width: number;
   height: number;
 }>;

@@ -9,10 +9,12 @@ import reportWebVitals from './reportWebVitals';
 import { initApp } from './init';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
-import { EditorPage } from './pages/EditorPage/EditorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ImagesPage } from './pages/ImagesPage/ImagesPage';
 import { Layout } from './components/Layout/Layout';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
+import { ImagesPageContainer } from './pages/ImagesPage/ImagesPageContainer';
+import { logError } from './utils';
+import { EditorPageContainer } from './pages/EditorPage/EditorPageContainer';
 
 initApp();
 
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <Layout title="Image Editor">
-        <ImagesPage />
+        <ImagesPageContainer />
       </Layout>
     ),
     errorElement: <ErrorPage />,
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
     path: '/editor',
     element: (
       <Layout title="Edit image">
-        <EditorPage />
+        <EditorPageContainer />
       </Layout>
     ),
     errorElement: <ErrorPage />,
@@ -40,13 +42,21 @@ const router = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById('root') ??
+    (() => {
+      const message = 'Missing root node';
+      logError(message);
+      throw new Error(message);
+    })()
 );
+
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
 

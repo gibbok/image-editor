@@ -2,16 +2,16 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import axios from 'axios';
 import { API_VERSION, LIST_THUMBNAILS_AMOUNT_PER_PAGE } from '../../../config';
-import { ResponseImages } from '../../../types-api';
+import { ImagesAndLink } from '../../../types-api';
 import { ResultImagesUI } from '../../../types-ui';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
-import { ImageSizes } from './type';
+import { ImageSize } from './type';
 
 const KEY_IMAGES = 'GET_IMAGES';
 
 export const fetchImages = ({
   page,
-}: Readonly<{ page: number }>): Promise<ResponseImages> =>
+}: Readonly<{ page: number }>): Promise<ImagesAndLink> =>
   axios
     .get(
       `${API_VERSION}/list?page=${page}&limit=${LIST_THUMBNAILS_AMOUNT_PER_PAGE}`
@@ -23,15 +23,15 @@ export const fetchImages = ({
 
 export type UseGetImages = (
   params: Readonly<{
-    imageSizes: ImageSizes;
+    imageSize: ImageSize;
     page: number;
     onError: (e: unknown) => void;
   }>
 ) => UseQueryResult<ResultImagesUI, unknown>;
-export const useGetImages: UseGetImages = ({ imageSizes, page, onError }) =>
+export const useGetImages: UseGetImages = ({ imageSize, page, onError }) =>
   useQuery([KEY_IMAGES, { page }], () => fetchImages({ page }), {
     select: (data) => ({
-      images: tranformResponseForUI(data.images, imageSizes),
+      images: tranformResponseForUI(data.images, imageSize),
       pagination: getPaginationInfoFromHeader(data.linkHeader),
     }),
     onError,

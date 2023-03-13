@@ -1,5 +1,4 @@
 export type ImageId = string;
-
 export type ImageUI = Readonly<{
   imageId: ImageId;
   author: string;
