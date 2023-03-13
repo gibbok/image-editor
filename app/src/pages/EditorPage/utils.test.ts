@@ -43,8 +43,8 @@ describe('utils', () => {
       expect(getEditorPageQueryParams(url.searchParams)).toEqual({
         imageId: '1',
         page: 1,
-        width: 800,
-        height: 600,
+        width: 650,
+        height: 450,
         isGrayscale: false,
         blur: 1,
       });

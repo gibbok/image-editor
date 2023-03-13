@@ -8,10 +8,11 @@ export const tranformResponseForUI = (
   response: Images,
   desiredSize: ImageSize // TODO rename to singular
 ): ImagesUI =>
-  response.map(({ id, author, download_url }) => ({
+  response.map(({ id, author, download_url, width, height }) => ({
     imageId: id,
     author,
     urlTransform: makeUrlWithFitImageSize({
+      currentSize: { width, height },
       originalUrl: download_url,
       desiredSize,
     }),

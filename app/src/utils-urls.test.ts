@@ -4,7 +4,6 @@ import {
   extractImageSizeFromUrl,
   makeUrlWithFitImageSize,
   modifySizeForImageUrl,
-  roundImageSize,
 } from './utils-urls';
 
 describe('utils-urls', () => {
@@ -35,15 +34,6 @@ describe('utils-urls', () => {
     });
   });
 
-  describe('roundImageSize', () => {
-    it('should round image size', () => {
-      expect(roundImageSize({ width: 100.2, height: 80.8 })).toEqual({
-        width: 100,
-        height: 81,
-      });
-    });
-  });
-
   describe('extractImageSizeFromUrl', () => {
     it('should extract width and height from url', () => {
       // TODO add test unhappy path
@@ -61,6 +51,10 @@ describe('utils-urls', () => {
       expect(
         makeUrlWithFitImageSize({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
+          currentSize: {
+            width: 2592,
+            height: 1936,
+          },
           desiredSize: {
             width: 200,
             height: 160,
@@ -71,6 +65,10 @@ describe('utils-urls', () => {
       expect(
         makeUrlWithFitImageSize({
           originalUrl: 'https://picsum.photos/id/103/2592/1936',
+          currentSize: {
+            width: 2592,
+            height: 1936,
+          },
           desiredSize: {
             width: 200,
             height: 160,

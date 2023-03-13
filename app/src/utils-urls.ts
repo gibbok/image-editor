@@ -41,16 +41,10 @@ export const calculateImageSizeAspectRatioFitImage: CalculateImageSizesAspectRat
     );
 
     return {
-      width: sourceSizes.width * ratio, // TODO do rounding here
-      height: sourceSizes.height * ratio,
+      width: Math.round(sourceSizes.width * ratio), // TODO do rounding here
+      height: Math.round(sourceSizes.height * ratio),
     };
   };
-
-//TODO maybe we do not need this fucntion
-export const roundImageSize = (sizes: ImageSize): ImageSize => ({
-  width: Math.round(sizes.width),
-  height: Math.round(sizes.height),
-});
 
 // TODO improve unhappy path
 // TODO use singular
@@ -79,17 +73,17 @@ export const appendBlur = (blur: number) => (url: string) =>
   `${url}?blur=${blur}`;
 
 export const makeUrlWithFitImageSize = ({
+  currentSize,
   originalUrl,
   desiredSize: desiredResize,
 }: Readonly<{
+  currentSize: ImageSize;
   originalUrl: string;
   desiredSize: ImageSize;
 }>) =>
   pipe(
-    originalUrl,
-    extractImageSizeFromUrl,
+    currentSize,
     calculateImageSizeAspectRatioFitImage(desiredResize),
-    roundImageSize,
     modifySizeForImageUrl(originalUrl)
   );
 
