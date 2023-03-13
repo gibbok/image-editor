@@ -1,4 +1,4 @@
-import { Box, Button, Paper } from '@mui/material';
+import { Box, Button, Grid, Paper } from '@mui/material';
 import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -103,8 +103,8 @@ export const EditorPage = () => {
   };
 
   return (
-    <Box display="flex">
-      <Box>
+    <Grid container>
+      <Grid item>
         {!imageDetailsQuery.data || imageDetailsQuery.isLoading ? (
           'loading' // TODO add spinner
         ) : (
@@ -114,16 +114,18 @@ export const EditorPage = () => {
             loading="lazy"
           />
         )}
-      </Box>
-      <PropertiesPanel
-        imageId={qp.imageId}
-        width={imageState.width}
-        height={imageState.height}
-        isGrayscale={imageState.isGrayscale}
-        blur={imageState.blur}
-        onApply={handleApply}
-        onDownload={handleDownload}
-      />
+      </Grid>
+      <Grid item>
+        <PropertiesPanel
+          imageId={qp.imageId}
+          width={imageState.width}
+          height={imageState.height}
+          isGrayscale={imageState.isGrayscale}
+          blur={imageState.blur}
+          onApply={handleApply}
+          onDownload={handleDownload}
+        />
+      </Grid>
       <Paper
         sx={{
           position: 'fixed',
@@ -139,6 +141,6 @@ export const EditorPage = () => {
           </Button>
         </Box>
       </Paper>
-    </Box>
+    </Grid>
   );
 };

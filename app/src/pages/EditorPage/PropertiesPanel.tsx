@@ -163,8 +163,9 @@ export const PropertiesPanel = ({
           </Grid>
           <Grid item>
             <Button
+              fullWidth
               type="submit"
-              variant="outlined"
+              variant="contained"
               disabled={isDisabledApplyButton}
             >
               Apply
@@ -172,9 +173,16 @@ export const PropertiesPanel = ({
           </Grid>
         </Grid>
       </Box>
-      <Button onClick={onDownload} type="submit" variant="outlined">
-        Download
-      </Button>
+      <Box mt={3}>
+        <Button
+          fullWidth
+          onClick={onDownload}
+          type="submit"
+          variant="contained"
+        >
+          Download
+        </Button>
+      </Box>
     </Box>
   );
 };
