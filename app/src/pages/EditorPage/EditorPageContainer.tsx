@@ -36,32 +36,30 @@ export const EditorPageContainer = () => {
     return <ErrorMessage />;
   }
   const handleDownload = () => {
-    if (imageDetailsQuery.data) {
-      pipe(
-        imageDetailsQuery.data,
-        O.fromNullable,
-        O.map((data) =>
-          pipe(
-            makeFileName(EDITOR_FILE_NAME_PREFIX)({
-              ...data,
-              imageId: data.imageId,
+    pipe(
+      imageDetailsQuery.data,
+      O.fromNullable,
+      O.map((data) =>
+        pipe(
+          makeFileName(EDITOR_FILE_NAME_PREFIX)({
+            ...data,
+            imageId: data.imageId,
+            isGrayscale: queryParams.isGrayscale,
+            blur: queryParams.blur,
+          }),
+          downloadImage(
+            makeUrlWithSizeGrayscaleBlur({
+              desiredSize: {
+                width: imageDetailsQuery.data.width,
+                height: imageDetailsQuery.data.height,
+              },
               isGrayscale: queryParams.isGrayscale,
               blur: queryParams.blur,
-            }),
-            downloadImage(
-              makeUrlWithSizeGrayscaleBlur({
-                desiredSize: {
-                  width: imageDetailsQuery.data.width,
-                  height: imageDetailsQuery.data.height,
-                },
-                isGrayscale: queryParams.isGrayscale,
-                blur: queryParams.blur,
-              })(data.imageId)
-            )
+            })(data.imageId)
           )
         )
-      );
-    }
+      )
+    );
   };
 
   const handleApply = (dataImage: ImageChanges) => {
