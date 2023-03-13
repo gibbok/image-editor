@@ -35,7 +35,7 @@ The state of the application is kept in query strings so it can be easily tracke
 - It is possible to avoid calling the server on every press of the `Apply` button by performing some image modification directly in the browser, for instance, some image processing can be executed in a Web Worker, which has the advantage to keep free the main thread and avoid server load.
 - The `containers` are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for what.
 - E2E could be an area of improvement, `Cypress` could be a good candidate.
-- Tooling like `Story Book` could be used to enhance developer productivity and documentation of the UI components.
+- Tooling like `Story Book` could be used to enhance developers productivity and documentation of the UI components.
 
 ## Screenshots
 
