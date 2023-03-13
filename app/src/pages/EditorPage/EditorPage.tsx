@@ -6,14 +6,14 @@ import {
 import { makeUrlWithSizeGrayscaleBlur } from '../../utils';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageChanges } from './types';
-import { ComponentStatus, ImageInfoUI } from '../../types-ui';
+import { ImageInfoUI } from '../../types-ui';
 
 type EditorPageLoading = Readonly<{
-  status: ComponentStatus.Loading;
+  status: 'loading';
 }>;
 
 type EditorPageLoaded = Readonly<{
-  status: ComponentStatus.Loaded;
+  status: 'loaded';
   data: ImageInfoUI &
     Readonly<{
       isGrayscale: boolean;
@@ -27,7 +27,7 @@ type EditorPageLoaded = Readonly<{
 export type EditorPageProps = EditorPageLoading | EditorPageLoaded;
 
 export const EditorPage = (props: EditorPageProps) => {
-  if (props.status === ComponentStatus.Loading) {
+  if (props.status === 'loading') {
     return (
       <Skeleton
         variant="rectangular"

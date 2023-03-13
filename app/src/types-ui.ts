@@ -1,8 +1,3 @@
-export const enum ComponentStatus {
-  Loading = 'loading',
-  Loaded = 'loaded',
-}
-
 export type ImageId = string;
 export type ImageUI = Readonly<{
   imageId: ImageId;

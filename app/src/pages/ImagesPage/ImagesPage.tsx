@@ -4,19 +4,14 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator/Paginator';
-import {
-  ComponentStatus,
-  ImageId,
-  PaginationMove,
-  ResultImagesUI,
-} from '../../types-ui';
+import { ImageId, PaginationMove, ResultImagesUI } from '../../types-ui';
 import { Grid, Paper, Typography } from '@mui/material';
 
 type ImagesPageLoading = Readonly<{
-  status: ComponentStatus.Loading;
+  status: 'loading';
 }>;
 type ImagesPageLoaded = Readonly<{
-  status: ComponentStatus.Loaded;
+  status: 'loaded';
   data: ResultImagesUI;
   page: number;
   onNavigateToEidtor: (imageId: ImageId) => void;
@@ -26,14 +21,14 @@ type ImagesPageProps = ImagesPageLoading | ImagesPageLoaded;
 
 export const ImagesPage = (props: ImagesPageProps) => {
   const handleNavigateToEditor = (imageId: ImageId) => () => {
-    if (props.status === ComponentStatus.Loaded) {
+    if (props.status === 'loaded') {
       props.onNavigateToEidtor(imageId);
     }
   };
 
   return (
     <Grid display="flex" justifyContent="center">
-      {props.status === ComponentStatus.Loading ? (
+      {props.status === 'loading' ? (
         <CircularProgress />
       ) : props.data.images.length === 0 ? (
         <Typography variant="body2">No data</Typography>

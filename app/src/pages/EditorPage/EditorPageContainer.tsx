@@ -1,4 +1,5 @@
 import { pipe } from 'fp-ts/lib/function';
+import * as O from 'fp-ts/Option';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
@@ -13,9 +14,8 @@ import {
   makeFileName,
   makeUrlToImagesList,
 } from './utils';
-import * as O from 'fp-ts/Option';
+
 import { EDITOR_FILE_NAME_PREFIX } from '../../config';
-import { ComponentStatus } from '../../types-ui';
 
 export const EditorPageContainer = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export const EditorPageContainer = () => {
   });
 
   if (imageDetailsQuery.isLoading) {
-    return <EditorPage status={ComponentStatus.Loading} />;
+    return <EditorPage status={'loading'} />;
   }
   if (imageDetailsQuery.isError) {
     return <ErrorMessage />;
@@ -79,7 +79,7 @@ export const EditorPageContainer = () => {
 
   return (
     <EditorPage
-      status={ComponentStatus.Loaded}
+      status={'loaded'}
       data={{
         ...imageDetailsQuery.data,
         imageId: queryParams.imageId,

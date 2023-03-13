@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ComponentStatus, ResultImagesUI } from '../../types-ui';
+import { ResultImagesUI } from '../../types-ui';
 import { ImagesPage } from './ImagesPage';
 
 const TEST_DATA: ResultImagesUI = {
@@ -26,7 +26,7 @@ describe('ImagesPage', () => {
 
     render(
       <ImagesPage
-        status={ComponentStatus.Loaded}
+        status={'loaded'}
         data={TEST_DATA}
         page={1}
         onNavigateToEidtor={onNavigateToEidtor}
@@ -59,7 +59,7 @@ describe('ImagesPage', () => {
 
     render(
       <ImagesPage
-        status={ComponentStatus.Loaded}
+        status={'loaded'}
         data={TEST_DATA}
         page={1}
         onNavigateToEidtor={onNavigateToEidtor}
@@ -79,7 +79,7 @@ describe('ImagesPage', () => {
 
     render(
       <ImagesPage
-        status={ComponentStatus.Loaded}
+        status={'loaded'}
         data={TEST_DATA}
         page={1}
         onNavigateToEidtor={onNavigateToEidtor}

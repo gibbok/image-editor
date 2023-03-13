@@ -9,7 +9,7 @@ import {
   LIST_THUMBNAIL_HEIGHT,
   LIST_THUMBNAIL_WIDTH,
 } from '../../config';
-import { ComponentStatus, ImageId, PaginationMove } from '../../types-ui';
+import { ImageId, PaginationMove } from '../../types-ui';
 import { logError } from '../../utils';
 import { ImagesPage } from './ImagesPage';
 import { useGetImages } from './useGetImages/useGetImages';
@@ -54,15 +54,15 @@ export const ImagesPageContainer = () => {
   };
 
   if (imagesQuery.isLoading) {
-    return <ImagesPage status={ComponentStatus.Loading} />;
+    return <ImagesPage status={'loading'} />;
   }
   if (imagesQuery.isError) {
     return <ErrorMessage />;
   }
-  console.log('xxx', JSON.stringify(imagesQuery.data));
+
   return (
     <ImagesPage
-      status={ComponentStatus.Loaded}
+      status={'loaded'}
       page={queryParams.page}
       data={imagesQuery.data}
       onNavigateToEidtor={handleNavigateToEditor}
