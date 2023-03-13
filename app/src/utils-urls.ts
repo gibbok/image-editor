@@ -87,20 +87,20 @@ export const makeUrlWithFitImageSizes = ({
     modifySizeForImageUrl(originalUrl)
   );
 
-export const makeUrlWithSizesGrayscaleBlur = ({
-  originalUrl,
-  desiredSizes,
-  isGrayscale,
-  blur,
-}: Readonly<{
-  originalUrl: string;
-  desiredSizes: ImageSizes;
-  isGrayscale: boolean;
-  blur: number;
-}>) =>
-  pipe(
+export const makeUrlWithSizesGrayscaleBlur =
+  ({
     desiredSizes,
-    modifySizeForImageUrl(originalUrl),
-    appendBlur(blur),
-    appendGrayscale(isGrayscale)
-  );
+    isGrayscale,
+    blur,
+  }: Readonly<{
+    desiredSizes: ImageSizes;
+    isGrayscale: boolean;
+    blur: number;
+  }>) =>
+  (originalUrl: string) =>
+    pipe(
+      desiredSizes,
+      modifySizeForImageUrl(originalUrl),
+      appendBlur(blur),
+      appendGrayscale(isGrayscale)
+    );

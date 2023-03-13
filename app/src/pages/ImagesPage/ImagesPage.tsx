@@ -59,8 +59,9 @@ export const ImagesPage = () => {
       ) : (
         <Box>
           <ImageList
-            sx={{ width: 500, height: 450 }}
+            sx={{ width: 800, height: 800 }}
             cols={3}
+            gap={30}
             rowHeight={LIST_THUMBNAIL_HEIGHT}
           >
             {imagesQuery.data.images.map((item) => (

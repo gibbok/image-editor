@@ -1,14 +1,19 @@
 import { Box, Button } from '@mui/material';
+import { pipe } from 'fp-ts/lib/function';
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { EDITOR_FILE_NAME_PREFIX } from '../../config';
 import { makeUrlWithSizesGrayscaleBlur } from '../../utils-urls';
 import { PropertiesPanel } from './PropertiesPanel';
 import { ImageState } from './types';
 import { useGetImageDetails } from './useGetImageInfo/useGetImageInfo';
+import * as O from 'fp-ts/Option';
 import {
+  downloadImage,
   getEditorPageQueryParams,
-  isEditorPageQueryParamsSameAsImageState as isEditorPageQueryParamsSameAsImageState,
+  isEditorPageQueryParamsSameAsImageState,
   makeEditorPageQueryParams,
+  makeFileName,
   makeUrlToImagesList,
 } from './utils';
 
@@ -72,6 +77,31 @@ export const EditorPage = () => {
     setImageState(dataImage);
   };
 
+  const makeImageUrl = makeUrlWithSizesGrayscaleBlur({
+    desiredSizes: {
+      width: imageState.width,
+      height: imageState.height,
+    },
+    isGrayscale: imageState.isGrayscale,
+    blur: imageState.blur,
+  });
+
+  const handleDownload = () => {
+    pipe(
+      imageDetailsQuery.data,
+      O.fromNullable,
+      O.map((data) =>
+        pipe(
+          makeFileName(EDITOR_FILE_NAME_PREFIX)({
+            ...imageState,
+            imageId: qp.imageId,
+          }),
+          downloadImage(makeImageUrl(data.urlTransform))
+        )
+      )
+    );
+  };
+
   return (
     <Box display="flex">
       <Box>
@@ -83,15 +113,7 @@ export const EditorPage = () => {
           'loading' // TODO add spinner
         ) : (
           <img
-            src={makeUrlWithSizesGrayscaleBlur({
-              originalUrl: imageDetailsQuery.data.urlTransform,
-              desiredSizes: {
-                width: imageState.width,
-                height: imageState.height,
-              },
-              isGrayscale: imageState.isGrayscale,
-              blur: imageState.blur,
-            })}
+            src={makeImageUrl(imageDetailsQuery.data.urlTransform)}
             alt={imageDetailsQuery.data.author}
             loading="lazy"
           />
@@ -103,7 +125,7 @@ export const EditorPage = () => {
         isGrayscale={imageState.isGrayscale}
         blur={imageState.blur}
         onApply={handleApply}
-        onDownload={(x) => console.log('on download', x)} // TODO
+        onDownload={handleDownload}
       />
     </Box>
   );
