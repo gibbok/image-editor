@@ -8,6 +8,7 @@ import {
   LIST_THUMBNAIL_WIDTH,
 } from '../../config';
 import { ImageId, PaginationMove } from '../../types-ui';
+import { logError } from '../../utils';
 import { ImagesPage } from './ImagesPage';
 import { useGetImages } from './useGetImages/useGetImages';
 import {
@@ -27,7 +28,7 @@ export const ContainerImagesPage = () => {
       height: LIST_THUMBNAIL_HEIGHT,
     },
     page: pageQueryParam,
-    onError: console.error, // TODO render error message
+    onError: logError,
   });
 
   if (imagesQuery.isLoading) {
