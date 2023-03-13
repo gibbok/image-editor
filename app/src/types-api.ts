@@ -9,7 +9,7 @@ export type Image = Readonly<{
 
 export type Images = ReadonlyArray<Image>;
 
-export type ResponseImages = Readonly<{
+export type ImagesAndLink = Readonly<{
   images: Images;
   linkHeader: string;
 }>;

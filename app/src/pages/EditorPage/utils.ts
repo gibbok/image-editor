@@ -12,14 +12,12 @@ import {
 } from '../../utils';
 import { ImageChanges } from './types';
 
-export type EditorPageQueryParams = Readonly<{
-  imageId: ImageId;
-  page: number;
-  width: number;
-  height: number;
-  isGrayscale: boolean;
-  blur: number;
-}>;
+export type EditorPageQueryParams = ImageChanges &
+  Readonly<{
+    imageId: ImageId;
+    page: number;
+  }>;
+
 export const makeEditorPageQueryParams = ({
   imageId,
   page,
@@ -27,14 +25,7 @@ export const makeEditorPageQueryParams = ({
   height,
   isGrayscale,
   blur,
-}: Readonly<{
-  imageId: ImageId;
-  page: number;
-  width: number;
-  height: number;
-  isGrayscale: boolean;
-  blur: number;
-}>) =>
+}: EditorPageQueryParams) =>
   `?${new URLSearchParams({
     imageId: imageId,
     page: page.toString(),
@@ -44,15 +35,9 @@ export const makeEditorPageQueryParams = ({
     blur: blur.toString(),
   })}`;
 
-export type EditorQueryParams = ImageChanges &
-  Readonly<{
-    imageId: ImageId;
-    page: number;
-  }>;
-
 export const getEditorPageQueryParams = (
   urlParams: URLSearchParams
-): EditorQueryParams => {
+): EditorPageQueryParams => {
   const imageId = getIntNumberFromQueryParamOrUseDefault(
     1,
     1,
@@ -96,17 +81,6 @@ export const getEditorPageQueryParams = (
     page,
   };
 };
-
-export const isEditorPageQueryParamsSameAsImageState = (
-  qp: EditorPageQueryParams,
-  imageState: ImageChanges
-) =>
-  imageState.width === qp.width &&
-  imageState.height === qp.height &&
-  imageState.isGrayscale === qp.isGrayscale &&
-  imageState.blur === qp.blur
-    ? true
-    : false;
 
 export const makeUrlToImagesList = (page: number) => `/?page=${page}`;
 

@@ -25,6 +25,7 @@ describe('utils', () => {
       const url = new URL(
         'http://localhost:3000/editor?imageId=61&page=2&width=800&height=600&grayscale=false&blur=1'
       );
+
       expect(getEditorPageQueryParams(url.searchParams)).toEqual({
         blur: 1,
         height: 600,
@@ -39,6 +40,7 @@ describe('utils', () => {
       const url = new URL(
         'http://localhost:3000/editor?imageId=61.5&page=2.5&width=&height=&grayscale=xxx&blur='
       );
+
       expect(getEditorPageQueryParams(url.searchParams)).toEqual({
         imageId: '1',
         page: 1,

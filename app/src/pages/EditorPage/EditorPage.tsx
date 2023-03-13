@@ -36,6 +36,7 @@ export const EditorPage = (props: EditorPageProps) => {
       />
     );
   }
+
   return (
     <Grid container mt={2} display="flex" justifyContent="center">
       <Grid item>

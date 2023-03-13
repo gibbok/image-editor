@@ -23,5 +23,7 @@ export const getImagesPageQueryParams = (
     Number.MAX_SAFE_INTEGER
   )(urlParams.get('page'));
 
-  return { page };
+  return {
+    page,
+  };
 };

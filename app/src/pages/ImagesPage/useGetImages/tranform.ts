@@ -4,10 +4,10 @@ import { makeUrlWithFitImageSize } from '../../../utils';
 import { ImageSize } from './type';
 
 export const tranformResponseForUI = (
-  response: Images,
+  images: Images,
   desiredSize: ImageSize
 ): ImagesUI =>
-  response.map(({ id, author, download_url, width, height }) => ({
+  images.map(({ id, author, width, height }) => ({
     imageId: id,
     author,
     urlTransform: makeUrlWithFitImageSize({

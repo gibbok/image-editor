@@ -2,7 +2,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 import axios from 'axios';
 import { API_VERSION, LIST_THUMBNAILS_AMOUNT_PER_PAGE } from '../../../config';
-import { ResponseImages } from '../../../types-api';
+import { ImagesAndLink } from '../../../types-api';
 import { ResultImagesUI } from '../../../types-ui';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
 import { ImageSize } from './type';
@@ -11,7 +11,7 @@ const KEY_IMAGES = 'GET_IMAGES';
 
 export const fetchImages = ({
   page,
-}: Readonly<{ page: number }>): Promise<ResponseImages> =>
+}: Readonly<{ page: number }>): Promise<ImagesAndLink> =>
   axios
     .get(
       `${API_VERSION}/list?page=${page}&limit=${LIST_THUMBNAILS_AMOUNT_PER_PAGE}`
