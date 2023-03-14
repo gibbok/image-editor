@@ -11,6 +11,7 @@ I love open source, for more code, please look at my GitHub projects: <https://g
 - Install dependencies, use `nvm use` and after run `npm i`
 - Run the project `npm start`
 - Visit <http://localhost:3000/>
+- To run the tests in app folder run `npm t` then press `a`
 
 ## Tool overview
 
