@@ -6,6 +6,8 @@ I love open source, for more code, please look at my GitHub projects: <https://g
 
 To learn more about my work experience please check my LinkedIn profile: <https://www.linkedin.com/in/simone-poggiali/>
 
+For more information please do not hesitate to contact me at: gibbok.coding📧gmail.com
+
 ## Install instruction
 
 - Clone this repo `git clone https://github.com/gibbok/image-editor.git`
