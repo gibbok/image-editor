@@ -86,7 +86,7 @@ export const PropertiesPanel = ({
     onApply(data);
   };
 
-  const isDisabledApplyButton = Object.keys(errors).length > 0;
+  const hasFormErrors = Object.keys(errors).length > 0;
 
   React.useEffect(() => {
     reset({
@@ -143,13 +143,7 @@ export const PropertiesPanel = ({
               control={control}
               render={({ field }) => (
                 <FormControlLabel
-                  control={
-                    <Checkbox
-                      defaultChecked={isGrayscale}
-                      {...field}
-                      checked={field.value}
-                    />
-                  }
+                  control={<Checkbox {...field} checked={field.value} />}
                   label="Grayscale"
                 />
               )}
@@ -175,7 +169,7 @@ export const PropertiesPanel = ({
               fullWidth
               type="submit"
               variant="contained"
-              disabled={isDisabledApplyButton}
+              disabled={hasFormErrors}
             >
               Apply
             </Button>

@@ -1,5 +1,7 @@
 import {
-  API_MAX_IMAGE_SIZE,
+  API_MAX_BLUR,
+  API_MAX_IMAGE_WIDTH_HEIGHT,
+  API_MIN_BLUR,
   EDITOR_MIN_HEIGHT,
   EDITOR_MIN_WIDTH,
   EDITOR_PREVIEW_INIT_HEIGHT,
@@ -9,6 +11,7 @@ import { ImageId } from '../../types-ui';
 import {
   getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
+  logError,
 } from '../../utils';
 import { ImageChanges } from './types';
 
@@ -53,13 +56,13 @@ export const getEditorPageQueryParams = (
   const width = getIntNumberFromQueryParamOrUseDefault(
     EDITOR_PREVIEW_INIT_WIDTH,
     EDITOR_MIN_WIDTH,
-    API_MAX_IMAGE_SIZE
+    API_MAX_IMAGE_WIDTH_HEIGHT
   )(urlParams.get('width'));
 
   const height = getIntNumberFromQueryParamOrUseDefault(
     EDITOR_PREVIEW_INIT_HEIGHT,
     EDITOR_MIN_HEIGHT,
-    API_MAX_IMAGE_SIZE
+    API_MAX_IMAGE_WIDTH_HEIGHT
   )(urlParams.get('height'));
 
   const isGrayscale = getBooleanFromQueryParamOrUseDefault(
@@ -67,9 +70,9 @@ export const getEditorPageQueryParams = (
   );
 
   const blur = getIntNumberFromQueryParamOrUseDefault(
-    1,
-    1,
-    10
+    API_MIN_BLUR,
+    API_MIN_BLUR,
+    API_MAX_BLUR
   )(urlParams.get('blur'));
 
   return {
@@ -84,19 +87,22 @@ export const getEditorPageQueryParams = (
 
 export const makeUrlToImagesList = (page: number) => `/?page=${page}`;
 
-// TODO add error handing
 const toDataUrl = async (url: string) => {
   const blob = await fetch(url).then((res) => res.blob());
   return URL.createObjectURL(blob);
 };
 
 export const downloadImage = (url: string) => async (nameFile: string) => {
-  const a = document.createElement('a');
-  a.href = await toDataUrl(url);
-  a.download = nameFile;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  try {
+    const a = document.createElement('a');
+    a.href = await toDataUrl(url);
+    a.download = nameFile;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (e) {
+    logError(e);
+  }
 };
 
 export const makeFileName =

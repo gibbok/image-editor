@@ -4,12 +4,14 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator/Paginator';
-import { ImageId, PaginationMove, ResultImagesUI } from '../../types-ui';
+import { ImageId } from '../../types-ui';
 import { Grid, Paper, Typography } from '@mui/material';
+import { PaginationMove, ResultImagesUI } from './types';
 
 type ImagesPageLoading = Readonly<{
   status: 'loading';
 }>;
+
 type ImagesPageLoaded = Readonly<{
   status: 'loaded';
   data: ResultImagesUI;
@@ -17,6 +19,7 @@ type ImagesPageLoaded = Readonly<{
   onNavigateToEidtor: (imageId: ImageId) => void;
   onChangePage: (move: PaginationMove) => void;
 }>;
+
 type ImagesPageProps = ImagesPageLoading | ImagesPageLoaded;
 
 export const ImagesPage = (props: ImagesPageProps) => {
@@ -73,5 +76,3 @@ export const ImagesPage = (props: ImagesPageProps) => {
     </Grid>
   );
 };
-
-// TODO publish on github static

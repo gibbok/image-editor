@@ -1,8 +1,11 @@
 import { Box } from '@mui/material';
 import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
+import { logError } from '../../utils';
 
 export default function ErrorPage() {
   const error = useRouteError();
+
+  logError(error);
 
   if (isRouteErrorResponse(error)) {
     return (

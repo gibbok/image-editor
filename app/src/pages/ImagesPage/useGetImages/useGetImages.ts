@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import axios from 'axios';
 import { API_VERSION, LIST_THUMBNAILS_AMOUNT_PER_PAGE } from '../../../config';
 import { ImagesAndLink } from '../../../types-api';
-import { ResultImagesUI } from '../../../types-ui';
+import { ResultImagesUI } from '../types';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
 import { ImageSize } from './type';
 

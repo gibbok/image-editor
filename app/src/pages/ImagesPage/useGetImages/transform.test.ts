@@ -1,5 +1,6 @@
 import { Images } from '../../../types-api';
-import { ImagesUI, PaginationMoveState } from '../../../types-ui';
+import { ImagesUI } from '../../../types-ui';
+import { PaginationMoveState } from '../types';
 import { getPaginationInfoFromHeader, tranformResponseForUI } from './tranform';
 
 describe('transform', () => {

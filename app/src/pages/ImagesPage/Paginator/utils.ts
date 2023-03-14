@@ -1,4 +1,4 @@
-import { PaginationMoveState } from '../../../types-ui';
+import { PaginationMoveState } from '../types';
 
 export type HideNextPrevButton = Readonly<{
   disableNext: boolean;

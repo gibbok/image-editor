@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 
-import { PaginationMoveState, PaginationMove } from '../../../types-ui';
 import { disablePrevNextButtons } from './utils';
+import { PaginationMove, PaginationMoveState } from '../types';
 
 type PaginationProps = Readonly<{
   page: number;
