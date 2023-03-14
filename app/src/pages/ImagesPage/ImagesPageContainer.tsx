@@ -9,9 +9,10 @@ import {
   LIST_THUMBNAIL_HEIGHT,
   LIST_THUMBNAIL_WIDTH,
 } from '../../config';
-import { ImageId, PaginationMove } from '../../types-ui';
+import { ImageId } from '../../types-ui';
 import { logError } from '../../utils';
 import { ImagesPage } from './ImagesPage';
+import { PaginationMove } from './types';
 import { useGetImages } from './useGetImages/useGetImages';
 import {
   getImagesPageQueryParams,

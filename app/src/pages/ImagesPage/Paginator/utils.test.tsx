@@ -1,4 +1,4 @@
-import { PaginationMoveState } from '../../../types-ui';
+import { PaginationMoveState } from '../types';
 import { disablePrevNextButtons, HideNextPrevButton } from './utils';
 
 describe('Paginator', () => {

@@ -4,8 +4,9 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from './Paginator/Paginator';
-import { ImageId, PaginationMove, ResultImagesUI } from '../../types-ui';
+import { ImageId } from '../../types-ui';
 import { Grid, Paper, Typography } from '@mui/material';
+import { PaginationMove, ResultImagesUI } from './types';
 
 type ImagesPageLoading = Readonly<{
   status: 'loading';

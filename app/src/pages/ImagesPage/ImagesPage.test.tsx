@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ResultImagesUI } from '../../types-ui';
 import { ImagesPage } from './ImagesPage';
+import { ResultImagesUI } from './types';
 
 const TEST_DATA: ResultImagesUI = {
   images: [
