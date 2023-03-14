@@ -4,6 +4,8 @@ Hello there! My name is Simone Poggiali, please check out this project code. I a
 
 I love open source, for more code, please look at my GitHub projects: <https://github.com/gibbok>
 
+To learn more about my work experience please check my Linkedin page: <https://www.linkedin.com/in/simone-poggiali/>
+
 ## Install instruction
 
 - Clone this repo `git clone https://github.com/gibbok/image-editor.git`
