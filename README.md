@@ -6,6 +6,8 @@ I love open source, for more code, please look at my GitHub projects: <https://g
 
 To learn more about my work experience please check my LinkedIn profile: <https://www.linkedin.com/in/simone-poggiali/>
 
+For more information please do not hesitate to contact me at: gibbok.coding📧gmail.com
+
 ## Install instruction
 
 - Clone this repo `git clone https://github.com/gibbok/image-editor.git`
@@ -28,15 +30,15 @@ To learn more about my work experience please check my LinkedIn profile: <https:
 
 ## Architect overview
 
-The container files are responsible for effects, including, data fetching, reading and updating query string, and error handling, the rest of the components are pure and they have no side effects. By using these techniques we can more easily separate concerns and allow quickly testing the majority of our components. I would be more than happy to discuss this with you in a meeting more about this approach.
+The container components are responsible for effects, including, data fetching, reading and updating query strings, and error handling, the rest of the components are pure and they have no side effects. By using these techniques we can more easily separate concerns and allow quickly testing the majority of our components. I would be more than happy to discuss this approch with you in a meeting.
 
 The state of the application is kept in query strings so it can be easily tracked with browser history. Users can also bookmark it and open the editor in any state.
 
 ## Area of improvements
 
-- Server returns pagination info via a dedicated header and does not provide the total number of pages, would be beneficial to change that and have all information returned in the payload for simplicity.
-- It is possible to avoid calling the server on every press of the `Apply` button by performing some image modification directly in the browser, for instance, some image processing can be executed in a Web Worker, which has the advantage to keep free the main thread and avoid server load.
-- The `containers` are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for what, although I tested some pages to give you a sense of my testings skills.
+- The server returns pagination info via a dedicated header and does not provide the total number of pages, would be beneficial to change that and have all information returned in the payload for simplicity.
+- It is possible to avoid calling the server on every press of the "Apply" button by performing some image modification directly in the browser, for instance, some image processing can be executed in a Web Worker, which has the advantage to keep free the main thread and avoid server load.
+- The containers are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for that, although I tested some pages to give you a sense of my testings skills using `React Testing Library`.
 - UX and design in general, we could also improve the way we shows errors to the users, for instance using a Snackbar.
 
 The following are some tools I would consider for a production project:
@@ -48,7 +50,7 @@ The following are some tools I would consider for a production project:
 
 ## Screenshots
 
-Image List:
+Images List:
 
 ![Screenshot 2023-03-13 at 11 36 37 PM](https://user-images.githubusercontent.com/17195702/224848085-4510d4ef-b467-4d6d-bc9a-dd052016fe2d.png)
 
