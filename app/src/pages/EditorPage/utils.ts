@@ -9,6 +9,7 @@ import { ImageId } from '../../types-ui';
 import {
   getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
+  logError,
 } from '../../utils';
 import { ImageChanges } from './types';
 
@@ -84,19 +85,22 @@ export const getEditorPageQueryParams = (
 
 export const makeUrlToImagesList = (page: number) => `/?page=${page}`;
 
-// TODO add error handing
 const toDataUrl = async (url: string) => {
   const blob = await fetch(url).then((res) => res.blob());
   return URL.createObjectURL(blob);
 };
 
 export const downloadImage = (url: string) => async (nameFile: string) => {
-  const a = document.createElement('a');
-  a.href = await toDataUrl(url);
-  a.download = nameFile;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  try {
+    const a = document.createElement('a');
+    a.href = await toDataUrl(url);
+    a.download = nameFile;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch (e) {
+    logError(e);
+  }
 };
 
 export const makeFileName =

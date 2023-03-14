@@ -73,5 +73,3 @@ export const ImagesPage = (props: ImagesPageProps) => {
     </Grid>
   );
 };
-
-// TODO publish on github static
