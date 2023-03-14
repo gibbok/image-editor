@@ -36,7 +36,7 @@ The state of the application is kept in query strings so it can be easily tracke
 - The `containers` are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for what, although I tested a bit some pages to give you a sense of my testings skills.
 - E2E could be an area of improvement, `Cypress` could be a good candidate.
 - Tooling like `Story Book` could be used to enhance developers productivity and documentation of the UI components.
-- UX and design in general.
+- UX and design in general, we could also improve the way we shows errors to the users.
 
 ## Screenshots
 
