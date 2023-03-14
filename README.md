@@ -16,7 +16,7 @@ I love open source, for more code, please look at my GitHub projects: <https://g
 
 - Code is written in `TypeScript` and `ReactJS` to provide type safety.
 - The project is built on top of `Create React App` to speed up the setup.
-- `React Query` has been used for declarative server-state data management together with `Axios`.
+- `React Query` has been used for declarative server-state data management together with `Axios` for data fetching.
 - `fp-ts` is used as a library for typed functional programming, I use function composition and Option type.
 - `React Hook Form` is used for forms validation together with `yup` for schema validation, this combination allows a very declarative and very maintainable way to manage forms and their validation avoiding a lot of boilerplates.
 - `Material UI` is used for UI components, with a fluid layout.
@@ -31,12 +31,17 @@ The state of the application is kept in query strings so it can be easily tracke
 
 ## Area of improvements
 
-- Server return pagination via a dedicated header and does not provide the total number of pages, would be beneficial to change that and have all information returned in the payload for simplicity.
+- Server returns pagination info via a dedicated header and does not provide the total number of pages, would be beneficial to change that and have all information returned in the payload for simplicity.
 - It is possible to avoid calling the server on every press of the `Apply` button by performing some image modification directly in the browser, for instance, some image processing can be executed in a Web Worker, which has the advantage to keep free the main thread and avoid server load.
-- The `containers` are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for what, although I tested a bit some pages to give you a sense of my testings skills.
-- E2E could be an area of improvement, `Cypress` could be a good candidate.
-- Tooling like `Story Book` could be used to enhance developers productivity and documentation of the UI components.
-- UX and design in general, we could also improve the way we shows errors to the users.
+- The `containers` are currently not tested in this solution, as it requires additional effort to stab network requests and were outside the scope of this assignment, but if I would have more time I would use `Mock Service Worker: MSW` for what, although I tested some pages to give you a sense of my testings skills.
+- UX and design in general, we could also improve the way we shows errors to the users, for instance using a Snackbar.
+
+The following are some tools I would consider for a production project:
+
+- E2E testing using `Cypress`.
+- Visual regression testing using `Chromatic` or `Loki`.
+- Tooling like `Story Book` could be used to enhance developers' productivity and documentation of the UI components.
+- Integration of error tracking like `Sentry`, performance monitoring, and collective analytics like `Hotjar` and `Google Analytics`.
 
 ## Screenshots
 
