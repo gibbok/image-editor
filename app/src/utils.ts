@@ -29,13 +29,9 @@ export const getBooleanFromQueryParamOrUseDefault = (
  * Conserve aspect ratio of the original region.
  * Use it when shrinking/enlarging images to fit into an area.
  */
-type SourceImageSizes = ImageSize;
-type MaxImageSize = ImageSize; // TODO do not use aliases
-type CalculateImageSizesAspectRatioFitImage = (
-  maximumSizes: MaxImageSize
-) => (sourceSizes: SourceImageSizes) => ImageSize;
-export const calculateImageSizeAspectRatioFitImage: CalculateImageSizesAspectRatioFitImage =
-  (maximumSizes) => (sourceSizes) => {
+export const calculateImageSizeAspectRatioFitImage =
+  (maximumSizes: ImageSize) =>
+  (sourceSizes: ImageSize): ImageSize => {
     const ratio = Math.min(
       maximumSizes.width / sourceSizes.width,
       maximumSizes.height / sourceSizes.height
