@@ -19,7 +19,7 @@ I love open source, for more code, please look at my GitHub projects: <https://g
 - `React Query` has been used for declarative server-state data management together with `Axios`.
 - `fp-ts` is used as a library for typed functional programming, I use function composition and Option type.
 - `React Hook Form` is used for forms validation together with `yup` for schema validation, this combination allows a very declarative and very maintainable way to manage forms and their validation avoiding a lot of boilerplates.
-- `Material UI` is used for UI components.
+- `Material UI` is used for UI components, with a fluid layout.
 - For testing `jest` and `React Testing Library` were installed to enable writting tests that resemble the way the app is being used. Utility functions were written mainly in TDD style.
 - `React Router` is used for routes and handling query strings.
 
