@@ -86,7 +86,7 @@ export const PropertiesPanel = ({
     onApply(data);
   };
 
-  const isDisabledApplyButton = Object.keys(errors).length > 0;
+  const hasFormErrors = Object.keys(errors).length > 0;
 
   React.useEffect(() => {
     reset({
@@ -169,7 +169,7 @@ export const PropertiesPanel = ({
               fullWidth
               type="submit"
               variant="contained"
-              disabled={isDisabledApplyButton}
+              disabled={hasFormErrors}
             >
               Apply
             </Button>
