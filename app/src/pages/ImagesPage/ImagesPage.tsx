@@ -11,6 +11,7 @@ import { PaginationMove, ResultImagesUI } from './types';
 type ImagesPageLoading = Readonly<{
   status: 'loading';
 }>;
+
 type ImagesPageLoaded = Readonly<{
   status: 'loaded';
   data: ResultImagesUI;
@@ -18,6 +19,7 @@ type ImagesPageLoaded = Readonly<{
   onNavigateToEidtor: (imageId: ImageId) => void;
   onChangePage: (move: PaginationMove) => void;
 }>;
+
 type ImagesPageProps = ImagesPageLoading | ImagesPageLoaded;
 
 export const ImagesPage = (props: ImagesPageProps) => {
