@@ -32,16 +32,12 @@ The state of the application is kept in query strings so it can be easily tracke
 
 Images List:
 
-![Screenshot 2023-03-13 at 11 36 37 PM](https://user-images.githubusercontent.com/17195702/224848085-4510d4ef-b467-4d6d-bc9a-dd052016fe2d.png)
+![Screenshot 2023-03-17 at 4 58 50 PM](https://user-images.githubusercontent.com/17195702/225958050-eb05ba50-0f7e-42fb-bb8b-28b19d22d726.png)
 
 Image Editor:
 
-![Screenshot 2023-03-13 at 11 36 46 PM](https://user-images.githubusercontent.com/17195702/224848106-a4fa3172-0857-4eed-97e7-cff617aff9c5.png)
+![Screenshot 2023-03-17 at 5 00 31 PM](https://user-images.githubusercontent.com/17195702/225958094-33cf856b-3782-4af6-9f59-9b878a890c79.png)
 
-Downloaded files in the OS:
+## Video
 
-![Screenshot 2023-03-13 at 11 37 42 PM](https://user-images.githubusercontent.com/17195702/224848113-65c09758-3288-4bf3-9c62-79b605f6a929.png)
-
-## Videos
-
-https://user-images.githubusercontent.com/17195702/224916864-6c1e79f2-9889-46c6-9a3d-4c673689e5db.mov
+https://user-images.githubusercontent.com/17195702/225958331-3def9c2b-3fb8-46a9-b30f-2ac025347806.mov
