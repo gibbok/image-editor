@@ -1,13 +1,13 @@
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Paginator } from '../Paginator/Paginator';
 import { ImageId } from '../../../types-ui';
 import { Grid, Paper, Typography } from '@mui/material';
 import { PaginationMove, ResultImagesUI } from '../types';
-import { LIST_THUMBNAIL_HEIGHT, LIST_THUMBNAIL_WIDTH } from '../../../config';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/opacity.css';
 
 type ImagesPageLoading = Readonly<{
   status: 'loading';
@@ -45,19 +45,16 @@ export const ImagesPage = (props: ImagesPageProps) => {
           >
             {props.data.images.map((item) => (
               <ImageListItem key={item.imageId}>
-                <img
-                  style={{
-                    cursor: 'pointer',
-                    backgroundColor: 'whitesmoke',
-                    width: LIST_THUMBNAIL_WIDTH,
-                    height: LIST_THUMBNAIL_HEIGHT,
-                  }}
-                  src={item.urlTransform}
-                  alt={item.author}
-                  loading="lazy"
+                <Box
+                  sx={{ cursor: 'pointer' }}
                   onClick={handleNavigateToEditor(item.imageId)}
-                />
-                <ImageListItemBar title={item.author} position="below" />
+                >
+                  <LazyLoadImage
+                    alt={item.author}
+                    src={item.urlTransform}
+                    effect="opacity"
+                  />
+                </Box>
               </ImageListItem>
             ))}
           </ImageList>

@@ -65,12 +65,7 @@ export const makeUrlWithFitImageSize = ({
   imageId: ImageId;
   currentSize: ImageSize;
   desiredSize: ImageSize;
-}>) =>
-  pipe(
-    currentSize,
-    calculateImageSizeAspectRatioFitImage(desiredSize),
-    makeUrlForImage(imageId)
-  );
+}>) => pipe(desiredSize, makeUrlForImage(imageId));
 
 export const makeUrlWithSizeGrayscaleBlur =
   ({
