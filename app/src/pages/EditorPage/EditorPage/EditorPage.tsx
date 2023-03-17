@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, Skeleton } from '@mui/material';
+import { Box, Button, Paper, Skeleton } from '@mui/material';
 import {
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
@@ -8,6 +8,8 @@ import { PropertiesPanel } from '../PropertiesPanel/PropertiesPanel';
 import { ImageChanges } from '../types';
 import { ImageInfoUI } from '../../../types-ui';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+const PANEL_LEFT = 200;
 
 type EditorPageLoading = Readonly<{
   status: 'loading';
@@ -43,7 +45,7 @@ export const EditorPage = (props: EditorPageProps) => {
       <Box
         style={{
           position: 'fixed',
-          width: 200,
+          width: PANEL_LEFT,
           height: '100%',
           zIndex: 1,
         }}
@@ -59,7 +61,7 @@ export const EditorPage = (props: EditorPageProps) => {
         />
       </Box>
       <Box>
-        <Box style={{ position: 'absolute', left: 200 + 40 }}>
+        <Box style={{ position: 'absolute', left: PANEL_LEFT + 40 }}>
           <LazyLoadImage
             src={makeUrlWithSizeGrayscaleBlur({
               desiredSize: {
