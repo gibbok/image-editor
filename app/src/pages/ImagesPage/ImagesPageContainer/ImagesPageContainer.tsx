@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
+import { ErrorMessage } from '../../../components/ErrorMessage/ErrorMessage';
 import {
   EDITOR_DEFAULT_BLUR,
   EDITOR_DEFAULT_GRAYSCALE,
@@ -8,17 +8,17 @@ import {
   EDITOR_PREVIEW_INIT_WIDTH,
   LIST_THUMBNAIL_HEIGHT,
   LIST_THUMBNAIL_WIDTH,
-} from '../../config';
-import { ImageId } from '../../types-ui';
-import { logError } from '../../utils';
-import { ImagesPage } from './ImagesPage';
-import { PaginationMove } from './types';
-import { useGetImages } from './useGetImages/useGetImages';
+} from '../../../config';
+import { ImageId } from '../../../types-ui';
+import { logError } from '../../../utils';
+import { ImagesPage } from '../ImagesPage/ImagesPage';
+import { PaginationMove } from '../types';
+import { useGetImages } from '../useGetImages/useGetImages';
 import {
   getImagesPageQueryParams,
   makeEditorUrl,
   makeImagesPageQueryParams,
-} from './utils';
+} from '../utils/utils';
 
 export const ImagesPageContainer = () => {
   const navigate = useNavigate();

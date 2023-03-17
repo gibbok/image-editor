@@ -1,5 +1,5 @@
-import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
-import { EditorPageQueryParams } from '../EditorPage/utils';
+import { schemaPage } from '../../EditorPage/schema';
+import { EditorPageQueryParams } from '../../EditorPage/utils/utils';
 
 export const makeEditorUrl = ({
   imageId,
@@ -17,11 +17,9 @@ export const makeImagesPageQueryParams = (page: number) =>
 export const getImagesPageQueryParams = (
   urlParams: URLSearchParams
 ): Readonly<{ page: number }> => {
-  const page = getIntNumberFromQueryParamOrUseDefault(
-    1,
-    1,
-    Number.MAX_SAFE_INTEGER
-  )(urlParams.get('page'));
+  const { page } = schemaPage.validateSync({
+    page: urlParams.get('page') ?? 1,
+  });
 
   return {
     page,

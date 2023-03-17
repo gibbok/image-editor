@@ -10,17 +10,12 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
 import React from 'react';
-import {
-  EDITOR_MAX_BLUR,
-  EDITOR_MAX_HEIGHT,
-  EDITOR_MAX_WIDTH,
-  EDITOR_MIN_BLUR,
-  EDITOR_MIN_HEIGHT,
-  EDITOR_MIN_WIDTH,
-} from '../../config';
-import { ImageChanges } from './types';
-import { ImageId } from '../../types-ui';
+
+import { ImageChanges } from '../types';
+import { ImageId } from '../../../types-ui';
+import { schemaImageProps } from '../schema';
 
 type PropertiesPanelProps = ImageChanges &
   Readonly<{
@@ -29,34 +24,7 @@ type PropertiesPanelProps = ImageChanges &
     onDownload: () => void;
   }>;
 
-const schema = yup
-  .object({
-    width: yup
-      .number()
-      .positive()
-      .integer()
-      .required()
-      .min(EDITOR_MIN_WIDTH)
-      .max(EDITOR_MAX_WIDTH),
-    height: yup
-      .number()
-      .positive()
-      .integer()
-      .required()
-      .min(EDITOR_MIN_HEIGHT)
-      .max(EDITOR_MAX_HEIGHT),
-    isGrayscale: yup.boolean().required().oneOf([true, false]),
-    blur: yup
-      .number()
-      .positive()
-      .integer()
-      .required()
-      .min(EDITOR_MIN_BLUR)
-      .max(EDITOR_MAX_BLUR),
-  })
-  .required();
-
-type FormData = yup.InferType<typeof schema>;
+type FormData = yup.InferType<typeof schemaImageProps>;
 
 export const PropertiesPanel = ({
   imageId,
@@ -73,7 +41,7 @@ export const PropertiesPanel = ({
     reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaImageProps),
     defaultValues: {
       width,
       height,
@@ -99,7 +67,7 @@ export const PropertiesPanel = ({
   }, [width, height, isGrayscale, blur]);
 
   return (
-    <Box>
+    <Box p={3} style={{ backgroundColor: 'white' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container direction={'column'} spacing={5}>
           <Grid item>

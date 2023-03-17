@@ -12,9 +12,9 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Layout } from './components/Layout/Layout';
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
-import { ImagesPageContainer } from './pages/ImagesPage/ImagesPageContainer';
+import { ImagesPageContainer } from './pages/ImagesPage/ImagesPageContainer/ImagesPageContainer';
 import { logError } from './utils';
-import { EditorPageContainer } from './pages/EditorPage/EditorPageContainer';
+import { EditorPageContainer } from './pages/EditorPage/EditorPageContainer/EditorPageContainer';
 
 initApp();
 
