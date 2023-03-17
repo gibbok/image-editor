@@ -40,39 +40,31 @@ export const EditorPage = (props: EditorPageProps) => {
 
   return (
     <Grid container mt={2} wrap="nowrap">
-      <Grid item>
-        <Box mt={1} mr={3} sx={{ width: 200 }}>
-          <PropertiesPanel
-            imageId={props.data.imageId}
-            width={props.data.width}
-            height={props.data.height}
-            isGrayscale={props.data.isGrayscale}
-            blur={props.data.blur}
-            onApply={props.onApply}
-            onDownload={props.onDownload}
-          />
-        </Box>
+      <Grid item pr={4}>
+        <PropertiesPanel
+          imageId={props.data.imageId}
+          width={props.data.width}
+          height={props.data.height}
+          isGrayscale={props.data.isGrayscale}
+          blur={props.data.blur}
+          onApply={props.onApply}
+          onDownload={props.onDownload}
+        />
       </Grid>
       <Grid item>
-        <Box
-          sx={{
-            width: '100vw',
-            height: 'calc(100vh - 200px)',
-            overflow: 'scroll',
-          }}
-        >
-          <LazyLoadImage
-            src={makeUrlWithSizeGrayscaleBlur({
-              desiredSize: {
-                width: props.data.width,
-                height: props.data.height,
-              },
-              isGrayscale: props.data.isGrayscale,
-              blur: props.data.blur,
-            })(props.data.imageId)}
-            effect="opacity"
-          />
-        </Box>
+        {/* <Box sx={{ width: '100vw', overflow: 'scroll' }}> */}
+        <LazyLoadImage
+          src={makeUrlWithSizeGrayscaleBlur({
+            desiredSize: {
+              width: props.data.width,
+              height: props.data.height,
+            },
+            isGrayscale: props.data.isGrayscale,
+            blur: props.data.blur,
+          })(props.data.imageId)}
+          effect="opacity"
+        />
+        {/* </Box> */}
       </Grid>
       <Grid item>
         <Paper
