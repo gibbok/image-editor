@@ -6,14 +6,14 @@ import {
   EDITOR_MIN_WIDTH,
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
-} from '../../config';
-import { ImageId } from '../../types-ui';
+} from '../../../config';
+import { ImageId } from '../../../types-ui';
 import {
   getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
   logError,
-} from '../../utils';
-import { ImageChanges } from './types';
+} from '../../../utils';
+import { ImageChanges } from '../types';
 
 export type EditorPageQueryParams = ImageChanges &
   Readonly<{

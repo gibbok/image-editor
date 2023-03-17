@@ -1,5 +1,5 @@
-import { getIntNumberFromQueryParamOrUseDefault } from '../../utils';
-import { EditorPageQueryParams } from '../EditorPage/utils';
+import { getIntNumberFromQueryParamOrUseDefault } from '../../../utils';
+import { EditorPageQueryParams } from '../../EditorPage/utils/utils';
 
 export const makeEditorUrl = ({
   imageId,

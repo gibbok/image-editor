@@ -2,11 +2,11 @@ import { Box, Button, Grid, Paper, Skeleton } from '@mui/material';
 import {
   EDITOR_PREVIEW_INIT_HEIGHT,
   EDITOR_PREVIEW_INIT_WIDTH,
-} from '../../config';
-import { makeUrlWithSizeGrayscaleBlur } from '../../utils';
-import { PropertiesPanel } from './PropertiesPanel';
-import { ImageChanges } from './types';
-import { ImageInfoUI } from '../../types-ui';
+} from '../../../config';
+import { makeUrlWithSizeGrayscaleBlur } from '../../../utils';
+import { PropertiesPanel } from '../PropertiesPanel/PropertiesPanel';
+import { ImageChanges } from '../types';
+import { ImageInfoUI } from '../../../types-ui';
 
 type EditorPageLoading = Readonly<{
   status: 'loading';

@@ -18,9 +18,9 @@ import {
   EDITOR_MIN_BLUR,
   EDITOR_MIN_HEIGHT,
   EDITOR_MIN_WIDTH,
-} from '../../config';
-import { ImageChanges } from './types';
-import { ImageId } from '../../types-ui';
+} from '../../../config';
+import { ImageChanges } from '../types';
+import { ImageId } from '../../../types-ui';
 
 type PropertiesPanelProps = ImageChanges &
   Readonly<{
