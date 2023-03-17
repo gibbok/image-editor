@@ -21,10 +21,6 @@ export const getIntNumberFromQueryParamOrUseDefault =
     return value;
   };
 
-export const getBooleanFromQueryParamOrUseDefault = (
-  valueParam: string | null
-) => (valueParam === null ? false : valueParam === 'true');
-
 /**
  * Conserve aspect ratio of the original region.
  * Use it when shrinking/enlarging images to fit into an area.

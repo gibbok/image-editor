@@ -3,7 +3,6 @@ import {
   calculateImageSizeAspectRatioFitImage,
   makeUrlWithFitImageSize,
   makeUrlForImage,
-  getBooleanFromQueryParamOrUseDefault,
 } from './utils';
 
 describe('utils', () => {
@@ -63,14 +62,6 @@ describe('utils', () => {
           },
         })
       ).toBe('https://picsum.photos/id/103/200/149');
-    });
-  });
-
-  describe('getBooleanFromQueryParamOrUseDefault', () => {
-    it('should return boolean for a valid query string', () => {
-      expect(getBooleanFromQueryParamOrUseDefault('false')).toBe(false);
-      expect(getBooleanFromQueryParamOrUseDefault('true')).toBe(true);
-      expect(getBooleanFromQueryParamOrUseDefault('xxx')).toBe(false);
     });
   });
 });

@@ -1,19 +1,10 @@
-import {
-  API_MAX_BLUR,
-  API_MAX_IMAGE_WIDTH_HEIGHT,
-  API_MIN_BLUR,
-  EDITOR_MIN_HEIGHT,
-  EDITOR_MIN_WIDTH,
-  EDITOR_PREVIEW_INIT_HEIGHT,
-  EDITOR_PREVIEW_INIT_WIDTH,
-} from '../../../config';
 import { ImageId } from '../../../types-ui';
 import {
-  getBooleanFromQueryParamOrUseDefault,
   getIntNumberFromQueryParamOrUseDefault,
   logError,
 } from '../../../utils';
 import { ImageChanges } from '../types';
+import { schema } from '../PropertiesPanel/schema-form';
 
 export type EditorPageQueryParams = ImageChanges &
   Readonly<{
@@ -53,27 +44,14 @@ export const getEditorPageQueryParams = (
     Number.MAX_SAFE_INTEGER
   )(urlParams.get('page'));
 
-  const width = getIntNumberFromQueryParamOrUseDefault(
-    EDITOR_PREVIEW_INIT_WIDTH,
-    EDITOR_MIN_WIDTH,
-    API_MAX_IMAGE_WIDTH_HEIGHT
-  )(urlParams.get('width'));
-
-  const height = getIntNumberFromQueryParamOrUseDefault(
-    EDITOR_PREVIEW_INIT_HEIGHT,
-    EDITOR_MIN_HEIGHT,
-    API_MAX_IMAGE_WIDTH_HEIGHT
-  )(urlParams.get('height'));
-
-  const isGrayscale = getBooleanFromQueryParamOrUseDefault(
-    urlParams.get('grayscale')
-  );
-
-  const blur = getIntNumberFromQueryParamOrUseDefault(
-    API_MIN_BLUR,
-    API_MIN_BLUR,
-    API_MAX_BLUR
-  )(urlParams.get('blur'));
+  const { width, height, isGrayscale, blur } = schema.validateSync({
+    imageId: urlParams.get('imageId'),
+    page: urlParams.get('page'),
+    width: urlParams.get('width'),
+    height: urlParams.get('height'),
+    isGrayscale: urlParams.get('grayscale'),
+    blur: urlParams.get('blur'),
+  });
 
   return {
     imageId,
