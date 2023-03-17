@@ -20,7 +20,7 @@ An image editor application based on React, TypeScript, and functional programmi
 - `Material UI` is used for UI components, with a fluid layout.
 - For testing `jest` and `React Testing Library` were installed to enable writting tests that resemble the way the app is being used. Utility functions were written mainly in TDD style.
 - `React Router` is used for routes and handling query strings.
-- 
+
 ## Architect overview
 
 The container components are responsible for effects, including, data fetching, reading and updating query strings, and error handling, the rest of the components are pure and they have no side effects. By using these techniques we can more easily separate concerns and allow quickly testing the majority of our components.
