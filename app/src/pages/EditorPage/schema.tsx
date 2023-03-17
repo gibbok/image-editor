@@ -30,7 +30,8 @@ export const schemaImageProps = yup.object({
     .integer()
     .required()
     .min(EDITOR_MIN_BLUR)
-    .max(EDITOR_MAX_BLUR),
+    .max(EDITOR_MAX_BLUR)
+    .default(1),
 });
 
 export const schemaImageId = yup.object({

@@ -52,12 +52,12 @@ describe('transform', () => {
         {
           author: 'Ben Moore',
           imageId: '102',
-          urlTransform: 'https://picsum.photos/id/102/100/75',
+          urlTransform: 'https://picsum.photos/id/102/100/80',
         },
         {
           author: 'Ilham Rahmansyah',
           imageId: '103',
-          urlTransform: 'https://picsum.photos/id/103/100/75',
+          urlTransform: 'https://picsum.photos/id/103/100/80',
         },
       ]);
     });
