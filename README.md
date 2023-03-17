@@ -1,6 +1,7 @@
 # Image editor
 
 An image editor application based on React, TypeScript, and functional programming.
+
 ## Install instruction
 
 - Clone this repo `git clone https://github.com/gibbok/image-editor.git`
