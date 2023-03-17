@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React, { Component, ReactNode, ErrorInfo } from 'react';
 import { logError } from '../../utils';
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';

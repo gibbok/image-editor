@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { useRouteError, isRouteErrorResponse } from 'react-router-dom';
+import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 import { logError } from '../../utils';
 
 export default function ErrorPage() {
@@ -10,6 +11,7 @@ export default function ErrorPage() {
   if (isRouteErrorResponse(error)) {
     return (
       <Box>
+        <ErrorMessage />
         {error.status} {error.statusText}
       </Box>
     );
