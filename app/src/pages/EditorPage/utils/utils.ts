@@ -1,7 +1,7 @@
 import { ImageId } from '../../../types-ui';
 import { logError } from '../../../utils';
 import { ImageChanges } from '../types';
-import { schemaIdentificator, schemaImageProps } from '../schema';
+import { schemaPage, schemaEditorPageQueryParams } from '../schema';
 
 export type EditorPageQueryParams = ImageChanges &
   Readonly<{
@@ -29,9 +29,8 @@ export const makeEditorPageQueryParams = ({
 export const getEditorPageQueryParams = (
   urlParams: URLSearchParams
 ): EditorPageQueryParams => {
-  const { imageId, page, width, height, isGrayscale, blur } = schemaImageProps
-    .concat(schemaIdentificator)
-    .validateSync({
+  const { imageId, page, width, height, isGrayscale, blur } =
+    schemaEditorPageQueryParams.concat(schemaPage).validateSync({
       imageId: urlParams.get('imageId'),
       page: urlParams.get('page'),
       width: urlParams.get('width'),

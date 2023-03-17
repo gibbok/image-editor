@@ -33,13 +33,16 @@ export const schemaImageProps = yup.object({
     .max(EDITOR_MAX_BLUR),
 });
 
-export const schemaIdentificator = yup.object({
+export const schemaImageId = yup.object({
   imageId: yup
     .string()
     .required()
-    .min(1)
+    .min(0)
     .max(Number.MAX_SAFE_INTEGER)
     .default('1'),
+});
+
+export const schemaPage = yup.object({
   page: yup
     .number()
     .positive()
@@ -50,6 +53,6 @@ export const schemaIdentificator = yup.object({
     .default(1),
 });
 
-export const schemaEditorPageQuerystring = schemaIdentificator.concat(
-  schemaImageProps.concat(schemaImageProps)
+export const schemaEditorPageQueryParams = schemaPage.concat(
+  schemaImageId.concat(schemaImageProps).concat(schemaImageProps)
 );
