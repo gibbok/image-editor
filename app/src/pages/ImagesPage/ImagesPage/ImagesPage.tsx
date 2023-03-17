@@ -39,6 +39,7 @@ export const ImagesPage = (props: ImagesPageProps) => {
       ) : (
         <Grid item>
           <ImageList
+            variant="quilted"
             sx={{ width: '100%', maxWidth: 1024, height: '100%' }}
             cols={3}
           >

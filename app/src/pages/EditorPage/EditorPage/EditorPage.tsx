@@ -38,23 +38,9 @@ export const EditorPage = (props: EditorPageProps) => {
   }
 
   return (
-    <Grid container mt={2} display="flex" justifyContent="center">
+    <Grid container mt={2}>
       <Grid item>
-        <img
-          src={makeUrlWithSizeGrayscaleBlur({
-            desiredSize: {
-              width: props.data.width,
-              height: props.data.height,
-            },
-            isGrayscale: props.data.isGrayscale,
-            blur: props.data.blur,
-          })(props.data.imageId)}
-          alt={props.data.author}
-          loading="lazy"
-        />
-      </Grid>
-      <Grid item>
-        <Box ml={4} mt={1} style={{ width: 200 }}>
+        <Box mt={1} mr={2} style={{ width: 200 }}>
           <PropertiesPanel
             imageId={props.data.imageId}
             width={props.data.width}
@@ -66,6 +52,26 @@ export const EditorPage = (props: EditorPageProps) => {
           />
         </Box>
       </Grid>
+      <Grid item>
+        <Box width="100%" height="100%">
+          <img
+            style={{
+              backgroundColor: 'lightgray',
+            }}
+            src={makeUrlWithSizeGrayscaleBlur({
+              desiredSize: {
+                width: props.data.width,
+                height: props.data.height,
+              },
+              isGrayscale: props.data.isGrayscale,
+              blur: props.data.blur,
+            })(props.data.imageId)}
+            alt={props.data.author}
+            loading="lazy"
+          />
+        </Box>
+      </Grid>
+
       <Paper
         sx={{
           position: 'fixed',
