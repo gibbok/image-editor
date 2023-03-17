@@ -47,7 +47,7 @@ describe('utils', () => {
             height: 160,
           },
         })
-      ).toBe('https://picsum.photos/id/103/200/149');
+      ).toBe('https://picsum.photos/id/103/200/160');
 
       expect(
         makeUrlWithFitImageSize({
@@ -61,7 +61,7 @@ describe('utils', () => {
             height: 160,
           },
         })
-      ).toBe('https://picsum.photos/id/103/200/149');
+      ).toBe('https://picsum.photos/id/103/200/160');
     });
   });
 });

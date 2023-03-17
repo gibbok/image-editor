@@ -53,14 +53,16 @@ describe('utils', () => {
   });
 
   describe('makeFileName', () => {
-    expect(
-      makeFileName('image-editor')({
-        width: 800,
-        height: 600,
-        isGrayscale: false,
-        blur: 1,
-        imageId: '1',
-      })
-    ).toEqual('image-editor-1-width-800-height-600-blur-1');
+    it('should make file name for download', () => {
+      expect(
+        makeFileName('image-editor')({
+          width: 800,
+          height: 600,
+          isGrayscale: false,
+          blur: 1,
+          imageId: '1',
+        })
+      ).toEqual('image-editor-1-width-800-height-600-blur-1');
+    });
   });
 });
