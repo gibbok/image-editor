@@ -3,6 +3,7 @@ import { API_BASE_URL } from './config';
 import { ImageSize } from './pages/ImagesPage/useGetImages/type';
 import { ImageId } from './types-ui';
 
+// TODO remove me
 export const getIntNumberFromQueryParamOrUseDefault =
   (defaultValue: number, minValue: number, maxValue: number) =>
   (valueParam: string | null) => {

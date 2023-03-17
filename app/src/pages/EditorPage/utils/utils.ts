@@ -1,10 +1,8 @@
 import { ImageId } from '../../../types-ui';
-import {
-  getIntNumberFromQueryParamOrUseDefault,
-  logError,
-} from '../../../utils';
+import { logError } from '../../../utils';
 import { ImageChanges } from '../types';
 import { schema } from '../PropertiesPanel/schema-form';
+import * as yup from 'yup';
 
 export type EditorPageQueryParams = ImageChanges &
   Readonly<{
@@ -29,29 +27,36 @@ export const makeEditorPageQueryParams = ({
     blur: blur.toString(),
   })}`;
 
+export const schema2 = yup.object({
+  imageId: yup
+    .string()
+    .required()
+    .min(1)
+    .max(Number.MAX_SAFE_INTEGER)
+    .default('1'),
+  page: yup
+    .number()
+    .positive()
+    .integer()
+    .required()
+    .min(1)
+    .max(Number.MAX_SAFE_INTEGER)
+    .default(1),
+});
+
 export const getEditorPageQueryParams = (
   urlParams: URLSearchParams
 ): EditorPageQueryParams => {
-  const imageId = getIntNumberFromQueryParamOrUseDefault(
-    1,
-    1,
-    Number.MAX_SAFE_INTEGER
-  )(urlParams.get('imageId')).toString();
-
-  const page = getIntNumberFromQueryParamOrUseDefault(
-    1,
-    1,
-    Number.MAX_SAFE_INTEGER
-  )(urlParams.get('page'));
-
-  const { width, height, isGrayscale, blur } = schema.validateSync({
-    imageId: urlParams.get('imageId'),
-    page: urlParams.get('page'),
-    width: urlParams.get('width'),
-    height: urlParams.get('height'),
-    isGrayscale: urlParams.get('grayscale'),
-    blur: urlParams.get('blur'),
-  });
+  const { imageId, page, width, height, isGrayscale, blur } = schema
+    .concat(schema2)
+    .validateSync({
+      imageId: urlParams.get('imageId'),
+      page: urlParams.get('page'),
+      width: urlParams.get('width'),
+      height: urlParams.get('height'),
+      isGrayscale: urlParams.get('grayscale'),
+      blur: urlParams.get('blur'),
+    });
 
   return {
     imageId,
