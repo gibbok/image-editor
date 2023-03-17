@@ -38,9 +38,9 @@ export const EditorPage = (props: EditorPageProps) => {
   }
 
   return (
-    <Grid container mt={2}>
-      <Grid item height="100%">
-        <Box mt={1} mr={2} style={{ width: 200 }}>
+    <Grid container mt={2} wrap="nowrap">
+      <Grid item>
+        <Box mt={1} mr={3} sx={{ width: 200 }}>
           <PropertiesPanel
             imageId={props.data.imageId}
             width={props.data.width}
@@ -52,37 +52,46 @@ export const EditorPage = (props: EditorPageProps) => {
           />
         </Box>
       </Grid>
-      <Grid item height="100%">
-        <img
-          style={{ backgroundColor: 'lightgray' }}
-          src={makeUrlWithSizeGrayscaleBlur({
-            desiredSize: {
-              width: props.data.width,
-              height: props.data.height,
-            },
-            isGrayscale: props.data.isGrayscale,
-            blur: props.data.blur,
-          })(props.data.imageId)}
-          alt={props.data.author}
-          loading="lazy"
-        />
-      </Grid>
-
-      <Paper
-        sx={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-        }}
-        elevation={3}
-      >
-        <Box p={2} display="flex" justifyContent="center">
-          <Button variant="contained" onClick={props.onGoBackToImagesList}>
-            Go to Image List
-          </Button>
+      <Grid item>
+        <Box
+          sx={{
+            width: '100vw',
+            height: 'calc(100vh - 200px)',
+            overflow: 'scroll',
+          }}
+        >
+          <img
+            style={{ backgroundColor: 'lightgray' }}
+            src={makeUrlWithSizeGrayscaleBlur({
+              desiredSize: {
+                width: props.data.width,
+                height: props.data.height,
+              },
+              isGrayscale: props.data.isGrayscale,
+              blur: props.data.blur,
+            })(props.data.imageId)}
+            alt={props.data.author}
+            loading="lazy"
+          />
         </Box>
-      </Paper>
+      </Grid>
+      <Grid item>
+        <Paper
+          sx={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            right: 0,
+          }}
+          elevation={3}
+        >
+          <Box p={2} display="flex" justifyContent="center">
+            <Button variant="contained" onClick={props.onGoBackToImagesList}>
+              Go to Image List
+            </Button>
+          </Box>
+        </Paper>
+      </Grid>
     </Grid>
   );
 };
