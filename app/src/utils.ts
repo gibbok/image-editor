@@ -3,25 +3,6 @@ import { API_BASE_URL } from './config';
 import { ImageSize } from './pages/ImagesPage/useGetImages/type';
 import { ImageId } from './types-ui';
 
-// TODO remove me
-export const getIntNumberFromQueryParamOrUseDefault =
-  (defaultValue: number, minValue: number, maxValue: number) =>
-  (valueParam: string | null) => {
-    if (valueParam === null) {
-      return defaultValue;
-    }
-    const value = Number(valueParam);
-    if (
-      Number.isNaN(value) ||
-      !Number.isInteger(value) ||
-      value < minValue ||
-      value > maxValue
-    ) {
-      return defaultValue;
-    }
-    return value;
-  };
-
 /**
  * Conserve aspect ratio of the original region.
  * Use it when shrinking/enlarging images to fit into an area.
