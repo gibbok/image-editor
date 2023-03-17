@@ -7,6 +7,7 @@ import { makeUrlWithSizeGrayscaleBlur } from '../../../utils';
 import { PropertiesPanel } from '../PropertiesPanel/PropertiesPanel';
 import { ImageChanges } from '../types';
 import { ImageInfoUI } from '../../../types-ui';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 type EditorPageLoading = Readonly<{
   status: 'loading';
@@ -60,8 +61,7 @@ export const EditorPage = (props: EditorPageProps) => {
             overflow: 'scroll',
           }}
         >
-          <img
-            style={{ backgroundColor: 'lightgray' }}
+          <LazyLoadImage
             src={makeUrlWithSizeGrayscaleBlur({
               desiredSize: {
                 width: props.data.width,
@@ -70,8 +70,7 @@ export const EditorPage = (props: EditorPageProps) => {
               isGrayscale: props.data.isGrayscale,
               blur: props.data.blur,
             })(props.data.imageId)}
-            alt={props.data.author}
-            loading="lazy"
+            effect="opacity"
           />
         </Box>
       </Grid>
