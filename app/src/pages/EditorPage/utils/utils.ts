@@ -1,8 +1,7 @@
 import { ImageId } from '../../../types-ui';
 import { logError } from '../../../utils';
 import { ImageChanges } from '../types';
-import { schema } from '../PropertiesPanel/schema-form';
-import * as yup from 'yup';
+import { schemaIdentificator, schemaImageProps } from '../schema';
 
 export type EditorPageQueryParams = ImageChanges &
   Readonly<{
@@ -27,28 +26,11 @@ export const makeEditorPageQueryParams = ({
     blur: blur.toString(),
   })}`;
 
-export const schema2 = yup.object({
-  imageId: yup
-    .string()
-    .required()
-    .min(1)
-    .max(Number.MAX_SAFE_INTEGER)
-    .default('1'),
-  page: yup
-    .number()
-    .positive()
-    .integer()
-    .required()
-    .min(1)
-    .max(Number.MAX_SAFE_INTEGER)
-    .default(1),
-});
-
 export const getEditorPageQueryParams = (
   urlParams: URLSearchParams
 ): EditorPageQueryParams => {
-  const { imageId, page, width, height, isGrayscale, blur } = schema
-    .concat(schema2)
+  const { imageId, page, width, height, isGrayscale, blur } = schemaImageProps
+    .concat(schemaIdentificator)
     .validateSync({
       imageId: urlParams.get('imageId'),
       page: urlParams.get('page'),

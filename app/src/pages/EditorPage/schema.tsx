@@ -5,10 +5,10 @@ import {
   EDITOR_MIN_BLUR,
   EDITOR_MIN_HEIGHT,
   EDITOR_MIN_WIDTH,
-} from '../../../config';
+} from '../../config';
 import * as yup from 'yup';
 
-export const schema = yup.object({
+export const schemaImageProps = yup.object({
   width: yup
     .number()
     .positive()
@@ -32,3 +32,24 @@ export const schema = yup.object({
     .min(EDITOR_MIN_BLUR)
     .max(EDITOR_MAX_BLUR),
 });
+
+export const schemaIdentificator = yup.object({
+  imageId: yup
+    .string()
+    .required()
+    .min(1)
+    .max(Number.MAX_SAFE_INTEGER)
+    .default('1'),
+  page: yup
+    .number()
+    .positive()
+    .integer()
+    .required()
+    .min(1)
+    .max(Number.MAX_SAFE_INTEGER)
+    .default(1),
+});
+
+export const schemaEditorPageQuerystring = schemaIdentificator.concat(
+  schemaImageProps.concat(schemaImageProps)
+);

@@ -15,7 +15,7 @@ import React from 'react';
 
 import { ImageChanges } from '../types';
 import { ImageId } from '../../../types-ui';
-import { schema } from './schema-form';
+import { schemaImageProps } from '../schema';
 
 type PropertiesPanelProps = ImageChanges &
   Readonly<{
@@ -24,7 +24,7 @@ type PropertiesPanelProps = ImageChanges &
     onDownload: () => void;
   }>;
 
-type FormData = yup.InferType<typeof schema>;
+type FormData = yup.InferType<typeof schemaImageProps>;
 
 export const PropertiesPanel = ({
   imageId,
@@ -41,7 +41,7 @@ export const PropertiesPanel = ({
     reset,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaImageProps),
     defaultValues: {
       width,
       height,
