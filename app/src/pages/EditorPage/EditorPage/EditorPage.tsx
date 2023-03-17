@@ -39,8 +39,15 @@ export const EditorPage = (props: EditorPageProps) => {
   }
 
   return (
-    <Grid container mt={2} wrap="nowrap">
-      <Grid item pr={4}>
+    <Box mt={2} display="flex">
+      <Box
+        style={{
+          position: 'fixed',
+          width: 200,
+          height: '100%',
+          zIndex: 1,
+        }}
+      >
         <PropertiesPanel
           imageId={props.data.imageId}
           width={props.data.width}
@@ -50,23 +57,23 @@ export const EditorPage = (props: EditorPageProps) => {
           onApply={props.onApply}
           onDownload={props.onDownload}
         />
-      </Grid>
-      <Grid item>
-        {/* <Box sx={{ width: '100vw', overflow: 'scroll' }}> */}
-        <LazyLoadImage
-          src={makeUrlWithSizeGrayscaleBlur({
-            desiredSize: {
-              width: props.data.width,
-              height: props.data.height,
-            },
-            isGrayscale: props.data.isGrayscale,
-            blur: props.data.blur,
-          })(props.data.imageId)}
-          effect="opacity"
-        />
-        {/* </Box> */}
-      </Grid>
-      <Grid item>
+      </Box>
+      <Box>
+        <Box style={{ position: 'absolute', left: 200 + 40 }}>
+          <LazyLoadImage
+            src={makeUrlWithSizeGrayscaleBlur({
+              desiredSize: {
+                width: props.data.width,
+                height: props.data.height,
+              },
+              isGrayscale: props.data.isGrayscale,
+              blur: props.data.blur,
+            })(props.data.imageId)}
+            effect="opacity"
+          />
+        </Box>
+      </Box>
+      <Box>
         <Paper
           sx={{
             position: 'fixed',
@@ -82,7 +89,7 @@ export const EditorPage = (props: EditorPageProps) => {
             </Button>
           </Box>
         </Paper>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 };

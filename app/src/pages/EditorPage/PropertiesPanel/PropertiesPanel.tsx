@@ -67,7 +67,7 @@ export const PropertiesPanel = ({
   }, [width, height, isGrayscale, blur]);
 
   return (
-    <Box>
+    <Box p={3} style={{ backgroundColor: 'white' }}>
       <Box component="form" onSubmit={handleSubmit(onSubmit)}>
         <Grid container direction={'column'} spacing={5}>
           <Grid item>
