@@ -12,6 +12,7 @@ describe('PropertiesPanel', () => {
     onApply: jest.fn(),
     onDownload: jest.fn(),
   };
+  
   it('should render correctly', () => {
     render(<PropertiesPanel {...mockProps} />);
 
