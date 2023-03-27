@@ -55,5 +55,5 @@ export const schemaPage = yup.object({
 });
 
 export const schemaEditorPageQueryParams = schemaPage.concat(
-  schemaImageId.concat(schemaImageProps).concat(schemaImageProps)
+  schemaImageId.concat(schemaImageProps).concat(schemaPage).concat(schemaImageId)
 );
