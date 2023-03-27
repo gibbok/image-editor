@@ -2,6 +2,10 @@
 
 An image editor application based on React, TypeScript, and functional programming.
 
+Running the application hosted on Vercel. You can visit it here:
+
+<https://image-editor-gibbok.vercel.app/>
+
 ## Install instruction
 
 - Clone this repo `git clone https://github.com/gibbok/image-editor.git`
