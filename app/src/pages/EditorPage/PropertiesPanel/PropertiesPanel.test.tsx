@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { PropertiesPanel, PropertiesPanelProps } from './PropertiesPanel';
 
 describe('PropertiesPanel', () => {
@@ -11,7 +12,7 @@ describe('PropertiesPanel', () => {
     onApply: jest.fn(),
     onDownload: jest.fn(),
   };
-  it('renders correctly', () => {
+  it('should render correctly', () => {
     render(<PropertiesPanel {...mockProps} />);
 
     expect(
