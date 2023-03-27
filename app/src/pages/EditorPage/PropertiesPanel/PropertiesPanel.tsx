@@ -17,7 +17,7 @@ import { ImageChanges } from '../types';
 import { ImageId } from '../../../types-ui';
 import { schemaImageProps } from '../schema';
 
-type PropertiesPanelProps = ImageChanges &
+export type PropertiesPanelProps = ImageChanges &
   Readonly<{
     imageId: ImageId;
     onApply: (propsChange: ImageChanges) => void;
