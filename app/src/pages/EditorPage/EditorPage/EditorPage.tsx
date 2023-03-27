@@ -11,11 +11,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const PANEL_LEFT = 200;
 
-type EditorPageLoading = Readonly<{
+export type EditorPageLoading = Readonly<{
   status: 'loading';
 }>;
 
-type EditorPageLoaded = Readonly<{
+export type EditorPageLoaded = Readonly<{
   status: 'loaded';
   data: ImageInfoUI &
     Readonly<{
